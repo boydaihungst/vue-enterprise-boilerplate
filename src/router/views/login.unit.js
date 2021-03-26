@@ -1,59 +1,59 @@
-import Login from './login.vue'
+import Login from './login.vue';
 
 describe('@views/login', () => {
   it('is a valid view', () => {
-    expect(Login).toBeAViewComponent()
-  })
+    expect(Login).toBeAViewComponent();
+  });
 
   it('redirects to home after successful login', () => {
-    const { vm } = mountLogin()
+    const { vm } = mountLogin();
 
-    vm.username = 'correctUsername'
-    vm.password = 'correctPassword'
+    vm.username = 'correctUsername';
+    vm.password = 'correctPassword';
 
-    const routerPush = jest.fn()
-    vm.$router = { push: routerPush }
-    vm.$route = { query: {} }
+    const routerPush = jest.fn();
+    vm.$router = { push: routerPush };
+    vm.$route = { query: {} };
 
-    expect.assertions(2)
+    expect.assertions(2);
     return vm.tryToLogIn().then(() => {
-      expect(vm.authError).toEqual(null)
-      expect(routerPush).toHaveBeenCalledWith({ name: 'home' })
-    })
-  })
+      expect(vm.authError).toEqual(null);
+      expect(routerPush).toHaveBeenCalledWith({ name: 'HOME' });
+    });
+  });
 
   it('redirects to redirectFrom query, if it exists, after successful login', () => {
-    const { vm } = mountLogin()
+    const { vm } = mountLogin();
 
-    vm.username = 'correctUsername'
-    vm.password = 'correctPassword'
+    vm.username = 'correctUsername';
+    vm.password = 'correctPassword';
 
-    const routerPush = jest.fn()
-    vm.$router = { push: routerPush }
+    const routerPush = jest.fn();
+    vm.$router = { push: routerPush };
 
-    const redirectFrom = '/profile?someQuery'
-    vm.$route = { query: { redirectFrom } }
+    const redirectFrom = '/profile?someQuery';
+    vm.$route = { query: { redirectFrom } };
 
-    expect.assertions(2)
+    expect.assertions(2);
     return vm.tryToLogIn().then(() => {
-      expect(vm.authError).toEqual(null)
-      expect(routerPush).toHaveBeenCalledWith(redirectFrom)
-    })
-  })
+      expect(vm.authError).toEqual(null);
+      expect(routerPush).toHaveBeenCalledWith(redirectFrom);
+    });
+  });
 
   it('displays an error after failed login', () => {
-    const { vm } = mountLogin()
+    const { vm } = mountLogin();
 
-    const routerPush = jest.fn()
-    vm.$router = { push: routerPush }
+    const routerPush = jest.fn();
+    vm.$router = { push: routerPush };
 
-    expect.assertions(2)
+    expect.assertions(2);
     return vm.tryToLogIn().then(() => {
-      expect(vm.authError).toBeTruthy()
-      expect(vm.$el.textContent).toContain('error')
-    })
-  })
-})
+      expect(vm.authError).toBeTruthy();
+      expect(vm.$el.textContent).toContain('error');
+    });
+  });
+});
 
 function mountLogin() {
   return shallowMountView(Login, {
@@ -66,14 +66,14 @@ function mountLogin() {
                 username === 'correctUsername' &&
                 password === 'correctPassword'
               ) {
-                return Promise.resolve('testToken')
+                return Promise.resolve('testToken');
               } else {
-                return Promise.reject(new Error('testError'))
+                return Promise.reject(new Error('testError'));
               }
             },
           },
         },
       },
     }),
-  })
+  });
 }

@@ -13,4 +13,4 @@ module.exports = {
   '*.scss': ['yarn lint:stylelint', 'yarn lint:prettier'],
   '*.md': ['yarn lint:markdownlint', 'yarn lint:prettier'],
   '*.{png,jpeg,jpg,gif,svg}': ['imagemin-lint-staged'],
-}
+};

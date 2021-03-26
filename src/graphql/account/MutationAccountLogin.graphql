@@ -1,0 +1,14 @@
+mutation login($payload: LoginInput!) {
+  login(payload: $payload) {
+    access {
+      token
+      iat
+      exp
+    }
+    refresh {
+      token
+      iat
+      exp
+    }
+  }
+}

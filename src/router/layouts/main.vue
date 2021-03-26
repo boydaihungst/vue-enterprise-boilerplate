@@ -1,9 +1,9 @@
 <script>
-import NavBar from '@components/nav-bar.vue'
+  import NavBar from '@components/nav-bar.vue';
 
-export default {
-  components: { NavBar },
-}
+  export default {
+    components: { NavBar },
+  };
 </script>
 
 <template>
@@ -14,11 +14,11 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+  @import '@design';
 
-.container {
-  min-width: $size-content-width-min;
-  max-width: $size-content-width-max;
-  margin: 0 auto;
-}
+  .container {
+    min-width: $size-content-width-min;
+    max-width: $size-content-width-max;
+    margin: 0 auto;
+  }
 </style>

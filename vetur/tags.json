@@ -1,0 +1,26 @@
+{
+  "base-button": {
+    "attributes": [],
+    "description": ""
+  },
+  "base-icon": {
+    "attributes": ["source", "name"],
+    "description": ""
+  },
+  "base-input-text": {
+    "attributes": ["type"],
+    "description": ""
+  },
+  "base-link": {
+    "attributes": ["href", "allowInsecure", "to", "name", "params", "target"],
+    "description": ""
+  },
+  "nav-bar-routes": {
+    "attributes": ["routes"],
+    "description": ""
+  },
+  "nav-bar": {
+    "attributes": [],
+    "description": ""
+  }
+}

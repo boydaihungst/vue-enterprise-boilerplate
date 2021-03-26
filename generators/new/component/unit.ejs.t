@@ -7,10 +7,10 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
   if (fileName.slice(0, 5) === 'base-') {
     fileName = '_' + fileName
   }
-%>import <%= importName %> from './<%= fileName %>'
+%>import <%= importName %> from './<%= fileName %>';
 
 describe('@components/<%= fileName %>', () => {
   it('exports a valid component', () => {
-    expect(<%= importName %>).toBeAComponent()
-  })
-})
+    expect(<%= importName %>).toBeAComponent();
+  });
+});

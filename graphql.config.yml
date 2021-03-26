@@ -1,0 +1,27 @@
+projects:
+  default:
+    schema:
+      - 'http://localhost:3001/graphql'
+    documents: './src/**/*.graphql'
+    extensions:
+      codegen:
+        config:
+        generates:
+          ./src/graphql/jsDoc.js:
+            plugins:
+              - jsdoc
+              - add:
+                  placement: 'prepend'
+                  content: 'export {};'
+              - add:
+                  placement: 'prepend'
+                  content: '/* eslint-disable prettier/prettier */;'
+          ./src/graphql/possibleTypes.js:
+            config:
+              apolloClientVersion: 3
+              useExplicitTyping: true
+            plugins:
+              - fragment-matcher
+              - add:
+                  placement: 'prepend'
+                  content: '/* eslint-disable prettier/prettier */;'

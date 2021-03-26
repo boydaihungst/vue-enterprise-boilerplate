@@ -2,7 +2,7 @@
 // will be used very frequently. Components are registered using the
 // PascalCased version of their file name.
 
-import Vue from 'vue'
+import Vue from 'vue';
 
 // https://webpack.js.org/guides/dependency-management/#require-context
 const requireComponent = require.context(
@@ -12,12 +12,12 @@ const requireComponent = require.context(
   false,
   // Only include "_base-" prefixed .vue files
   /_base-[\w-]+\.vue$/
-)
+);
 
 // For each matching file name...
 requireComponent.keys().forEach((fileName) => {
   // Get the component config
-  const componentConfig = requireComponent(fileName)
+  const componentConfig = requireComponent(fileName);
   // Get the PascalCase version of the component name
   const componentName = fileName
     // Remove the "./_" from the beginning
@@ -29,8 +29,8 @@ requireComponent.keys().forEach((fileName) => {
     // Upper case
     .map((kebab) => kebab.charAt(0).toUpperCase() + kebab.slice(1))
     // Concatenated
-    .join('')
+    .join('');
 
   // Globally register the component
-  Vue.component(componentName, componentConfig.default || componentConfig)
-})
+  Vue.component(componentName, componentConfig.default || componentConfig);
+});

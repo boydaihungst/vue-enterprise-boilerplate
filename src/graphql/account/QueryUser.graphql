@@ -1,0 +1,13 @@
+query user($account: String!) {
+  user(account: $account) {
+    id
+    account
+    email
+    avatar {
+      url
+      mimetype
+      size
+    }
+    fullName
+  }
+}

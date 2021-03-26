@@ -1,18 +1,15 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    sourceType: 'script',
-  },
+  parser: 'vue-eslint-parser',
+  parserOptions: { parser: '@babel/eslint-parser', sourceType: 'script' },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#bulb-rules
     'plugin:vue/recommended',
+    'plugin:prettier/recommended',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard',
-    // https://github.com/prettier/eslint-config-prettier
-    'prettier',
-    'prettier/standard',
-    'prettier/vue',
+    // 'standard',
   ],
+  plugins: ['prettier', 'import', 'promise'],
   rules: {
     // Only allow debugger in development
     'no-debugger': process.env.PRE_COMMIT ? 'error' : 'off',
@@ -53,21 +50,17 @@ module.exports = {
   },
   overrides: [
     {
+      parser: 'vue-eslint-parser',
       files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module',
-      },
+      parserOptions: { parser: '@babel/eslint-parser', sourceType: 'module' },
       env: {
         browser: true,
       },
     },
     {
+      parser: 'vue-eslint-parser',
       files: ['**/*.unit.js'],
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module',
-      },
+      parserOptions: { parser: '@babel/eslint-parser', sourceType: 'module' },
       env: { jest: true },
       globals: {
         mount: false,
@@ -78,4 +71,4 @@ module.exports = {
       },
     },
   ],
-}
+};

@@ -1,4 +1,4 @@
-import BaseIcon from './_base-icon.vue'
+import BaseIcon from './_base-icon.vue';
 
 describe('@components/_base-icon', () => {
   it('renders a font-awesome icon', () => {
@@ -6,11 +6,11 @@ describe('@components/_base-icon', () => {
       propsData: {
         name: 'sync',
       },
-    })
+    });
 
-    expect(element.tagName).toEqual('svg')
-    expect(element.classList).toContain('svg-inline--fa', 'fa-sync', 'fa-w-16')
-  })
+    expect(element.tagName).toEqual('svg');
+    expect(element.classList).toContain('svg-inline--fa', 'fa-sync', 'fa-w-16');
+  });
 
   it('renders a custom icon', () => {
     const { element } = shallowMount(BaseIcon, {
@@ -23,8 +23,8 @@ describe('@components/_base-icon', () => {
         source: 'custom',
         name: 'some-icon',
       },
-    })
+    });
 
-    expect(element.className).toEqual('generated-class-name')
-  })
-})
+    expect(element.className).toEqual('generated-class-name');
+  });
+});
