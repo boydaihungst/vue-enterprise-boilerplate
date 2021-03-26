@@ -2,7 +2,6 @@
   // ===
   // Spacing
   // ===
-
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
@@ -18,7 +17,7 @@
   "files.exclude": {
     "**/*.log": true,
     "**/*.log*": true,
-    "**/dist": true,
+    "**/dist": false,
     "**/coverage": true
   },
   "files.associations": {
@@ -44,12 +43,12 @@
     "html"
   ],
   "vetur.format.enable": false,
+  "vetur.experimental.templateInterpolationService": true,
   "vetur.completion.scaffoldSnippetSources": {
     "user": "🗒️",
     "workspace": "💼",
     "vetur": ""
   },
-  "prettier.disableLanguages": [],
 
   // ===
   // HTML
@@ -70,8 +69,8 @@
   "jest.autoEnable": false,
   "jest.enableCodeLens": false,
   "javascript.format.enable": false,
-  "json.format.enable": false,
-  "vetur.validation.script": false,
+  "json.format.enable": true,
+  "vetur.validation.script": true,
 
   // ===
   // CSS
@@ -89,5 +88,35 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
-  }
+  },
+
+  // ===
+  // Other
+  // ===
+  // "typescript.suggest.paths": false,
+  "i18n-ally.localesPaths": "../src/lang",
+  "i18n-ally.keystyle": "flat",
+
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#65c89b",
+    "activityBar.activeBorder": "#945bc4",
+    "activityBar.background": "#65c89b",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#945bc4",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#42b882",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#359267",
+    "titleBar.activeBackground": "#42b882",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#42b88299",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.remoteColor": "#42b882",
+  "peacock.color": "#42b882",
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -5,9 +5,9 @@ module.exports = [
     message: 'Name:',
     validate(value) {
       if (!value.length) {
-        return 'View components must have a name.'
+        return 'View components must have a name.';
       }
-      return true
+      return true;
     },
   },
   {
@@ -15,4 +15,4 @@ module.exports = [
     name: 'useStyles',
     message: 'Add <style> block?',
   },
-]
+];

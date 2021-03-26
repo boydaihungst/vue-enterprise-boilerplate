@@ -92,8 +92,8 @@ Beyond that, also know that you can access our app in Cypress on the `window`. F
 
 ```js
 cy.window().then((window) => {
-  return window.__app__.$store.dispatch('someModule/someAction')
-})
+  return window.__app__.$store.dispatch('someModule/someAction');
+});
 ```
 
 ### Accessibility-driven end-to-end tests
@@ -106,39 +106,39 @@ Ideally, tests should only fail when either:
 Unfortunately, there are _a lot_ of ways to get this wrong. For example, when creating a selector for a login link:
 
 ```js
-cy.get('a')
+cy.get('a');
 // Too general, as there could be many links
 
-cy.get('.login-link')
+cy.get('.login-link');
 // Tied to implementation detail of CSS
 
-cy.get('#login-link')
+cy.get('#login-link');
 // Tied to implementation detail of JS and prevents component reusability
 
-cy.contains('Log in')
+cy.contains('Log in');
 // Assumes the text only appears in one context
 ```
 
 To create the right selector, think from the perspective of the user. What _exactly_ are they looking for? They're not looking for:
 
 ```js
-cy.get('a')
+cy.get('a');
 // Any link
 
-cy.get('.login-link')
+cy.get('.login-link');
 // An element with a specific class
 
-cy.get('#login-link')
+cy.get('#login-link');
 // An element with a specific id
 
-cy.contains('Log in')
+cy.contains('Log in');
 // Specific text anywhere on the page
 ```
 
 But rather:
 
 ```js
-cy.contains('a', 'Log in')
+cy.contains('a', 'Log in');
 // A link containing the text "Log in"
 ```
 
@@ -161,7 +161,7 @@ For example, let's imagine you replaced "Log in" with an icon:
 Now users browsing your page with a screen reader will have no way to find the login link. From their perspective, this is just a link with no content. You may be tempted to try to fix the test with something like:
 
 ```js
-cy.get('a[href="/login"]')
+cy.get('a[href="/login"]');
 // A link going to "/login"
 ```
 
@@ -178,7 +178,7 @@ Instead, thinking from a user's perspective forces you to stay accessible, perha
 Then the selector in your test can update as well:
 
 ```js
-cy.get('a[aria-label*="Log in"]')
+cy.get('a[aria-label*="Log in"]');
 // A link with a label containing the text "Log in"
 ```
 

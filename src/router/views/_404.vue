@@ -1,19 +1,19 @@
 <script>
-import Layout from '@layouts/main.vue'
+  import Layout from '@layouts/main.vue';
 
-export default {
-  page: {
-    title: '404',
-    meta: [{ name: 'description', content: '404' }],
-  },
-  components: { Layout },
-  props: {
-    resource: {
-      type: String,
-      default: '',
+  export default {
+    metaInfo: {
+      title: '404',
+      meta: [{ name: 'description', content: '404' }],
     },
-  },
-}
+    components: { Layout },
+    props: {
+      resource: {
+        type: String,
+        default: '',
+      },
+    },
+  };
 </script>
 
 <template>
@@ -29,7 +29,7 @@ export default {
 </template>
 
 <style lang="scss" module>
-.title {
-  text-align: center;
-}
+  .title {
+    text-align: center;
+  }
 </style>

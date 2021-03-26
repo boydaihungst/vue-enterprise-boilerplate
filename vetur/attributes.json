@@ -1,0 +1,34 @@
+{
+  "base-icon/source": {
+    "type": "string"
+  },
+  "base-icon/name": {
+    "type": "string"
+  },
+  "base-input-text/type": {
+    "type": "string",
+    "options": ["email", "number", "password", "search", "tel", "text", "url"]
+  },
+  "base-link/href": {
+    "type": "string"
+  },
+  "base-link/allowInsecure": {
+    "type": "boolean"
+  },
+  "base-link/to": {
+    "type": "Location"
+  },
+  "base-link/name": {
+    "type": "string"
+  },
+  "base-link/params": {
+    "type": "object"
+  },
+  "base-link/target": {
+    "type": "string",
+    "options": ["_blank", "_self", "_parent", "_top", "framename"]
+  },
+  "nav-bar-routes/routes": {
+    "type": "{ new (): RouteLocation[]}"
+  }
+}

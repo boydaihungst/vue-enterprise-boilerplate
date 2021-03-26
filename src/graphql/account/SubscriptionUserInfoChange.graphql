@@ -1,0 +1,15 @@
+subscription notifyUserUpdated {
+  notifyUserUpdated {
+    id
+    firstName
+    lastName
+    account
+    email
+    avatar {
+      url
+      mimetype
+      size
+    }
+    fullName
+  }
+}

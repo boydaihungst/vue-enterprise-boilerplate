@@ -1,32 +1,32 @@
 <script>
-import axios from 'axios'
-import Layout from '@layouts/main.vue'
-import LoadingView from './_loading.vue'
+  import axios from 'axios';
+  import Layout from '@layouts/main.vue';
+  import LoadingView from './_loading.vue';
 
-export default {
-  page: {
-    title: 'Page timeout',
-    meta: [
-      { name: 'description', content: 'The page timed out while loading.' },
-    ],
-  },
-  components: { Layout, LoadingView },
-  data() {
-    return {
-      offlineConfirmed: false,
-    }
-  },
-  beforeCreate() {
-    axios
-      .head('/api/ping')
-      .then(() => {
-        window.location.reload()
-      })
-      .catch(() => {
-        this.offlineConfirmed = true
-      })
-  },
-}
+  export default {
+    metaInfo: {
+      title: 'Page timeout',
+      meta: [
+        { name: 'description', content: 'The page timed out while loading.' },
+      ],
+    },
+    components: { Layout, LoadingView },
+    data() {
+      return {
+        offlineConfirmed: false,
+      };
+    },
+    beforeCreate() {
+      axios
+        .head('/api/ping')
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          this.offlineConfirmed = true;
+        });
+    },
+  };
 </script>
 
 <template>
@@ -40,7 +40,7 @@ export default {
 </template>
 
 <style lang="scss" module>
-.title {
-  text-align: center;
-}
+  .title {
+    text-align: center;
+  }
 </style>

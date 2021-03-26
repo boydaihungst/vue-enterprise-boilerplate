@@ -1,17 +1,20 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 // https://github.com/declandewet/vue-meta
-import VueMeta from 'vue-meta'
+import VueMeta from 'vue-meta';
 // Adds a loading bar at the top during page loads.
-import NProgress from 'nprogress/nprogress'
-import store from '@state/store'
-import routes from './routes'
+import NProgress from 'nprogress/nprogress';
+import store from '@state/store';
+import { API_ERROR_CODE } from '@api';
+import { ApolloError } from '@apollo/client/errors';
+import { SIGNUP_VERIFY_TYPE } from '@graphql/jsDoc';
+import routes from './routes';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 Vue.use(VueMeta, {
   // The component option name that vue-meta looks for meta info on.
-  keyName: 'page',
-})
+  keyName: 'metaInfo',
+});
 
 const router = new VueRouter({
   routes,
@@ -24,47 +27,62 @@ const router = new VueRouter({
   // route and using back/forward buttons.
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 };
     }
   },
-})
+});
 
 // Before each route evaluates...
-router.beforeEach((routeTo, routeFrom, next) => {
+router.beforeEach(async (routeTo, routeFrom, next) => {
   // If this isn't an initial page load...
   if (routeFrom.name !== null) {
     // Start the route progress bar.
-    NProgress.start()
+    NProgress.start();
   }
 
+  // @ts-ignore
+  await store.restored;
   // Check if auth is required on this route
   // (including nested routes).
-  const authRequired = routeTo.matched.some((route) => route.meta.authRequired)
+  const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
 
   // If auth isn't required for the route, just continue.
-  if (!authRequired) return next()
+  if (!authRequired) return next();
 
   // If auth is required and the user is logged in...
   if (store.getters['auth/loggedIn']) {
     // Validate the local user token...
-    return store.dispatch('auth/validate').then((validUser) => {
-      // Then continue if the token still represents a valid user,
-      // otherwise redirect to login.
-      validUser ? next() : redirectToLogin()
-    })
+    /** @type {boolean|ApolloError} user token is validated of error message */
+    const isValidated = await store.dispatch('auth/validate');
+    if (typeof isValidated === 'boolean') return next();
+    return isValidated.message === API_ERROR_CODE.UserError.ACCOUNT_NOT_VERIFIED
+      ? redirectToUserVerify(isValidated.extraInfo.SIGNUP_VERIFY_TYPE)
+      : redirectToLogin();
   }
 
   // If auth is required and the user is NOT currently logged in,
   // redirect to login.
-  redirectToLogin()
+  redirectToLogin();
 
   function redirectToLogin() {
     // Pass the original route to the login component
-    next({ name: 'login', query: { redirectFrom: routeTo.fullPath } })
+    next({ name: 'LOGIN', query: { redirectFrom: routeTo.fullPath } });
   }
-})
+
+  /**
+   *
+   * @param {SIGNUP_VERIFY_TYPE} signupVerifyType
+   */
+  function redirectToUserVerify(signupVerifyType) {
+    // Pass the original route to the login component
+    next({
+      name: 'USER_VERIFY',
+      query: { redirectFrom: routeTo.fullPath, signupVerifyType },
+    });
+  }
+});
 
 router.beforeResolve(async (routeTo, routeFrom, next) => {
   // Create a `beforeResolve` hook, which fires whenever
@@ -86,34 +104,34 @@ router.beforeResolve(async (routeTo, routeFrom, next) => {
               // If redirecting to the same route we're coming from...
               if (routeFrom.name === args[0].name) {
                 // Complete the animation of the route progress bar.
-                NProgress.done()
+                NProgress.done();
               }
               // Complete the redirect.
-              next(...args)
-              reject(new Error('Redirected'))
+              next(...args);
+              reject(new Error('Redirected'));
             } else {
-              resolve()
+              resolve();
             }
-          })
+          });
         } else {
           // Otherwise, continue resolving the route.
-          resolve()
+          resolve();
         }
-      })
+      });
     }
     // If a `beforeResolve` hook chose to redirect, just return.
   } catch (error) {
-    return
+    return;
   }
 
   // If we reach this point, continue resolving the route.
-  next()
-})
+  next();
+});
 
 // When each route is finished evaluating...
 router.afterEach((routeTo, routeFrom) => {
   // Complete the animation of the route progress bar.
-  NProgress.done()
-})
+  NProgress.done();
+});
 
-export default router
+export default router;

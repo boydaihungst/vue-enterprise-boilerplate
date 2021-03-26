@@ -1,4 +1,4 @@
-import NavBarRoutes from './nav-bar-routes.vue'
+import NavBarRoutes from './nav-bar-routes.vue';
 
 const mountRoutes = (options) => {
   return mount(
@@ -8,7 +8,7 @@ const mountRoutes = (options) => {
           <ul>
             <NavBarRoutes {...{ props: options.propsData }} />
           </ul>
-        )
+        );
       },
     },
     {
@@ -16,15 +16,15 @@ const mountRoutes = (options) => {
         BaseLink: {
           functional: true,
           render(h, { slots }) {
-            return <a>{slots().default}</a>
+            return <a>{slots().default}</a>;
           },
         },
         ...options.stubs,
       },
       ...options,
     }
-  )
-}
+  );
+};
 
 describe('@components/nav-bar-routes', () => {
   it('correctly renders routes with text titles', () => {
@@ -37,9 +37,9 @@ describe('@components/nav-bar-routes', () => {
           },
         ],
       },
-    })
-    expect(element.textContent).toEqual('bbb')
-  })
+    });
+    expect(element.textContent).toEqual('bbb');
+  });
 
   it('correctly renders routes with function titles', () => {
     const { element } = mountRoutes({
@@ -51,7 +51,7 @@ describe('@components/nav-bar-routes', () => {
           },
         ],
       },
-    })
-    expect(element.textContent).toEqual('bbb')
-  })
-})
+    });
+    expect(element.textContent).toEqual('bbb');
+  });
+});

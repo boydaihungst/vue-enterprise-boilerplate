@@ -20,13 +20,13 @@ You might be thinking, "Why not just automatically inject all of these into ever
 Here's an example:
 
 ```js
-import { authComputed } from '@state/helpers'
+import { authComputed } from '@state/helpers';
 
 export default {
   computed: {
     ...authComputed,
   },
-}
+};
 ```
 
 ## Module Nesting
@@ -38,7 +38,7 @@ Vuex modules can be nested, which sometimes makes sense for organizational purpo
 
 export const state = {
   role: 'project-manager',
-}
+};
 ```
 
 ```js
@@ -46,21 +46,21 @@ export const state = {
 
 export const state = {
   all: [],
-}
+};
 
 export const getters = {
   favorited(state) {
-    return state.all.filter((video) => video.favorited)
+    return state.all.filter((video) => video.favorited);
   },
-}
+};
 ```
 
 Then you'd be able to access those modules with:
 
 ```js
-store.state.dashboard.role
-store.state.dashboard.videos.all
-store.getters['dashboard/videos/favorited']
+store.state.dashboard.role;
+store.state.dashboard.videos.all;
+store.getters['dashboard/videos/favorited'];
 ```
 
 As you can see, placing the `videos` module in a folder called `dashboard` automatically nests it underneath the `dashboard` namespace. This works even if a `dashboard.js` file doesn't exist. You can also have as many levels of nesting as you want.

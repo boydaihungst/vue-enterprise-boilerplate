@@ -1,22 +1,26 @@
-import allModules from '@state/modules'
-import store from '@state/store'
+import allModules from '@state/modules';
+import store from '@state/store';
 
 export default function dispatchActionForAllModules(
   actionName,
-  { modules = allModules, modulePrefix = '', flags = {} } = {}
+  {
+    modules = allModules,
+    modulePrefix = '',
+    flags = { dispatchGlobal: false },
+  } = {}
 ) {
   // For every module...
   for (const moduleName in modules) {
-    const moduleDefinition = modules[moduleName]
+    const moduleDefinition = modules[moduleName];
 
     // If the action is defined on the module...
     if (moduleDefinition.actions && moduleDefinition.actions[actionName]) {
       // Dispatch the action if the module is namespaced. Otherwise,
       // set a flag to dispatch the action globally at the end.
       if (moduleDefinition.namespaced) {
-        store.dispatch(`${modulePrefix}${moduleName}/${actionName}`)
+        store.dispatch(`${modulePrefix}${moduleName}/${actionName}`);
       } else {
-        flags.dispatchGlobal = true
+        flags.dispatchGlobal = true;
       }
     }
 
@@ -27,7 +31,7 @@ export default function dispatchActionForAllModules(
         modules: moduleDefinition.modules,
         modulePrefix: modulePrefix + moduleName + '/',
         flags,
-      })
+      });
     }
   }
 
@@ -35,6 +39,6 @@ export default function dispatchActionForAllModules(
   // was found with the action...
   if (!modulePrefix && flags.dispatchGlobal) {
     // Dispatch the action globally.
-    store.dispatch(actionName)
+    store.dispatch(actionName);
   }
 }

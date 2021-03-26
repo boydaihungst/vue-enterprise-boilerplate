@@ -1,40 +1,47 @@
-import store from '@state/store'
+import store from '@state/store';
+import { RouteConfig, NavigationGuard } from 'vue-router';
 
-export default [
+/**
+ * @type {RouteConfig[]}
+ */
+const routeConfig = [
   {
     path: '/',
-    name: 'home',
+    name: 'HOME',
     component: () => lazyLoadView(import('@views/home.vue')),
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'LOGIN',
     component: () => lazyLoadView(import('@views/login.vue')),
     meta: {
+      /**
+       * @type {NavigationGuard}
+       */
       beforeResolve(routeTo, routeFrom, next) {
         // If the user is already logged in
         if (store.getters['auth/loggedIn']) {
           // Redirect to the home page instead
-          next({ name: 'home' })
+          next({ name: 'HOME' });
         } else {
           // Continue to the login page
-          next()
+          next();
         }
       },
     },
   },
   {
     path: '/profile',
-    name: 'profile',
+    name: 'PROFILE',
     component: () => lazyLoadView(import('@views/profile.vue')),
     meta: {
       authRequired: true,
     },
-    props: (route) => ({ user: store.state.auth.currentUser || {} }),
+    props: (route) => ({ user: store.state.users.currentUser || {} }),
   },
   {
     path: '/profile/:username',
-    name: 'username-profile',
+    name: 'USERNAME-PROFILE',
     component: () => lazyLoadView(import('@views/profile.vue')),
     meta: {
       authRequired: true,
@@ -42,6 +49,9 @@ export default [
       // and the `props` function, we must create an object for temporary
       // data only used during route resolution.
       tmp: {},
+      /**
+       * @type {NavigationGuard}
+       */
       beforeResolve(routeTo, routeFrom, next) {
         store
           // Try to fetch the user's information by their username
@@ -49,15 +59,15 @@ export default [
           .then((user) => {
             // Add the user to `meta.tmp`, so that it can
             // be provided as a prop.
-            routeTo.meta.tmp.user = user
+            routeTo.meta.tmp.user = user;
             // Continue to the route.
-            next()
+            next();
           })
           .catch(() => {
             // If a user with the provided username could not be
             // found, redirect to the 404 page.
-            next({ name: '404', params: { resource: 'User' } })
-          })
+            next({ name: '404', params: { resource: 'User' } });
+          });
       },
     },
     // Set the user from the route params, once it's set in the
@@ -66,23 +76,26 @@ export default [
   },
   {
     path: '/logout',
-    name: 'logout',
+    name: 'LOGOUT',
     meta: {
       authRequired: true,
+      /**
+       * @type {NavigationGuard}
+       */
       beforeResolve(routeTo, routeFrom, next) {
-        store.dispatch('auth/logOut')
+        store.dispatch('auth/logOut');
         const authRequiredOnPreviousRoute = routeFrom.matched.some(
           (route) => route.meta.authRequired
-        )
+        );
         // Navigate back to previous page, or home as a fallback
-        next(authRequiredOnPreviousRoute ? { name: 'home' } : { ...routeFrom })
+        next(authRequiredOnPreviousRoute ? { name: 'HOME' } : { ...routeFrom });
       },
     },
   },
   {
     path: '/404',
     name: '404',
-    component: require('@views/_404.vue').default,
+    component: () => lazyLoadView(import('@views/_404.vue')),
     // Allows props to be passed to the 404 page through route
     // params, such as `resource` to define what wasn't found.
     props: true,
@@ -94,7 +107,7 @@ export default [
     path: '*',
     redirect: '404',
   },
-]
+];
 
 // Lazy-loads view components, but with better UX. A loading view
 // will be used if the component takes a while to load, falling
@@ -123,15 +136,16 @@ function lazyLoadView(AsyncView) {
     error: require('@views/_timeout.vue').default,
     // Time before giving up trying to load the component.
     // Default: Infinity (milliseconds).
-    timeout: 10000,
-  })
+    timeout: 20000,
+  });
 
   return Promise.resolve({
     functional: true,
     render(h, { data, children }) {
       // Transparently pass any props or children
       // to the view component.
-      return h(AsyncHandler, data, children)
+      return h(AsyncHandler, data, children);
     },
-  })
+  });
 }
+export default routeConfig;

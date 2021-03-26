@@ -1,4 +1,4 @@
-const appConfig = require('../src/app.config')
+const appConfig = require('../src/app.config');
 
 module.exports = {
   title: appConfig.title + ' Docs',
@@ -18,4 +18,4 @@ module.exports = {
       '/docs/troubleshooting',
     ],
   },
-}
+};

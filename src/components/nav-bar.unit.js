@@ -1,4 +1,4 @@
-import NavBar from './nav-bar.vue'
+import NavBar from './nav-bar.vue';
 
 describe('@components/nav-bar', () => {
   it(`displays the user's name in the profile link`, () => {
@@ -18,11 +18,11 @@ describe('@components/nav-bar', () => {
           },
         },
       })
-    )
+    );
 
     const profileRoute = vm.loggedInNavRoutes.find(
       (route) => route.name === 'profile'
-    )
-    expect(profileRoute.title()).toEqual('Logged in as My Name')
-  })
-})
+    );
+    expect(profileRoute.title()).toEqual('Logged in as My Name');
+  });
+});

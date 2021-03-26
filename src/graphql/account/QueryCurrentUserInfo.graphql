@@ -1,0 +1,19 @@
+query currentUser {
+  currentUser {
+    id
+    email
+    phoneNumber
+    phonePrefix
+    firstName
+    lastName
+    avatar {
+      id
+      mimetype
+      size
+      url
+    }
+    emailVerified
+    phoneNumberVerified
+    fullName
+  }
+}

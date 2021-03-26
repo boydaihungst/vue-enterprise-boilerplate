@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const kebabCase = require('lodash/kebabCase');
 
 module.exports = [
   {
@@ -7,13 +7,13 @@ module.exports = [
     message: 'Name:',
     validate(value) {
       if (!value.length) {
-        return 'Components must have a name.'
+        return 'Components must have a name.';
       }
-      const fileName = _.kebabCase(value)
+      const fileName = kebabCase(value);
       if (fileName.indexOf('-') === -1) {
-        return 'Component names should contain at least two words to avoid conflicts with existing and future HTML elements.'
+        return 'Component names should contain at least two words to avoid conflicts with existing and future HTML elements.';
       }
-      return true
+      return true;
     },
   },
   {
@@ -37,9 +37,9 @@ module.exports = [
     ],
     validate(value) {
       if (value.indexOf('script') === -1 && value.indexOf('template') === -1) {
-        return 'Components require at least a <script> or <template> tag.'
+        return 'Components require at least a <script> or <template> tag.';
       }
-      return true
+      return true;
     },
   },
-]
+];
