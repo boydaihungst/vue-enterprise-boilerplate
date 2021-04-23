@@ -1,0 +1,78 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+  "name": "vue-enterprise-boilderplate",
+
+  // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+  // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+  "dockerComposeFile": ["./docker-compose.dev.yml"],
+
+  // The 'service' property is the name of the service for the container that VS Code should
+  // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+  "service": "vue-enterprise-boilderplate",
+
+  // The optional 'workspaceFolder' property is the path VS Code should open by default when
+  // connected. This is typically a file mount in .devcontainer/docker-compose.yml
+  "workspaceFolder": "/home/app",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": null
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "naumovs.color-highlight",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "graphql.vscode-graphql",
+    "zignd.html-css-class-completion",
+    "whtouche.vscode-js-console-utils",
+    "eg2.vscode-npm-script",
+    "christian-kohler.npm-intellisense",
+    "quicktype.quicktype",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "mrmlnc.vscode-scss",
+    "jasonnutter.search-node-modules",
+    "mrmlnc.vscode-attrs-sorter",
+    "cssho.vscode-svgviewer",
+    "gruntfuggly.todo-tree",
+    "octref.vetur",
+    "dariofuzinato.vue-peek",
+    "sdras.vue-vscode-snippets",
+    "santacodes.santacodes-region-viewer",
+    "orta.vscode-jest",
+    "davidanson.vscode-markdownlint",
+    "stylelint.vscode-stylelint",
+    "lokalise.i18n-ally",
+    "aaron-bond.better-comments",
+    "coenraads.bracket-pair-colorizer-2",
+    "msjsdiag.debugger-for-chrome",
+    "firefox-devtools.vscode-firefox-debug",
+    "ms-azuretools.vscode-docker",
+    "vincaslt.highlight-matching-tag",
+    "firsttris.vscode-jest-runner",
+    "johnpapa.vscode-peacock",
+    "ms-vscode-remote.remote-containers",
+    "wayou.vscode-todo-highlight",
+    "redhat.vscode-yaml"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Uncomment the next line if you want start specific services in your Docker Compose config.
+  // "runServices": [],
+
+  // Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+  // "shutdownAction": "none",
+
+  // Uncomment the next line to run commands after the container is created - for example installing curl.
+  // "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+  // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node"
+}

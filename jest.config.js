@@ -1,54 +1,73 @@
-const _ = require('lodash')
+const random = require('lodash/random');
+const deepmerge = require('deepmerge');
+const presets = require('@vue/cli-plugin-unit-jest/presets/typescript-and-babel/jest-preset');
 // Use a random port number for the mock API by default,
 // to support multiple instances of Jest running
 // simultaneously, like during pre-commit lint.
-process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || _.random(9000, 9999)
+process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || random(9000, 9999);
 
-module.exports = {
-  setupFiles: ['<rootDir>/tests/unit/setup'],
-  globalSetup: '<rootDir>/tests/unit/global-setup',
-  globalTeardown: '<rootDir>/tests/unit/global-teardown',
-  setupFilesAfterEnv: ['<rootDir>/tests/unit/matchers'],
-  testMatch: ['**/(*.)unit.js'],
-  moduleFileExtensions: ['js', 'json', 'vue'],
-  transform: {
-    '^.+\\.vue$': 'vue-jest',
-    '^.+\\.js$': 'babel-jest',
-    '.+\\.(css|scss|jpe?g|png|gif|webp|svg|mp4|webm|ogg|mp3|wav|flac|aac|woff2?|eot|ttf|otf)$':
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+const config = deepmerge(presets, {
+  globalSetup: '<rootDir>/tests/unit/global-setup.ts',
+  globalTeardown: '<rootDir>/tests/unit/global-teardown.ts',
+  setupFiles: [],
+  setupFilesAfterEnv: [
+    '<rootDir>/tests/unit/setup.ts',
+    '<rootDir>/tests/unit/setup-mock-server.ts',
+    '<rootDir>/tests/unit/matchers.ts',
+  ],
+  timers: 'modern', // fake timer
+  testMatch: ['**/(*.)unit.+(ts|tsx|js|jsx)'],
+
+  transform: {},
+  moduleNameMapper: {
+    ...require('./aliases.config').jest,
+    // Map with module in node_modules
+    '^.+\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       'jest-transform-stub',
   },
-  moduleNameMapper: require('./aliases.config').jest,
-  snapshotSerializers: ['jest-serializer-vue'],
   coverageDirectory: '<rootDir>/tests/unit/coverage',
+
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
+    'src/**/*.{js,vue,ts,jsx,tsx}',
+    '!src/**/_globals.ts',
+    '!src/**/*.d.ts',
     '!**/node_modules/**',
-    '!src/main.js',
-    '!src/app.vue',
-    '!src/router/index.js',
-    '!src/router/routes.js',
-    '!src/state/store.js',
-    '!src/state/helpers.js',
-    '!src/state/modules/index.js',
-    '!src/components/_globals.js',
+    '!src/main.ts',
+    '!src/App.vue',
+    '!src/router/index.ts',
+    '!src/router/routes.ts',
+    '!src/state/store.ts',
+    '!src/state/helpers.ts',
+    '!src/state/index.ts',
+    '!src/state/module-loader.ts',
   ],
+
   // https://facebook.github.io/jest/docs/en/configuration.html#testurl-string
   // Set the `testURL` to a provided base URL if one exists, or the mock API base URL
   // Solves: https://stackoverflow.com/questions/42677387/jest-returns-network-error-when-doing-an-authenticated-request-with-axios
   testURL:
     process.env.API_BASE_URL || `http://localhost:${process.env.MOCK_API_PORT}`,
-  // https://github.com/jest-community/jest-watch-typeahead
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
+
   globals: {
     'vue-jest': {
-      // Compilation errors in the <style> tags of Vue components will
-      // already result in failing builds, so compiling CSS during unit
-      // tests doesn't protect us from anything. It only complicates
-      // and slows down our unit tests.
-      experimentalCSSCompile: false,
+      /**
+       * Set to `false` if don't use css module.
+       * See {@link https://vue-loader.vuejs.org/guide/css-modules.html#usage|css-modules}
+       */
+      experimentalCSSCompile: true,
     },
+    mount: false,
+    shallowMount: false,
+    shallowMountView: false,
+    createComponentMocks: false,
+    createModuleStore: false,
   },
-}
+});
+/**
+ * Igonore transform all module in node_modules/** except module moduleA and moduleB
+ */
+// config.transformIgnorePatterns = [
+// 'node_modules/(?!(moduleA|moduleB)/)',
+// ];
+module.exports = config;

@@ -1,18 +1,26 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    sourceType: 'script',
+
+  env: {
+    node: true,
   },
+
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#bulb-rules
-    'plugin:vue/recommended',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard',
-    // https://github.com/prettier/eslint-config-prettier
-    'prettier',
-    'prettier/standard',
-    'prettier/vue',
+    'plugin:vue/vue3-recommended',
+    'eslint:recommended',
+    '@vue/prettier',
   ],
+
+  parserOptions: {
+    jsx: true,
+    ecmaVersion: 2020,
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
+    tsconfigRootDir: __dirname,
+  },
+
+  plugins: ['import', 'promise'],
+
   rules: {
     // Only allow debugger in development
     'no-debugger': process.env.PRE_COMMIT ? 'error' : 'off',
@@ -50,25 +58,23 @@ module.exports = {
       },
     ],
     'vue/valid-v-slot': 'error',
+    'max-classes-per-file': 'off',
+    'no-useless-constructor': 'off',
+    'no-empty-function': 'off',
+    '@typescript-eslint/no-useless-constructor': 'error',
+    'import/prefer-default-export': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
+
   overrides: [
     {
-      files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module',
-      },
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/*.{spec,unit}.{j,t}s?(x)'],
       env: {
-        browser: true,
+        jest: true,
       },
-    },
-    {
-      files: ['**/*.unit.js'],
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module',
-      },
-      env: { jest: true },
       globals: {
         mount: false,
         shallowMount: false,
@@ -77,5 +83,17 @@ module.exports = {
         createModuleStore: false,
       },
     },
+    {
+      files: ['**/*.{vue,ts,tsx}'],
+      extends: [
+        '@vue/typescript/recommended',
+        '@vue/prettier/@typescript-eslint',
+      ],
+      rules: {
+        '@typescript-eslint/no-unused-vars': ['warn'],
+        '@typescript-eslint/no-explicit-any': ['off'],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
+    },
   ],
-}
+};

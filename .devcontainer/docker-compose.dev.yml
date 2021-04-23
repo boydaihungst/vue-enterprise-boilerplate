@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  vue-enterprise-boilderplate:
+    build:
+      context: ../
+      target: dev-stage
+    volumes:
+      - ../:/home/app
+      - $HOME/.ssh:/home/node/.ssh
+      - vscode-extension-volume-vue-enterprise-boilderplate:/home/node/.vscode-server/extensions
+      - vscode-extension-volume-insiders-vue-enterprise-boilderplate:/home/node/.vscode-server-insiders/extensions
+    working_dir: /home/app/
+    restart: on-failure
+    command: tail -f /dev/null
+    user: node
+    ports:
+      - 3000:3000
+      - 5858:5858
+      - 80:80
+      - 443:443
+      - 8080:8080
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - HOST=0.0.0.0
+    networks:
+      default:
+    tty: true
+volumes:
+  vscode-extension-volume-vue-enterprise-boilderplate:
+  vscode-extension-volume-insiders-vue-enterprise-boilderplate:

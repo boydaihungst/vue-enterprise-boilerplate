@@ -129,7 +129,7 @@ For our styles, we're using SCSS and CSS modules, which you can activate by addi
 
 ```vue
 <style lang="scss" module>
-/* Styles go here */
+  /* Styles go here */
 </style>
 ```
 
@@ -179,13 +179,13 @@ As mentioned earlier, every Vue component should be a CSS module. That means the
 
 ```vue
 <style lang="scss" module>
-.inputLabel {
-  /* ... */
-}
+  .inputLabel {
+    /* ... */
+  }
 
-.input {
-  /* ... */
-}
+  .input {
+    /* ... */
+  }
 </style>
 ```
 
@@ -232,9 +232,9 @@ In these cases, you can use an [attribute selector](https://developer.mozilla.or
 </template>
 
 <style lang="scss" module>
-.container [class^='base-input_inputLabel'] {
-  /* ... */
-}
+  .container [class^='base-input_inputLabel'] {
+    /* ... */
+  }
 </style>
 ```
 
@@ -252,11 +252,11 @@ You could import our design tooling, then use CSS modules' `:export` it:
 
 ```vue
 <style lang="scss" module>
-@import '@design';
+  @import '@design';
 
-:export {
-  grid-padding: $size-grid-padding;
-}
+  :export {
+    grid-padding: $size-grid-padding;
+  }
 </style>
 ```
 
