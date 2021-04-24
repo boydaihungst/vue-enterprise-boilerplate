@@ -1,5 +1,5 @@
 const path = require('path');
-
+const CopyPlugin = require('copy-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //   .BundleAnalyzerPlugin;
 // const DuplicatePackageCheckerWebpackPlugin = require('duplicate-package-checker-webpack-plugin');
@@ -118,12 +118,34 @@ module.exports = {
       config.externals(['Vue']);
 
       // Exclude mock service worker from build
-      config.plugin('copy').tap(([options]) => {
-        options[0].globOptions.ignore.push(
-          path.resolve(__dirname, 'public/mockServiceWorker.js')
-        );
-        return [options];
-      });
+      // config
+      //   .plugin('copy')
+      //   .after('CompressionPlugin')
+      //   .tap(([options]) => {
+      //     options[0].globOptions.ignore.push(
+      //       path.resolve(__dirname, 'public/mockServiceWorker.js')
+      //     );
+      //     return [options];
+      //   });
+      config.plugin('copy').use(CopyPlugin, [
+        {
+          patterns: [
+            {
+              from: path.resolve(__dirname, 'public'),
+              to: path.resolve(__dirname, 'dist'),
+              noErrorOnMissing: true,
+              toType: 'dir',
+              globOptions: {
+                ignore: [
+                  'mockServiceWorker.js',
+                  '**/.DS_Store',
+                  '/home/boydaihungst/Gits/vue-enterprise-boilerplate/public/index.html',
+                ],
+              },
+            },
+          ],
+        },
+      ]);
     }
     config.module
       .rule('mjs')
