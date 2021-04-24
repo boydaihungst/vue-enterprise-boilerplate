@@ -17,7 +17,7 @@ A big thanks to [Chris Fritz](https://www.patreon.com/chrisvuefritz) for the inc
 
 ```bash
 # 1. Clone the repository.
-git clone https://github.com/chrisvfritz/vue-enterprise-boilerplate.git my-new-project
+git clone https://github.com/boydaihungst/vue-enterprise-boilerplate.git my-new-project
 
 # 2. Enter your newly-cloned folder.
 cd my-new-project
