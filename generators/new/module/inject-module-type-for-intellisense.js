@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const prettier = require('prettier');
 const { camel, pascal, snake } = require('change-case');
+const prettierConfig = require('../../../.prettierrc');
 
 /**
  *
@@ -21,7 +23,14 @@ function injectStringIntoFile(relativePathToWorkspace, ...injectDatas) {
       data.replaceWith
     );
   });
-  fs.writeFileSync(filePath, fileOriginContent);
+  fs.writeFileSync(
+    filePath,
+    // format with prettier
+    prettier.format(fileOriginContent, {
+      ...prettierConfig,
+      parser: 'typescript',
+    })
+  );
 }
 
 let moduleInfo = {};
