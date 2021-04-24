@@ -1,4 +1,6 @@
-# Vue Enterprise Boilerplate
+# Vue Enterprise Boilerplate.
+
+**Updated with vuejs 3, @vue/cli v5, webpack 5, typescript, full typesafe for vuex module... read more in [docs](#documentation)**
 
 **You diverged from the boilerplate on Mar 20 2021. See [what's been added](https://github.com/chrisvfritz/vue-enterprise-boilerplate/compare/e6d74341c1e3e1091f0841012d303e092c6f2676...master) since then.**
 
