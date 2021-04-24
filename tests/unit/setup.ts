@@ -63,7 +63,7 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 // ===
-// Register global components,plugins,directive
+// Register global components,directive, provide, mocks.
 // ===
 //
 config.global.components = {};
@@ -107,6 +107,8 @@ config.global.directives = {
     _.kebabCase
   ),
 };
+
+// Mock css module $style
 config.global.mocks = {
   $style: new Proxy(
     {},
@@ -250,7 +252,13 @@ createComponentMocks = ({ store, router, style, mocks, stubs }) => {
               }
               return false;
             });
+            // if $style[name] in component matched with your mocked style[name]
+            // then return your mocked value: style[name].value
+            // Example: Your mocked value: { style: { container: 'mocked-value' } }
+            // in component: this.$style.container -> return string `mocked-value`
             if (matchedStyle) return matchedStyle[1];
+            // otherwise return name
+            // Example: this.$style.container -> return string `container`
             return name;
           }
         },

@@ -9,6 +9,7 @@ declare global {
     [P in keyof T & string as `${P}`]: T[P];
   };
 }
+// Declaration merge for vuex module for better type-safe
 declare module 'vuex' {
   type AugmentedActionContext<
     LocalMutations extends Record<string, (...args: any[]) => any>,

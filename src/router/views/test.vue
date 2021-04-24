@@ -1,11 +1,4 @@
----
-to: "src/router/views/<%= h.changeCase.kebab(name) %>.vue"
----
-<%
-  const fileName = h.changeCase.kebab(name)
-  const importName = h.changeCase.pascal(fileName)
-  const titleName = h.changeCase.title(name)
-%><script lang="ts">
+<script lang="ts">
   import { defineComponent } from 'vue';
   import { useMeta } from 'vue-meta';
   import Layout from '@layouts/layout.vue';
@@ -35,7 +28,7 @@ to: "src/router/views/<%= h.changeCase.kebab(name) %>.vue"
     setup() {
       // const { propName } = toRefs(props);
       useMeta({
-        title: '<%= titleName %>',
+        title: 'Test',
         description: '',
       });
     },
@@ -94,11 +87,9 @@ to: "src/router/views/<%= h.changeCase.kebab(name) %>.vue"
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout"><%= titleName %></Layout>
+  <Layout is="main" data-test="view-layout">Test</Layout>
 </template>
-<%
 
-if (useStyles) { %>
 <style lang="scss" module>
   @import '@design';
-</style><% } %>
+</style>

@@ -10,5 +10,5 @@ describe('@views/<%= fileName %>', () => {
   it('is a valid view', () => {
     expect(<%= importName %>).toBeAViewComponent();
   });
-  it.todo('todo test');
+  it.todo('should be implemented');
 });

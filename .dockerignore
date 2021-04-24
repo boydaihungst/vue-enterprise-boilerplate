@@ -24,3 +24,5 @@ values.dev.yaml
 dist
 .nuxt
 README.md
+.vuepress/.temp/
+webpack.config.prod.js

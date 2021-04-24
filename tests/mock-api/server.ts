@@ -1,8 +1,7 @@
 import { setupServer } from 'msw/node';
-import userHandlers from './routers/users';
-import authHandlers from './routers/auth';
+import { handlers } from './index';
 
 /**
- * Run on node environment. Like run with jest unit test
+ * Run on node environment. Like run with jest jsdom
  */
-export const mockServer = setupServer(...authHandlers, ...userHandlers);
+export const mockServer = setupServer(...handlers);

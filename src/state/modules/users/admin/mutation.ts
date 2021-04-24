@@ -1,11 +1,11 @@
 import { State } from './state';
 
 type Mutations<S = State> = {
-  SET_AUTH_TOKEN(state: S, newAuthToken: string | null): void;
+  SAMPLE_MUTATION(state: S, newAuthToken: string | null): void;
 };
 
 export const mutations: Mutations = {
-  SET_AUTH_TOKEN() {
+  SAMPLE_MUTATION() {
     //
   },
 };

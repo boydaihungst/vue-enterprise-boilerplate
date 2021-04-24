@@ -94,38 +94,26 @@
   },
 
   // ===
+  // Docker
+  // ===
+
+  // If you use git with SSH (ssh-agent), use this commands to forward your ssh from your environment to
+  // docker container.
+  // Learn more: https://stackoverflow.com/questions/59838300/docker-buildkit-mount-ssh-when-using-remote-agent-forwarding
+  // With window: https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows
+
+  // "docker.commands.build": ["--ssh default=$SSH_AUTH_SOCK"],
+
+  // ===
   // Other
   // ===
-  // "typescript.suggest.paths": false,
-  "i18n-ally.localesPaths": "../src/lang",
-  "i18n-ally.keystyle": "flat",
+  //
 
-  "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#65c89b",
-    "activityBar.activeBorder": "#945bc4",
-    "activityBar.background": "#65c89b",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#945bc4",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "statusBar.background": "#42b882",
-    "statusBar.foreground": "#15202b",
-    "statusBarItem.hoverBackground": "#359267",
-    "titleBar.activeBackground": "#42b882",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#42b88299",
-    "titleBar.inactiveForeground": "#15202b99"
-  },
-  "peacock.remoteColor": "#42b882",
-  "peacock.color": "#42b882",
-  "[vue]": {
-    "editor.defaultFormatter": "octref.vetur"
-  },
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "jestrunner.jestCommand": "yarn test:unit",
+  // Custom for support vue-cli unit test with jest
   "jestrunner.codeLensSelector": "**/*.{test,spec,unit}.{js,jsx,ts,tsx}",
-  "jestrunner.jestPath": "${workspaceFolder}/node_modules/.bin/cross-env",
+  "jestrunner.jestCommand": "yarn test:unit",
   "jestrunner.runOptions": ["--bail", "--config", "jest.config.js"],
+  "jestrunner.jestPath": "${workspaceFolder}/node_modules/.bin/cross-env",
   "jestrunner.debugOptions": {
     "args": [
       "VUE_APP_TEST=unit",
@@ -134,5 +122,58 @@
     ],
     "sourcemaps": "inline",
     "disableOptimisticBPs": true
-  }
+  },
+
+  // Auto sort html elemnt attributes on save
+  // Follow rules in: https://v3.vuejs.org/style-guide/#element-attribute-order-recommended
+  "attrsSorter.order": [
+    "is",
+    "v-if",
+    "v-for",
+    "v-else-if",
+    "v-else",
+    "v-show",
+    "v-cloak",
+    "v-pre",
+    "v-once",
+    "id",
+    "ref",
+    "key",
+    "v-model",
+    "v-model.+",
+    "slot",
+    "v-bind",
+    "v-bind.+",
+    ":.+",
+    "class",
+    "@.+",
+    "name",
+    "data-.+",
+    "ng-.+",
+    "src",
+    "for",
+    "type",
+    "href",
+    "values",
+    "title",
+    "alt",
+    "role",
+    "aria-.+",
+    "$unknown$",
+    "v-on.+",
+    "v-html",
+    "v-html.+",
+    "v-text",
+    "v-text.+"
+  ],
+
+  // set i18n folder
+  "i18n-ally.localesPaths": "../src/lang",
+  // i18n json file style: nested | flat | auto
+  "i18n-ally.keystyle": "auto",
+  // i18n default language
+  "i18n-ally.displayLanguage": "en",
+
+  // Specifies the folder path to the typescript
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

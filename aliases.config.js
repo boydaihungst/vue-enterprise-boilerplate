@@ -15,7 +15,6 @@ const aliases = {
   '@design': './src/design/index.scss',
   // custom
   '@plugin': './src/plugin',
-  '@api': './src/api',
   '@models': './src/models',
 };
 

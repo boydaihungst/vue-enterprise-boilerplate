@@ -4,6 +4,9 @@ import faker from 'faker';
 import merge from 'lodash/merge';
 import { User } from '@models/user';
 
+/**
+ * Function to generate user
+ */
 function generateUser(userOptions: User = {}) {
   const id = userOptions.id || faker.datatype.uuid();
   const firstName = faker.name.firstName();
@@ -20,7 +23,7 @@ function generateUser(userOptions: User = {}) {
 
 const user1: User = generateUser({
   id: '1',
-  username: 'admin',
+  username: 'user1',
   password: 'password123',
 });
 
@@ -32,6 +35,7 @@ const admin: User = generateUser({
 // Generate 5 random user
 const randomUsers = [5].map(() => generateUser());
 
+// Include all mocked users
 const all: User[] = [...randomUsers, admin, user1];
 
 export default {

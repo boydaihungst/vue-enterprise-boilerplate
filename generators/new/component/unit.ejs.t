@@ -9,7 +9,6 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
   }
 %>import <%= importName %> from './<%= fileName %>.vue';
 
-
 describe('@components/<%= fileName %>', () => {
   it('exports a valid component', () => {
     expect(<%= importName %>).toBeAComponent();

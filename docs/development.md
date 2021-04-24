@@ -18,6 +18,8 @@ Make sure you have the following installed:
 - [Node](https://nodejs.org/en/) (at least the latest LTS)
 - [Yarn](https://yarnpkg.com/lang/en/docs/install/) (at least 1.0)
 
+Its automatically installed in the Docker container. [Developing inside a Container](#docker-optional).
+
 Then update the following files to suit your application:
 
 - `src/app.config.json` (provides metadata about your app)
@@ -144,3 +146,7 @@ docker-compose down --volumes --rmi all --remove-orphans
 This command can also be useful in case something goes wrong with a container and you'd like to start over. All containers, networks, volumes, and images defined in `docker-compose.yml` will be rebuilt the next time you run `docker-compose up`.
 
 See the docs for [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) for more information on how to use and configure Docker tooling.
+
+## Docker (optional) - Developing inside a Container
+
+Read more here: [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers#_getting-started)

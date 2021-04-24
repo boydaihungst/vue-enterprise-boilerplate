@@ -11,6 +11,7 @@ module.exports = {
     '@vue/babel-plugin-jsx',
   ],
   env: {
+    // Merge with these in test environment
     test: {
       plugins: [],
     },

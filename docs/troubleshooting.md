@@ -37,7 +37,7 @@ If this solves your problem, you can use `yarn outdated` to see the packages tha
 
 ## Visual Studio (VS) Code formatting issues
 
-If you're using VS Code and notice that some files are being formatted incorrectly on save, the source is probably a formatter extension you've installed. The reason you're seeing it now is that this project enables the `editor.formatOnSave` setting. Previously, that extension was probably just doing nothing. To fix the problem, you'll need to either properly configure the extension or, if it's simply broken, uninstall it.
+If you're using VS Code and notice that some files are being formatted incorrectly on save, the source is probably a formatter extension you've installed. The reason you're seeing it now is that this project enables the `editor.formatOnSave` setting. Previously, that extension was probably just doing nothing. To fix the problem, you'll need to either properly configure the extension or, if it's simply broken, uninstall it. There are 2 places for setting file: [project settings](../.vscode/settings.json) and your global settings.
 
 Extensions with known issues include:
 

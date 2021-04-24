@@ -1,12 +1,19 @@
 # Languages and technologies
 
 - [Languages and technologies](#languages-and-technologies)
-  - [JavaScript](#javascript)
+  - [JavaScript/Typescript](#javascript)
     - [Polyfills](#polyfills)
     - [Vue](#vue)
     - [Vue Router](#vue-router)
     - [Vuex (state management)](#vuex-state-management)
-    - [JavaScript FAQ](#javascript-faq)
+    - [[**Deprecated**] JavaScript FAQ](#javascript-faq-deprecated)
+  - [Typescript](#typescript)
+    - [Vue Component](#vue-component)
+    - [Vue router meta](#vue-router-meta)
+    - [Vue custom property](#vue-custom-property)
+    - [Cypress](#cypress-custom-command)
+    - [Jest](#jest-custom-matcher)
+    - [Vue Component](#vue-component)
   - [HTML](#html)
     - [Templates](#templates)
     - [Render functions](#render-functions)
@@ -24,7 +31,7 @@
 
 ## JavaScript
 
-Our JavaScript is compiled by Babel, using the [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app) as a base configuration. You can update this configuration in `.babelrc.js`.
+Our JavaScript is compiled by Babel, using the [`@vue/babel-preset-app`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/babel-preset-app) as a base configuration. You can update this configuration in [babel.conf.js](../babel.conf.js).
 
 If you're new to features such as `const`, `let`, and `=>` (arrow functions), take some time to read about the following features in Babel's ES2015 guide:
 
@@ -39,23 +46,23 @@ Reading these sections alone will get you 99% of the way to mastering Babel code
 
 ### Polyfills
 
-This project uses Vue CLI's [modern mode](https://cli.vuejs.org/guide/browser-compatibility.html#modern-mode), which creates two bundles: one modern bundle targeting modern browsers that support [ES modules](https://jakearchibald.com/2017/es-modules-in-browsers/), and one legacy bundle targeting older browsers that do not.
+This project uses Vue CLI's [modern mode](https://next.cli.vuejs.org/guide/browser-compatibility.html), which creates two bundles: one modern bundle targeting modern browsers that support [ES modules](https://jakearchibald.com/2017/es-modules-in-browsers/), and one legacy bundle targeting older browsers that do not.
 
 For each bundle, polyfills for any JavaScript features you use are included based on the target bundle and supported browsers defined by `browserslist` in `package.json`.
 
 ### Vue
 
-Since Vue is such a huge part of our app, I strongly recommend everyone read through at least the _Essentials_ of [Vue's guide](https://vuejs.org/v2/guide/).
+Since Vue is such a huge part of our app, I strongly recommend everyone read through at least the _Essentials_ of [Vue's guide](https://v3.vuejs.org/style-guide/).
 
 ### Vue Router
 
-To understand how to manage pages with Vue Router, I recommend reading through the _Essentials_ of [those docs](https://router.vuejs.org/en/essentials/getting-started.html). Then you can read more about [routing in this application](routing.md).
+To understand how to manage pages with Vue Router, I recommend reading through the _Essentials_ of [those docs](https://next.router.vuejs.org/guide/#getting-started). Then you can read more about [routing in this application](routing.md).
 
 ### Vuex (state management)
 
-To wrap your head around our state management, I recommend reading through [those docs](https://vuex.vuejs.org/guide), starting at _What is Vuex?_ and stopping before _Application Architecture_. Then skip down and read [_Form Handling_](https://vuex.vuejs.org/en/forms.html) and [_Testing_](https://vuex.vuejs.org/en/testing.html). Finally, read about [state management in this application](state.md).
+To wrap your head around our state management, I recommend reading through [those docs](https://next.vuex.vuejs.org/guide), starting at _What is Vuex?_ and stopping before _Application Architecture_. Then skip down and read [_Form Handling_](https://next.vuex.vuejs.org/guide/forms.html) and [_Testing_](https://next.vuex.vuejs.org/guide/testing.html). Finally, read about [state management in this application](state.md).
 
-### JavaScript FAQ
+### JavaScript FAQ [**Deprecated**]
 
 **Why not use TypeScript instead of JavaScript? Isn't that more appropriate for enterprise environments?**
 
@@ -67,14 +74,51 @@ At its current rate of development, I think TypeScript will eventually _become_ 
 - Despite most bugs having nothing to do with type violations, developers can spend _a lot_ of time working towards full type safety, meaning teams unaccustomed to strongly typed languages may face significant drops in productivity. As I mentioned earlier, I think that time would be better spent on tests and code reviews.
 - While the next version of Vuex will be designed with TypeScript in mind, the current version can be particularly painful with TypeScript.
 
+## [Typescript](https://www.typescriptlang.org/docs/)
+
+### Vue Component
+
+Create `vue component` with `typescript`, read the following guide.
+
+- add `lang="ts"` to `<script>`
+- use `export default defineComponent({})` instead of `export default = {}`
+- Props, Data: using `as PropType<TYPE>` for non-primitive data type
+- Computed, Method: always add return type.
+- Emits: If using with [emit validator](https://v3.vuejs.org/guide/component-custom-events.html#validate-emitted-events) add validator's arguments type.
+- Provide/Inject: using `as InjectionKey<TYPE>`. Check out [const.ts](../src/utils/const.ts#InjectKey)
+
+More information: [Vue 3 typescript guide](https://v3.vuejs.org/guide/typescript-support.html#using-with-options-api)
+
+### Vue router meta
+
+Define types for `router meta` in [/src/@types/vue-route.d.ts](../src/@types/vue-route.d.ts)
+
+### [Vue custom property](https://v3.vuejs.org/guide/migration/global-api.html#vue-prototype-replaced-by-config-globalproperties)
+
+Define vue custom properties types in in [/src/@types/vue-route.d.ts](../src/@types/vue.d.ts)
+
+### [Cypress custom command](https://docs.cypress.io/guides/tooling/typescript-support#Types-for-custom-commands)
+
+When add `Cypress` custom commands in [e2e/support/commands.ts](../tests/e2e/support/commands.ts) you have to define types in [/src/@types/cypress.d.ts](../src/@types/cypress.d.ts)
+
+### [Jest custom matcher](https://jestjs.io/docs/expect#custom-matchers-api)
+
+With `Jest` matcher define types in [/src/@types/jest.d.ts](../src/@types/jest.d.ts).
+
+### [Global](https://jestjs.io/docs/expect#custom-matchers-api)
+
+For global function, interface, class... add to [/src/@types/global.d.ts](../src/@types/global.d.ts). If using them in test u have to add `[functionName]: false` to [jest.config.js > globals](../jest.config.js)
+
+Learn more about declaration merging in here: [Declaration Merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html)
+
 ## HTML
 
-All HTML will exist within [`.vue` files](https://vuejs.org/v2/guide/single-file-components.html), either:
+All HTML will exist within [`.vue` files](https://v3.vuejs.org/guide/single-file-component.html#introduction), either:
 
 - in a `<template>`, or
-- in a [`render` function](https://vuejs.org/v2/guide/render-function.html), optionally using [JSX](https://vuejs.org/v2/guide/render-function.html#JSX).
+- in a [`render` function](https://v3.vuejs.org/guide/render-function.html), optionally using [JSX](https://v3.vuejs.org/guide/render-function.html#jsx).
 
-### [Templates](https://vuejs.org/v2/guide/syntax.html)
+### [Templates](https://v3.vuejs.org/guide/template-syntax.html)
 
 ~95% of HTML will be in `.vue` files. Since Vue has a chance to parse it before the browser does, we can also do a few extra things that normally aren't possible in a browser.
 
@@ -100,14 +144,14 @@ This feature is especially useful when writing components with long names, but n
 />
 ```
 
-### [Render functions](https://vuejs.org/v2/guide/render-function.html)
+### [Render functions](https://v3.vuejs.org/guide/render-function.html)
 
 Render functions are _alternatives_ to templates. Components using render functions will be relatively rare, written only when we need either:
 
 - the full expressive power of JavaScript, or
-- better rendering performance through stateless, [functional components](https://vuejs.org/v2/guide/render-function.html#Functional-Components)
+- [**Deprecated**](https://v3.vuejs.org/guide/migration/functional-components.html#overviewkmmmm) better rendering performance through stateless, [functional components](https://vuejs.org/v2/guide/render-function.html#Functional-Components)
 
-These components can optionally be written using an HTML-like syntax within JavaScript called [JSX](https://vuejs.org/v2/guide/render-function.html#JSX), including support for [some template features](https://github.com/vuejs/babel-preset-vue#supports-event-modifiers).
+These components can optionally be written using an HTML-like syntax within JavaScript called [JSX](https://v3.vuejs.org/guide/render-function.html#JSX), including support for [some template features](https://github.com/vuejs/babel-preset-vue#supports-event-modifiers).
 
 ### HTML FAQ
 
@@ -115,9 +159,9 @@ These components can optionally be written using an HTML-like syntax within Java
 
 Jade offers too little convenience (no new features we'd want, just simpler syntax) and would break `eslint-plugin-vue`'s template linting.
 
-**If using a render function instead of a template, why not use a `.js(x)` file instead of a `.vue` file?**
+**If using a render function instead of a template, why not use a `.js(x)` or `.ts(x)` file instead of a `.vue` file?**
 
-There are no advantages to using a JS(X) file, other than not having to use a `<script>` tag. By sticking to `.vue` files, you can:
+There are no advantages to using a JS(X) or TS(X) file, other than not having to use a `<script>` tag. By sticking to `.vue` files, you can:
 
 - leave out components' `name` property, because `vue-loader` adds a `__filename` property to exported objects as a fallback for Vue's devtools
 - easily add styles if you later decide to

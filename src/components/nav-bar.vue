@@ -2,11 +2,10 @@
   import { defineComponent } from 'vue';
   import { authComputed } from '@state/helpers';
   import { NavRouteItem } from '@models/nav-route-item';
-  import NavBarRoutes from './nav-bar-routes.vue';
+  import NavBarRoutes from '@components/nav-bar-routes.vue';
 
   export default defineComponent({
     components: { NavBarRoutes },
-
     data() {
       return {
         persistentNavRoutes: [

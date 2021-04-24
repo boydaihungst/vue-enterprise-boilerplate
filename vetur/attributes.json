@@ -1,256 +1,120 @@
 {
-  "base-button-attrs/autofocus": {
-    "type": "boolean"
-  },
-  "base-button-attrs/disabled": {
-    "type": "boolean"
-  },
-  "base-button-attrs/form": {
-    "type": "string"
-  },
-  "base-button-attrs/formaction": {
-    "type": "string"
-  },
-  "base-button-attrs/formenctype": {
-    "type": "string"
-  },
-  "base-button-attrs/formmethod": {
-    "type": "string"
-  },
-  "base-button-attrs/formnovalidate": {
-    "type": "string"
-  },
-  "base-button-attrs/formtarget": {
-    "type": "string"
-  },
-  "base-button-attrs/name": {
-    "type": "string"
-  },
-  "base-button-attrs/type": {
-    "type": "string"
-  },
-  "base-button-attrs/value": {
-    "type": "string"
-  },
   "base-button/autofocus": {
+    "type": "boolean"
+  },
+  "BaseButton/autofocus": {
     "type": "boolean"
   },
   "base-button/disabled": {
     "type": "boolean"
   },
+  "BaseButton/disabled": {
+    "type": "boolean"
+  },
   "base-button/form": {
     "type": "string"
   },
-  "base-button/formaction": {
-    "type": "string"
-  },
-  "base-button/formenctype": {
+  "BaseButton/form": {
     "type": "string"
   },
   "base-button/formmethod": {
     "type": "string"
   },
-  "base-button/formnovalidate": {
-    "type": "string"
-  },
-  "base-button/formtarget": {
+  "BaseButton/formmethod": {
     "type": "string"
   },
   "base-button/name": {
     "type": "string"
   },
+  "BaseButton/name": {
+    "type": "string"
+  },
   "base-button/type": {
+    "type": "string"
+  },
+  "BaseButton/type": {
     "type": "string"
   },
   "base-button/value": {
     "type": "string"
   },
+  "BaseButton/value": {
+    "type": "string"
+  },
   "base-icon/source": {
+    "type": "string"
+  },
+  "BaseIcon/source": {
     "type": "string"
   },
   "base-icon/name": {
     "type": "string"
   },
-  "base-input-attrs/accept": {
+  "BaseIcon/name": {
     "type": "string"
   },
-  "base-input-attrs/alt": {
+  "base-input-text/modelValue": {
     "type": "string"
   },
-  "base-input-attrs/autocomplete": {
+  "BaseInputText/modelValue": {
+    "type": "string"
+  },
+  "base-input-text/type": {
     "type": "string",
     "options": [
-      "additional-name",
-      "address-level1",
-      "address-level2",
-      "address-level3",
-      "address-level4",
-      "address-line1",
-      "address-line2",
-      "address-line3",
-      "bday",
-      "bday-year",
-      "bday-day",
-      "bday-month",
-      "billing",
-      "cc-additional-name",
-      "cc-csc",
-      "cc-exp",
-      "cc-exp-month",
-      "cc-exp-year",
-      "cc-family-name",
-      "cc-given-name",
-      "cc-name",
-      "cc-number",
-      "cc-type",
-      "country",
-      "country-name",
-      "current-password",
-      "email",
-      "family-name",
-      "fax",
-      "given-name",
-      "home",
-      "honorific-prefix",
-      "honorific-suffix",
-      "impp",
-      "language",
-      "mobile",
-      "name",
-      "new-password",
-      "nickname",
-      "organization",
-      "organization-title",
-      "pager",
-      "photo",
-      "postal-code",
-      "sex",
-      "shipping",
-      "street-address",
-      "tel-area-code",
+      "hidden",
+      "text",
+      "search",
       "tel",
-      "tel-country-code",
-      "tel-extension",
-      "tel-local",
-      "tel-local-prefix",
-      "tel-local-suffix",
-      "tel-national",
-      "transaction-amount",
-      "transaction-currency",
       "url",
-      "username",
-      "work"
+      "email",
+      "password",
+      "datetime",
+      "date",
+      "month",
+      "week",
+      "time",
+      "datetime-local",
+      "number",
+      "range",
+      "color",
+      "file",
+      "image"
     ]
   },
-  "base-input-attrs/autofocus": {
-    "type": "boolean"
-  },
-  "base-input-attrs/checked": {
-    "type": "boolean"
-  },
-  "base-input-attrs/dirname": {
-    "type": "string"
-  },
-  "base-input-attrs/disabled": {
-    "type": "boolean"
-  },
-  "base-input-attrs/form": {
-    "type": "string"
-  },
-  "base-input-attrs/formaction": {
-    "type": "string"
-  },
-  "base-input-attrs/formenctype": {
-    "type": "string"
-  },
-  "base-input-attrs/formmethod": {
-    "type": "string"
-  },
-  "base-input-attrs/formnovalidate": {
-    "type": "boolean"
-  },
-  "base-input-attrs/formtarget": {
-    "type": "string"
-  },
-  "base-input-attrs/height": {
-    "type": "string"
-  },
-  "base-input-attrs/inputmode": {
-    "type": "string"
-  },
-  "base-input-attrs/list": {
-    "type": "string"
-  },
-  "base-input-attrs/max": {
-    "type": "string"
-  },
-  "base-input-attrs/maxlength": {
-    "type": "string"
-  },
-  "base-input-attrs/min": {
-    "type": "string"
-  },
-  "base-input-attrs/minlength": {
-    "type": "string"
-  },
-  "base-input-attrs/multiple": {
-    "type": "boolean"
-  },
-  "base-input-attrs/name": {
-    "type": "string"
-  },
-  "base-input-attrs/pattern": {
-    "type": "string"
-  },
-  "base-input-attrs/placeholder": {
-    "type": "string"
-  },
-  "base-input-attrs/readonly": {
-    "type": "boolean"
-  },
-  "base-input-attrs/required": {
-    "type": "boolean"
-  },
-  "base-input-attrs/size": {
-    "type": "string"
-  },
-  "base-input-attrs/src": {
-    "type": "string"
-  },
-  "base-input-attrs/step": {
-    "type": "string"
-  },
-  "base-input-attrs/type": {
-    "type": "string"
-  },
-  "base-input-attrs/value": {
-    "type": "string"
-  },
-  "base-input-attrs/width": {
-    "type": "string"
-  },
-  "base-input-link/href": {
-    "type": "string"
-  },
-  "base-input-link/allowInsecure": {
-    "type": "boolean"
-  },
-  "base-input-link/to": {
-    "type": "object"
-  },
-  "base-input-link/name": {
-    "type": "string"
-  },
-  "base-input-link/params": {
-    "type": "object"
-  },
-  "base-input-link/target": {
-    "type": "string"
+  "BaseInputText/type": {
+    "type": "string",
+    "options": [
+      "hidden",
+      "text",
+      "search",
+      "tel",
+      "url",
+      "email",
+      "password",
+      "datetime",
+      "date",
+      "month",
+      "week",
+      "time",
+      "datetime-local",
+      "number",
+      "range",
+      "color",
+      "file",
+      "image"
+    ]
   },
   "base-input-text/accept": {
     "type": "string"
   },
+  "BaseInputText/accept": {
+    "type": "string"
+  },
   "base-input-text/alt": {
+    "type": "string"
+  },
+  "BaseInputText/alt": {
     "type": "string"
   },
   "base-input-text/autocomplete": {
@@ -318,103 +182,7 @@
       "work"
     ]
   },
-  "base-input-text/autofocus": {
-    "type": "boolean"
-  },
-  "base-input-text/checked": {
-    "type": "boolean"
-  },
-  "base-input-text/dirname": {
-    "type": "string"
-  },
-  "base-input-text/disabled": {
-    "type": "boolean"
-  },
-  "base-input-text/form": {
-    "type": "string"
-  },
-  "base-input-text/formaction": {
-    "type": "string"
-  },
-  "base-input-text/formenctype": {
-    "type": "string"
-  },
-  "base-input-text/formmethod": {
-    "type": "string"
-  },
-  "base-input-text/formnovalidate": {
-    "type": "boolean"
-  },
-  "base-input-text/formtarget": {
-    "type": "string"
-  },
-  "base-input-text/height": {
-    "type": "string"
-  },
-  "base-input-text/inputmode": {
-    "type": "string"
-  },
-  "base-input-text/list": {
-    "type": "string"
-  },
-  "base-input-text/max": {
-    "type": "string"
-  },
-  "base-input-text/maxlength": {
-    "type": "string"
-  },
-  "base-input-text/min": {
-    "type": "string"
-  },
-  "base-input-text/minlength": {
-    "type": "string"
-  },
-  "base-input-text/multiple": {
-    "type": "boolean"
-  },
-  "base-input-text/name": {
-    "type": "string"
-  },
-  "base-input-text/pattern": {
-    "type": "string"
-  },
-  "base-input-text/placeholder": {
-    "type": "string"
-  },
-  "base-input-text/readonly": {
-    "type": "boolean"
-  },
-  "base-input-text/required": {
-    "type": "boolean"
-  },
-  "base-input-text/size": {
-    "type": "string"
-  },
-  "base-input-text/src": {
-    "type": "string"
-  },
-  "base-input-text/step": {
-    "type": "string"
-  },
-  "base-input-text/type": {
-    "type": "string"
-  },
-  "base-input-text/value": {
-    "type": "string"
-  },
-  "base-input-text/width": {
-    "type": "string"
-  },
-  "base-input-text/modelValue": {
-    "type": "string"
-  },
-  "base-link/accept": {
-    "type": "string"
-  },
-  "base-link/alt": {
-    "type": "string"
-  },
-  "base-link/autocomplete": {
+  "BaseInputText/autocomplete": {
     "type": "string",
     "options": [
       "additional-name",
@@ -479,94 +247,190 @@
       "work"
     ]
   },
-  "base-link/autofocus": {
+  "base-input-text/autofocus": {
     "type": "boolean"
   },
-  "base-link/checked": {
+  "BaseInputText/autofocus": {
     "type": "boolean"
   },
-  "base-link/dirname": {
+  "base-input-text/dirname": {
     "type": "string"
   },
-  "base-link/disabled": {
+  "BaseInputText/dirname": {
+    "type": "string"
+  },
+  "base-input-text/disabled": {
     "type": "boolean"
   },
-  "base-link/form": {
-    "type": "string"
-  },
-  "base-link/formaction": {
-    "type": "string"
-  },
-  "base-link/formenctype": {
-    "type": "string"
-  },
-  "base-link/formmethod": {
-    "type": "string"
-  },
-  "base-link/formnovalidate": {
+  "BaseInputText/disabled": {
     "type": "boolean"
   },
-  "base-link/formtarget": {
+  "base-input-text/form": {
     "type": "string"
   },
-  "base-link/height": {
+  "BaseInputText/form": {
     "type": "string"
   },
-  "base-link/inputmode": {
+  "base-input-text/height": {
     "type": "string"
   },
-  "base-link/list": {
+  "BaseInputText/height": {
     "type": "string"
   },
-  "base-link/max": {
+  "base-input-text/list": {
     "type": "string"
   },
-  "base-link/maxlength": {
+  "BaseInputText/list": {
     "type": "string"
   },
-  "base-link/min": {
+  "base-input-text/max": {
     "type": "string"
   },
-  "base-link/minlength": {
+  "BaseInputText/max": {
     "type": "string"
   },
-  "base-link/multiple": {
+  "base-input-text/maxlength": {
+    "type": "string"
+  },
+  "BaseInputText/maxlength": {
+    "type": "string"
+  },
+  "base-input-text/min": {
+    "type": "string"
+  },
+  "BaseInputText/min": {
+    "type": "string"
+  },
+  "base-input-text/minlength": {
+    "type": "string"
+  },
+  "BaseInputText/minlength": {
+    "type": "string"
+  },
+  "base-input-text/multiple": {
     "type": "boolean"
+  },
+  "BaseInputText/multiple": {
+    "type": "boolean"
+  },
+  "base-input-text/name": {
+    "type": "string"
+  },
+  "BaseInputText/name": {
+    "type": "string"
+  },
+  "base-input-text/placeholder": {
+    "type": "string"
+  },
+  "BaseInputText/placeholder": {
+    "type": "string"
+  },
+  "base-input-text/readonly": {
+    "type": "boolean"
+  },
+  "BaseInputText/readonly": {
+    "type": "boolean"
+  },
+  "base-input-text/required": {
+    "type": "boolean"
+  },
+  "BaseInputText/required": {
+    "type": "boolean"
+  },
+  "base-input-text/size": {
+    "type": "string"
+  },
+  "BaseInputText/size": {
+    "type": "string"
+  },
+  "base-input-text/src": {
+    "type": "string"
+  },
+  "BaseInputText/src": {
+    "type": "string"
+  },
+  "base-input-text/step": {
+    "type": "string"
+  },
+  "BaseInputText/step": {
+    "type": "string"
+  },
+  "base-input-text/width": {
+    "type": "string"
+  },
+  "BaseInputText/width": {
+    "type": "string"
+  },
+  "base-link/allowInsecure": {
+    "type": "boolean"
+  },
+  "BaseLink/allowInsecure": {
+    "type": "boolean"
+  },
+  "base-link/to": {
+    "type": "RouteLocationRaw"
+  },
+  "BaseLink/to": {
+    "type": "RouteLocationRaw"
   },
   "base-link/name": {
     "type": "string"
   },
-  "base-link/pattern": {
+  "BaseLink/name": {
     "type": "string"
   },
-  "base-link/placeholder": {
+  "base-link/params": {
+    "type": "object"
+  },
+  "BaseLink/params": {
+    "type": "object"
+  },
+  "base-link/href": {
     "type": "string"
   },
-  "base-link/readonly": {
-    "type": "boolean"
-  },
-  "base-link/required": {
-    "type": "boolean"
-  },
-  "base-link/size": {
+  "BaseLink/href": {
     "type": "string"
   },
-  "base-link/src": {
+  "base-link/target": {
     "type": "string"
   },
-  "base-link/step": {
+  "BaseLink/target": {
+    "type": "string"
+  },
+  "base-link/download": {
+    "type": "string"
+  },
+  "BaseLink/download": {
+    "type": "string"
+  },
+  "base-link/ping": {
+    "type": "string"
+  },
+  "BaseLink/ping": {
+    "type": "string"
+  },
+  "base-link/rel": {
+    "type": "string"
+  },
+  "BaseLink/rel": {
+    "type": "string"
+  },
+  "base-link/hreflang": {
+    "type": "string"
+  },
+  "BaseLink/hreflang": {
     "type": "string"
   },
   "base-link/type": {
     "type": "string"
   },
-  "base-link/value": {
+  "BaseLink/type": {
     "type": "string"
   },
-  "base-link/width": {
-    "type": "string"
+  "nav-bar-routes/routes": {
+    "type": "array"
   },
-  "base-link/modelValue": {
-    "type": "string"
+  "NavBarRoutes/routes": {
+    "type": "array"
   }
 }

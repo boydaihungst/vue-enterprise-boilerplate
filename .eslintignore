@@ -11,7 +11,8 @@ Thumbs.db
 /tests/e2e/screenshots/
 /tests/unit/coverage/
 webpack.config.prod.js
-
+.vuepress/.temp/
+.vuepress/.cache/
 # Local Env Files
 .env.local
 .env.*.local

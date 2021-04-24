@@ -1,16 +1,13 @@
 ---
-to: src/state/modules/<%= h.changeCase.kebab(name).toLowerCase() %>/<%= h.changeCase.kebab(name).toLowerCase() %>.unit.ts
+to: src/state/modules/<%= modulePath %>/<%= moduleName %>.unit.ts
 ---
 <%
-  const fileName = h.changeCase.kebab(name).toLowerCase()
-  const importName = h.changeCase.camel(fileName) + 'Module'
-%>
+  const importName = h.changeCase.camel(moduleName) + 'Module'
+%>import <%= importName %> from './index';
 
-import <%= importName %> from './index';
-
-describe('@state/modules/<%= h.changeCase.kebab(name).toLowerCase() %>/<%= fileName %>', () => {
+describe('@state/modules/<%= modulePath %>/<%= moduleName %>', () => {
   it('exports a valid Vuex module', () => {
     expect(<%= importName %>).toBeAVuexModule();
   });
-  it.todo('todo test');
+  it.todo('should be implemented');
 });

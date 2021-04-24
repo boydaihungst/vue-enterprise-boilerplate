@@ -4,8 +4,8 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
 <%
   if (blocks.indexOf('script') !== -1) {
 %><script lang="ts">
-  import { defineComponent, <% if (blocks.indexOf('template') === -1) {
-    %>VNode<% } %> } from 'vue';
+  import { defineComponent<% if (blocks.indexOf('template') === -1) {
+    %>, VNode, h<% } %> } from 'vue';
   export default defineComponent({
     components: {},
     directives: {},
@@ -13,8 +13,8 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
     inject: {
       foo: {
         from: 'bar',
-        default: 'foo'
-      }
+        default: 'foo',
+      },
     },
     inheritAttrs: true,
     props: {
@@ -29,16 +29,11 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
     },
     emits: {
       click: null,
-      submit: (payload) => {
-        if (payload.email && payload.password) {
-          return true;
-        } else {
-          console.warn(`Invalid submit event payload!`)
-          return false;
-        }
-      }
+      eventName: () => {
+        return true;
+      },
     },
-    setup(props, { attrs, slots, emit }) {
+    setup() {
       // const { propName } = toRefs(props);
     },
     data() {
@@ -53,7 +48,7 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
       },
     },
     watch: {
-      dataName(newValue, oldValue) {
+      dataName() {
         //
       },
     },
@@ -88,13 +83,14 @@ to: "src/components/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === '
       //
     },
     methods: {
-      methodName() {},
+      methodName() {
+        //
+      },
     },<% if (blocks.indexOf('template') === -1) {
-    %>render(): VNode {
-      // <div><slot></slot></div>
-      return h('div', this.$slots.default({
-        propName: 'data'
-      }))
+    %>
+    render(): VNode {
+      // <div><p></p></div>
+      return h('div', h('p'));
     },<% } %>
   });
 </script>

@@ -1,8 +1,8 @@
 import adminModule from './index';
 
-describe('@state/modules/admin/admin', () => {
+describe('@state/modules/users/admin/admin', () => {
   it('exports a valid Vuex module', () => {
     expect(adminModule).toBeAVuexModule();
   });
-  it.todo('todo test');
+  it.todo('should be implemented');
 });

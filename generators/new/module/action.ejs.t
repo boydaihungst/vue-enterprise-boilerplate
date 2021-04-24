@@ -1,5 +1,5 @@
 ---
-to: src/state/modules/<%= h.changeCase.kebab(name).toLowerCase() %>/action.ts
+to: src/state/modules/<%= modulePath %>/action.ts
 ---
 import { AugmentedActionContext } from 'vuex';
 import { State as LocalState } from './state';
@@ -14,7 +14,7 @@ export const actions: Actions = {
   /**
    *
    */
-  async init({ state, dispatch, commit }) {
+  async init() {
     //
   },
 };

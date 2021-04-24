@@ -1,30 +1,22 @@
 {
-  "base-button-attrs": {
+  "base-button": {
     "attributes": [
       "autofocus",
       "disabled",
       "form",
-      "formaction",
-      "formenctype",
       "formmethod",
-      "formnovalidate",
-      "formtarget",
       "name",
       "type",
       "value"
     ],
     "description": ""
   },
-  "base-button": {
+  "BaseButton": {
     "attributes": [
       "autofocus",
       "disabled",
       "form",
-      "formaction",
-      "formenctype",
       "formmethod",
-      "formnovalidate",
-      "formtarget",
       "name",
       "type",
       "value"
@@ -35,64 +27,22 @@
     "attributes": ["source", "name"],
     "description": ""
   },
-  "base-input-attrs": {
-    "attributes": [
-      "accept",
-      "alt",
-      "autocomplete",
-      "autofocus",
-      "checked",
-      "dirname",
-      "disabled",
-      "form",
-      "formaction",
-      "formenctype",
-      "formmethod",
-      "formnovalidate",
-      "formtarget",
-      "height",
-      "inputmode",
-      "list",
-      "max",
-      "maxlength",
-      "min",
-      "minlength",
-      "multiple",
-      "name",
-      "pattern",
-      "placeholder",
-      "readonly",
-      "required",
-      "size",
-      "src",
-      "step",
-      "type",
-      "value",
-      "width"
-    ],
-    "description": ""
-  },
-  "base-input-link": {
-    "attributes": ["href", "allowInsecure", "to", "name", "params", "target"],
+  "BaseIcon": {
+    "attributes": ["source", "name"],
     "description": ""
   },
   "base-input-text": {
     "attributes": [
+      "modelValue",
+      "type",
       "accept",
       "alt",
       "autocomplete",
       "autofocus",
-      "checked",
       "dirname",
       "disabled",
       "form",
-      "formaction",
-      "formenctype",
-      "formmethod",
-      "formnovalidate",
-      "formtarget",
       "height",
-      "inputmode",
       "list",
       "max",
       "maxlength",
@@ -100,59 +50,90 @@
       "minlength",
       "multiple",
       "name",
-      "pattern",
       "placeholder",
       "readonly",
       "required",
       "size",
       "src",
       "step",
+      "width"
+    ],
+    "description": ""
+  },
+  "BaseInputText": {
+    "attributes": [
+      "modelValue",
       "type",
-      "value",
-      "width",
-      "modelValue"
+      "accept",
+      "alt",
+      "autocomplete",
+      "autofocus",
+      "dirname",
+      "disabled",
+      "form",
+      "height",
+      "list",
+      "max",
+      "maxlength",
+      "min",
+      "minlength",
+      "multiple",
+      "name",
+      "placeholder",
+      "readonly",
+      "required",
+      "size",
+      "src",
+      "step",
+      "width"
     ],
     "description": ""
   },
   "base-link": {
     "attributes": [
-      "accept",
-      "alt",
-      "autocomplete",
-      "autofocus",
-      "checked",
-      "dirname",
-      "disabled",
-      "form",
-      "formaction",
-      "formenctype",
-      "formmethod",
-      "formnovalidate",
-      "formtarget",
-      "height",
-      "inputmode",
-      "list",
-      "max",
-      "maxlength",
-      "min",
-      "minlength",
-      "multiple",
+      "allowInsecure",
+      "to",
       "name",
-      "pattern",
-      "placeholder",
-      "readonly",
-      "required",
-      "size",
-      "src",
-      "step",
-      "type",
-      "value",
-      "width",
-      "modelValue"
+      "params",
+      "href",
+      "target",
+      "download",
+      "ping",
+      "rel",
+      "hreflang",
+      "type"
     ],
     "description": ""
   },
+  "BaseLink": {
+    "attributes": [
+      "allowInsecure",
+      "to",
+      "name",
+      "params",
+      "href",
+      "target",
+      "download",
+      "ping",
+      "rel",
+      "hreflang",
+      "type"
+    ],
+    "description": ""
+  },
+  "nav-bar-routes": {
+    "attributes": ["routes"],
+    "description": ""
+  },
+  "NavBarRoutes": {
+    "attributes": ["routes"],
+    "description": ""
+  },
   "nav-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBar": {
     "attributes": [],
     "description": ""
   }

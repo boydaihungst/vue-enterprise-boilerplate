@@ -47,13 +47,13 @@ Then at the very least, read about:
 
 ### Unit test files
 
-Configuration for Jest is in `jest.config.js`, support files are in `tests/unit`, but as for the tests themselves - they're first-class citizens. That means they live alongside our source files, using the same name as the file they test, but with the extension `.unit.js`.
+Configuration for Jest is in `jest.config.js`, support files are in `tests/unit`, but as for the tests themselves - they're first-class citizens. That means they live alongside our source files, using the same name as the file they test, but with the extension `.unit.ts`.
 
 This may seem strange at first, but it makes poor test coverage obvious from a glance, even for those less familiar with the project. It also lowers the barrier to adding tests before creating a new file, adding a new feature, or fixing a bug.
 
 ### Unit test helpers
 
-See [`tests/unit/setup.js`](../tests/unit/setup.js) for a list of helpers, including documentation in comments.
+See [`tests/unit/setup.ts`](../tests/unit/setup.ts) for a list of helpers, including documentation in comments.
 
 ### Unit test mocks
 
@@ -198,11 +198,13 @@ Working against the production API can be useful sometimes, but it also has some
 - Hitting the production API often means modifying the production database, which you typically don't want to do during automated tests.
 - To work on a frontend feature, the backend for it must already be complete.
 
-The mock API is an [Express](https://expressjs.com/) server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
+The mock API is an [Mock service](https://mswjs.io/) web worker/server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
+
+> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `ctx.status(statusCode)`. If you don't webpack proxy will throw `Network Error`
 
 ### Mock authentication
 
-See the [`users` resource](../tests/mock-api/resources/users.js) in the mock API for a list of usernames and passwords you can use in development.
+See the [`users` resource](../tests/mock-api/resources/users.ts) in the mock API for a list of usernames and passwords you can use in development.
 
 ### Testing/developing against a real server
 

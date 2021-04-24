@@ -1,10 +1,18 @@
 ---
-to: src/state/modules/<%= h.changeCase.kebab(name).toLowerCase() %>/state.ts
+to: src/state/modules/<%= modulePath %>/state.ts
 ---
+// ==== Automation import: Import Type ==== //
+// ==== Dont remove comment of this section ==== //
+
 export type State = {
-  testState: string | null;
+  [nestedModule: string]: any;
+  sampleState: string | null;
 };
 
 export const state: State = {
-  testState: null,
+  sampleState: null,
 };
+
+// ==== Automation import: Namespaced Type ==== //
+export type NamespaceState = State;
+// ==== Dont remove comment of this section ==== //

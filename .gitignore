@@ -12,7 +12,8 @@ node_modules/
 /tests/unit/coverage/
 tsconfig.json
 webpack.config.prod.js
-
+.vuepress/.temp/
+.vuepress/.cache/
 # Local Env Files
 .env.local
 .env.*.local

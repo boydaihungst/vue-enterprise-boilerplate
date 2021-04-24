@@ -2,7 +2,7 @@ import { RootGetters, RootState } from '@state';
 import { State } from './state';
 
 type Getters = {
-  test(
+  sampleGetter(
     state: State,
     getters?: LocalGetters,
     rootState?: RootState,
@@ -11,7 +11,7 @@ type Getters = {
 };
 
 export const getters: Getters = {
-  test: () => {
+  sampleGetter: () => {
     return true;
   },
 };
