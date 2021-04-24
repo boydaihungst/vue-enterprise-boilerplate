@@ -118,7 +118,6 @@ module.exports = {
       config.externals(['Vue']);
 
       // Exclude mock service worker from build
-
       config.plugin('copy').use(CopyPlugin, [
         {
           patterns: [
