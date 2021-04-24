@@ -43,7 +43,7 @@ waitForMockServiceWorkerStart().then(() => {
     registerLayoutComponent(app);
     // Globally register all directive
     registerGlobalDirective(app);
-    router.isReady().then(async () => {
+    router.isReady().then(() => {
       const appMounted = app.mount('#app');
       // If running e2e tests...
       if (process.env.VUE_APP_TEST === 'e2e') {

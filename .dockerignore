@@ -25,4 +25,5 @@ dist
 .nuxt
 README.md
 .vuepress/.temp/
+.vuepress/.cache/
 webpack.config.prod.js
