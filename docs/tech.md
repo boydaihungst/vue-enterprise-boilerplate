@@ -97,7 +97,7 @@ Define types for `router meta` in [/src/@types/vue-route.d.ts](../src/@types/vue
 
 ### [Vue custom property](https://v3.vuejs.org/guide/migration/global-api.html#vue-prototype-replaced-by-config-globalproperties)
 
-Define vue custom properties types in in [/src/@types/vue-route.d.ts](../src/@types/vue.d.ts)
+Define vue custom properties types in in [/src/@types/vue.d.ts](../src/@types/vue.d.ts)
 
 ### [Cypress custom command](https://docs.cypress.io/guides/tooling/typescript-support#Types-for-custom-commands)
 
