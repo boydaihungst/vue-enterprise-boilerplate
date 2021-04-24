@@ -1,5 +1,6 @@
 // https://docs.cypress.io/guides/guides/plugins-guide.html
-import { Cypress } from 'local-cypress';
+/// <reference types="cypress" />
+
 const plugin: Cypress.PluginConfig = (on, config) => {
   // Dynamic configuration
   // https://docs.cypress.io/guides/references/configuration.html

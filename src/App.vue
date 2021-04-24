@@ -37,8 +37,9 @@
               'https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap',
           },
         ],
-        // this will teleport to body tag. see metainfo tag in template> v-slot:body in template below. Still bugged
-        body: [{ tag: 'script', href: '', rel: '' }],
+        // this will teleport to body tag. see metainfo tag in template> v-slot:body in template below.
+        // Still bugged in ver vue-meta v3.0.0-alpha.4.
+        // body: [{ tag: 'script', href: '', rel: '' }],
       });
       // Current metadat
       const metadata = useActiveMeta();
