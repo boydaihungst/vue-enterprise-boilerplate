@@ -76,7 +76,9 @@ yarn new view
 yarn new layout
 
 # Generate a new Vuex module with adjacent unit test
-yarn new module
+yarn new module moduleName
+# For nested module
+yarn new module parentModule/nestedModule/nestedOfNestedModule
 
 # Generate a new utility function with adjacent unit test
 yarn new util
