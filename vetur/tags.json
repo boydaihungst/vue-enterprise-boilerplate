@@ -1,0 +1,140 @@
+{
+  "base-button": {
+    "attributes": [
+      "autofocus",
+      "disabled",
+      "form",
+      "formmethod",
+      "name",
+      "type",
+      "value"
+    ],
+    "description": ""
+  },
+  "BaseButton": {
+    "attributes": [
+      "autofocus",
+      "disabled",
+      "form",
+      "formmethod",
+      "name",
+      "type",
+      "value"
+    ],
+    "description": ""
+  },
+  "base-icon": {
+    "attributes": ["source", "name"],
+    "description": ""
+  },
+  "BaseIcon": {
+    "attributes": ["source", "name"],
+    "description": ""
+  },
+  "base-input-text": {
+    "attributes": [
+      "modelValue",
+      "type",
+      "accept",
+      "alt",
+      "autocomplete",
+      "autofocus",
+      "dirname",
+      "disabled",
+      "form",
+      "height",
+      "list",
+      "max",
+      "maxlength",
+      "min",
+      "minlength",
+      "multiple",
+      "name",
+      "placeholder",
+      "readonly",
+      "required",
+      "size",
+      "src",
+      "step",
+      "width"
+    ],
+    "description": ""
+  },
+  "BaseInputText": {
+    "attributes": [
+      "modelValue",
+      "type",
+      "accept",
+      "alt",
+      "autocomplete",
+      "autofocus",
+      "dirname",
+      "disabled",
+      "form",
+      "height",
+      "list",
+      "max",
+      "maxlength",
+      "min",
+      "minlength",
+      "multiple",
+      "name",
+      "placeholder",
+      "readonly",
+      "required",
+      "size",
+      "src",
+      "step",
+      "width"
+    ],
+    "description": ""
+  },
+  "base-link": {
+    "attributes": [
+      "allowInsecure",
+      "to",
+      "name",
+      "params",
+      "href",
+      "target",
+      "download",
+      "ping",
+      "rel",
+      "hreflang",
+      "type"
+    ],
+    "description": ""
+  },
+  "BaseLink": {
+    "attributes": [
+      "allowInsecure",
+      "to",
+      "name",
+      "params",
+      "href",
+      "target",
+      "download",
+      "ping",
+      "rel",
+      "hreflang",
+      "type"
+    ],
+    "description": ""
+  },
+  "nav-bar-routes": {
+    "attributes": ["routes"],
+    "description": ""
+  },
+  "NavBarRoutes": {
+    "attributes": ["routes"],
+    "description": ""
+  },
+  "nav-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBar": {
+    "attributes": [],
+    "description": ""
+  }
+}

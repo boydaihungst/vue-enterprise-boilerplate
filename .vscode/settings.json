@@ -2,7 +2,6 @@
   // ===
   // Spacing
   // ===
-
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
@@ -18,7 +17,7 @@
   "files.exclude": {
     "**/*.log": true,
     "**/*.log*": true,
-    "**/dist": true,
+    "**/dist": false,
     "**/coverage": true
   },
   "files.associations": {
@@ -37,6 +36,8 @@
     "source.fixAll.markdownlint": true
   },
   "eslint.validate": [
+    "typescript",
+    "typescriptreact",
     "javascript",
     "javascriptreact",
     "vue",
@@ -44,34 +45,35 @@
     "html"
   ],
   "vetur.format.enable": false,
+  "vetur.experimental.templateInterpolationService": true,
   "vetur.completion.scaffoldSnippetSources": {
     "user": "🗒️",
     "workspace": "💼",
     "vetur": ""
   },
-  "prettier.disableLanguages": [],
 
   // ===
   // HTML
   // ===
 
   "html.format.enable": false,
-  "vetur.validation.template": false,
+  "vetur.validation.template": true,
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
     "vue-html": "html"
   },
   "vetur.completion.tagCasing": "initial",
+  "vetur.completion.autoImport": true,
+  "vetur.validation.templateProps": true,
+  // "html.customData": ["./intellisense/html.html-data.json"],
 
   // ===
   // JS(ON)
   // ===
 
-  "jest.autoEnable": false,
-  "jest.enableCodeLens": false,
   "javascript.format.enable": false,
-  "json.format.enable": false,
-  "vetur.validation.script": false,
+  "json.format.enable": true,
+  "vetur.validation.script": true,
 
   // ===
   // CSS
@@ -89,5 +91,89 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
-  }
+  },
+
+  // ===
+  // Docker
+  // ===
+
+  // If you use git with SSH (ssh-agent), use this commands to forward your ssh from your environment to
+  // docker container.
+  // Learn more: https://stackoverflow.com/questions/59838300/docker-buildkit-mount-ssh-when-using-remote-agent-forwarding
+  // With window: https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows
+
+  // "docker.commands.build": ["--ssh default=$SSH_AUTH_SOCK"],
+
+  // ===
+  // Other
+  // ===
+  //
+
+  // Custom for support vue-cli unit test with jest
+  "jestrunner.codeLensSelector": "**/*.{test,spec,unit}.{js,jsx,ts,tsx}",
+  "jestrunner.jestCommand": "yarn test:unit",
+  "jestrunner.runOptions": ["--bail", "--config", "jest.config.js"],
+  "jestrunner.jestPath": "${workspaceFolder}/node_modules/.bin/cross-env",
+  "jestrunner.debugOptions": {
+    "args": [
+      "VUE_APP_TEST=unit",
+      "${workspaceFolder}/node_modules/.bin/vue-cli-service",
+      "test:unit"
+    ],
+    "sourcemaps": "inline",
+    "disableOptimisticBPs": true
+  },
+
+  // Auto sort html elemnt attributes on save
+  // Follow rules in: https://v3.vuejs.org/style-guide/#element-attribute-order-recommended
+  "attrsSorter.order": [
+    "is",
+    "v-if",
+    "v-for",
+    "v-else-if",
+    "v-else",
+    "v-show",
+    "v-cloak",
+    "v-pre",
+    "v-once",
+    "id",
+    "ref",
+    "key",
+    "v-model",
+    "v-model.+",
+    "slot",
+    "v-bind",
+    "v-bind.+",
+    ":.+",
+    "class",
+    "@.+",
+    "name",
+    "data-.+",
+    "ng-.+",
+    "src",
+    "for",
+    "type",
+    "href",
+    "values",
+    "title",
+    "alt",
+    "role",
+    "aria-.+",
+    "$unknown$",
+    "v-on.+",
+    "v-html",
+    "v-html.+",
+    "v-text",
+    "v-text.+"
+  ],
+
+  // set i18n folder
+  "i18n-ally.localesPaths": "../src/lang",
+  // i18n json file style: nested | flat | auto
+  "i18n-ally.keystyle": "auto",
+  // i18n default language
+  "i18n-ally.displayLanguage": "en",
+
+  // Specifies the folder path to the typescript
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

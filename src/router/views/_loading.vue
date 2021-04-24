@@ -1,17 +1,21 @@
-<script>
-import Layout from '@layouts/main.vue'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import Layout from '@layouts/layout.vue';
+  import { useMeta } from 'vue-meta';
 
-export default {
-  page: {
-    title: 'Loading page...',
-    meta: [{ name: 'description', content: 'Loading page...' }],
-  },
-  components: { Layout },
-}
+  export default defineComponent({
+    components: { Layout },
+    setup() {
+      useMeta({
+        title: 'Loading page...',
+        description: 'Loading page...',
+      });
+    },
+  });
 </script>
 
 <template>
-  <Layout>
+  <Layout is="main" data-test="view-layout">
     <Transition appear>
       <BaseIcon :class="$style.loadingIcon" name="sync" spin />
     </Transition>
@@ -19,21 +23,21 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+  @import '@design';
 
-.loadingIcon {
-  @extend %typography-xxlarge;
+  .loadingIcon {
+    @extend %typography-xxlarge;
 
-  display: block;
-  margin: 0 auto;
+    display: block;
+    margin: 0 auto;
 
-  // stylelint-disable-next-line selector-class-pattern
-  &:global(.v-enter-active) {
-    transition: opacity 1s;
+    // stylelint-disable-next-line selector-class-pattern
+    &:global(.v-enter-active) {
+      transition: opacity 1s;
+    }
+    // stylelint-disable-next-line selector-class-pattern
+    &:global(.v-enter) {
+      opacity: 0;
+    }
   }
-  // stylelint-disable-next-line selector-class-pattern
-  &:global(.v-enter) {
-    opacity: 0;
-  }
-}
 </style>

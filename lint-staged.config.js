@@ -1,5 +1,9 @@
 module.exports = {
-  '*.js': ['yarn lint:eslint', 'yarn lint:prettier', 'yarn test:unit:file'],
+  '*.{js,jsx,ts,tsx}': [
+    'yarn lint:eslint',
+    'yarn lint:prettier',
+    'yarn test:unit:file',
+  ],
   '{!(package)*.json,*.code-snippets,.!(browserslist)*rc}': [
     'yarn lint:prettier --parser json',
   ],
@@ -13,4 +17,4 @@ module.exports = {
   '*.scss': ['yarn lint:stylelint', 'yarn lint:prettier'],
   '*.md': ['yarn lint:markdownlint', 'yarn lint:prettier'],
   '*.{png,jpeg,jpg,gif,svg}': ['imagemin-lint-staged'],
-}
+};

@@ -5,9 +5,9 @@ module.exports = [
     message: 'Name:',
     validate(value) {
       if (!value.length) {
-        return 'Components must have a name.'
+        return 'Components must have a name.';
       }
-      return true
+      return true;
     },
   },
-]
+];

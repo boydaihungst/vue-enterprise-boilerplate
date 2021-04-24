@@ -1,0 +1,144 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+  "name": "vue-enterprise-boilderplate",
+
+  // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+  // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+  "dockerComposeFile": ["../docker-compose.yml"],
+
+  // The 'service' property is the name of the service for the container that VS Code should
+  // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+  "service": "vue-enterprise-boilderplate",
+
+  // The optional 'workspaceFolder' property is the path VS Code should open by default when
+  // connected. This is typically a file mount in .devcontainer/docker-compose.yml
+  "workspaceFolder": "/home/app",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": null
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    // Syntax highlighting and more for .vue files
+    // https://github.com/vuejs/vetur
+    "octref.vetur",
+
+    // Peek and go-to-definition for .vue files
+    // https://github.com/fuzinato/vscode-vue-peek
+    "dariofuzinato.vue-peek",
+
+    // Lint-on-save with ESLint
+    // https://github.com/microsoft/vscode-eslint
+    "dbaeumer.vscode-eslint",
+
+    // Lint-on-save with Stylelint
+    // https://github.com/stylelint/vscode-stylelint
+    "stylelint.vscode-stylelint",
+
+    // Lint-on-save markdown in README files
+    // https://github.com/DavidAnson/vscode-markdownlint
+    "davidanson.vscode-markdownlint",
+
+    // Format-on-save with Prettier
+    // https://github.com/prettier/prettier-vscode
+    "esbenp.prettier-vscode",
+
+    // SCSS intellisense
+    // https://github.com/mrmlnc/vscode-scss
+
+    "mrmlnc.vscode-scss",
+
+    // Test `.unit.js` files on save with Jest
+    // https://github.com/jest-community/vscode-jest
+    "orta.vscode-jest",
+
+    // i18n intellisense, better multilang development
+    // https://github.com/lokalise/i18n-ally/wiki
+    "lokalise.i18n-ally",
+
+    // Highly recommend this extension.
+    // Lets you use a Docker container as a full-featured development environment.
+    // Really useful. With Pre-config Dockerfile, automatically install nodejs, @vue/cli...
+    // Read more here: https://code.visualstudio.com/docs/remote/containers
+    "ms-vscode-remote.remote-containers",
+
+    // CSS/SCSS intellisense
+    "zignd.html-css-class-completion",
+
+    // highlight color found
+    // https://github.com/enyancc/vscode-ext-color-highlight
+    // "naumovs.color-highlight",
+
+    // Npm package intellisense
+    // https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense
+    "christian-kohler.npm-intellisense",
+
+    // search module in node_module folders
+    // https://github.com/jasonnutter/vscode-search-node-modules
+    "jasonnutter.search-node-modules",
+
+    // auto sort element attributes in save, follow rules in here https://v3.vuejs.org/style-guide/#element-attribute-order-recommended
+    // https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-attrs-sorter
+    "mrmlnc.vscode-attrs-sorter",
+
+    // Preview svg file
+    // https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer
+    "cssho.vscode-svgviewer",
+
+    // Show and highlight TODO,FIXME comment... in list
+    // https://github.com/Gruntfuggly/todo-tree
+    "gruntfuggly.todo-tree",
+
+    // vue code snippets
+    // https://github.com/sdras/vue-vscode-snippets
+    "sdras.vue-vscode-snippets",
+
+    // Highlight comment
+    // https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
+    "aaron-bond.better-comments",
+
+    // Matching brackets to be identified with colours
+    // https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2
+    "coenraads.bracket-pair-colorizer-2",
+
+    // Debug for chrome
+    "msjsdiag.debugger-for-chrome",
+
+    // Debug for firefox
+    "firefox-devtools.vscode-firefox-debug",
+
+    // Docker management
+    // https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+    "ms-azuretools.vscode-docker",
+
+    // HTML Highlights matching opening and/or closing tags
+    // https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag
+    "vincaslt.highlight-matching-tag",
+
+    // Running or debugging a specific test or test-suite. With pre-setting to support vue-cli in ./vscode/settings.json
+    // https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner
+    "firsttris.vscode-jest-runner",
+
+    // yaml intellisense
+    "redhat.vscode-yaml"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Uncomment the next line if you want start specific services in your Docker Compose config.
+  // "runServices": [],
+
+  // Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+  // "shutdownAction": "none",
+
+  // Uncomment the next line to run commands after the container is created - for example installing curl.
+  // "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+  // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node"
+}

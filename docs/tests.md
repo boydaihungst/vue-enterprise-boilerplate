@@ -47,13 +47,13 @@ Then at the very least, read about:
 
 ### Unit test files
 
-Configuration for Jest is in `jest.config.js`, support files are in `tests/unit`, but as for the tests themselves - they're first-class citizens. That means they live alongside our source files, using the same name as the file they test, but with the extension `.unit.js`.
+Configuration for Jest is in `jest.config.js`, support files are in `tests/unit`, but as for the tests themselves - they're first-class citizens. That means they live alongside our source files, using the same name as the file they test, but with the extension `.unit.ts`.
 
 This may seem strange at first, but it makes poor test coverage obvious from a glance, even for those less familiar with the project. It also lowers the barrier to adding tests before creating a new file, adding a new feature, or fixing a bug.
 
 ### Unit test helpers
 
-See [`tests/unit/setup.js`](../tests/unit/setup.js) for a list of helpers, including documentation in comments.
+See [`tests/unit/setup.ts`](../tests/unit/setup.ts) for a list of helpers, including documentation in comments.
 
 ### Unit test mocks
 
@@ -92,8 +92,8 @@ Beyond that, also know that you can access our app in Cypress on the `window`. F
 
 ```js
 cy.window().then((window) => {
-  return window.__app__.$store.dispatch('someModule/someAction')
-})
+  return window.__app__.$store.dispatch('someModule/someAction');
+});
 ```
 
 ### Accessibility-driven end-to-end tests
@@ -106,39 +106,39 @@ Ideally, tests should only fail when either:
 Unfortunately, there are _a lot_ of ways to get this wrong. For example, when creating a selector for a login link:
 
 ```js
-cy.get('a')
+cy.get('a');
 // Too general, as there could be many links
 
-cy.get('.login-link')
+cy.get('.login-link');
 // Tied to implementation detail of CSS
 
-cy.get('#login-link')
+cy.get('#login-link');
 // Tied to implementation detail of JS and prevents component reusability
 
-cy.contains('Log in')
+cy.contains('Log in');
 // Assumes the text only appears in one context
 ```
 
 To create the right selector, think from the perspective of the user. What _exactly_ are they looking for? They're not looking for:
 
 ```js
-cy.get('a')
+cy.get('a');
 // Any link
 
-cy.get('.login-link')
+cy.get('.login-link');
 // An element with a specific class
 
-cy.get('#login-link')
+cy.get('#login-link');
 // An element with a specific id
 
-cy.contains('Log in')
+cy.contains('Log in');
 // Specific text anywhere on the page
 ```
 
 But rather:
 
 ```js
-cy.contains('a', 'Log in')
+cy.contains('a', 'Log in');
 // A link containing the text "Log in"
 ```
 
@@ -161,7 +161,7 @@ For example, let's imagine you replaced "Log in" with an icon:
 Now users browsing your page with a screen reader will have no way to find the login link. From their perspective, this is just a link with no content. You may be tempted to try to fix the test with something like:
 
 ```js
-cy.get('a[href="/login"]')
+cy.get('a[href="/login"]');
 // A link going to "/login"
 ```
 
@@ -178,7 +178,7 @@ Instead, thinking from a user's perspective forces you to stay accessible, perha
 Then the selector in your test can update as well:
 
 ```js
-cy.get('a[aria-label*="Log in"]')
+cy.get('a[aria-label*="Log in"]');
 // A link with a label containing the text "Log in"
 ```
 
@@ -198,11 +198,13 @@ Working against the production API can be useful sometimes, but it also has some
 - Hitting the production API often means modifying the production database, which you typically don't want to do during automated tests.
 - To work on a frontend feature, the backend for it must already be complete.
 
-The mock API is an [Express](https://expressjs.com/) server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
+The mock API is an [Mock service](https://mswjs.io/) web worker/server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
+
+> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `ctx.status(statusCode)`. If you don't webpack proxy will throw `Network Error`
 
 ### Mock authentication
 
-See the [`users` resource](../tests/mock-api/resources/users.js) in the mock API for a list of usernames and passwords you can use in development.
+See the [`users` resource](../tests/mock-api/resources/users.ts) in the mock API for a list of usernames and passwords you can use in development.
 
 ### Testing/developing against a real server
 

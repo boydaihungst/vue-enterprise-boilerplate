@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 vm_settings: &vm_settings
   docker:

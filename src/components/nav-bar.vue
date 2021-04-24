@@ -1,39 +1,41 @@
-<script>
-import { authComputed } from '@state/helpers'
-import NavBarRoutes from './nav-bar-routes.vue'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { authComputed } from '@state/helpers';
+  import { NavRouteItem } from '@models/nav-route-item';
+  import NavBarRoutes from '@components/nav-bar-routes.vue';
 
-export default {
-  components: { NavBarRoutes },
-  data() {
-    return {
-      persistentNavRoutes: [
-        {
-          name: 'home',
-          title: 'Home',
-        },
-      ],
-      loggedInNavRoutes: [
-        {
-          name: 'profile',
-          title: () => 'Logged in as ' + this.currentUser.name,
-        },
-        {
-          name: 'logout',
-          title: 'Log out',
-        },
-      ],
-      loggedOutNavRoutes: [
-        {
-          name: 'login',
-          title: 'Log in',
-        },
-      ],
-    }
-  },
-  computed: {
-    ...authComputed,
-  },
-}
+  export default defineComponent({
+    components: { NavBarRoutes },
+    data() {
+      return {
+        persistentNavRoutes: [
+          {
+            name: 'home',
+            title: 'Home',
+          },
+        ] as NavRouteItem[],
+        loggedInNavRoutes: [
+          {
+            name: 'profile',
+            title: () => 'Logged in as ' + this.currentUser.name,
+          },
+          {
+            name: 'logout',
+            title: 'Log out',
+          },
+        ] as NavRouteItem[],
+        loggedOutNavRoutes: [
+          {
+            name: 'login',
+            title: 'Log in',
+          },
+        ] as NavRouteItem[],
+      };
+    },
+    computed: {
+      ...authComputed,
+    },
+  });
 </script>
 
 <template>
@@ -45,17 +47,16 @@ export default {
 </template>
 
 <style lang="scss" module>
-@import '@design';
+  @import '@design';
+  .container {
+    padding: 0;
+    margin: 0 0 $size-grid-padding;
+    text-align: center;
+    list-style-type: none;
 
-.container {
-  padding: 0;
-  margin: 0 0 $size-grid-padding;
-  text-align: center;
-  list-style-type: none;
-
-  > li {
-    display: inline-block;
-    margin-right: $size-grid-padding;
+    > li {
+      display: inline-block;
+      margin-right: $size-grid-padding;
+    }
   }
-}
 </style>

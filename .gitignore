@@ -10,8 +10,10 @@ node_modules/
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 /tests/unit/coverage/
-jsconfig.json
-
+tsconfig.json
+webpack.config.prod.js
+.vuepress/.temp/
+.vuepress/.cache/
 # Local Env Files
 .env.local
 .env.*.local

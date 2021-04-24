@@ -1,34 +1,33 @@
-<script>
-import Layout from '@layouts/main.vue'
+<script lang="ts">
+  import { defineComponent, toRefs, PropType } from 'vue';
+  import Layout from '@layouts/layout.vue';
+  import { useMeta } from 'vue-meta';
+  import { User } from '@models/user';
 
-export default {
-  page() {
-    return {
-      title: this.user.name,
-      meta: [
-        {
-          name: 'description',
-          content: `The user profile for ${this.user.name}.`,
-        },
-      ],
-    }
-  },
-  components: { Layout },
-  props: {
-    user: {
-      type: Object,
-      required: true,
+  export default defineComponent({
+    components: { Layout },
+    props: {
+      user: {
+        type: Object as PropType<User>,
+        required: true,
+      },
     },
-  },
-}
+    setup(props) {
+      const { user } = toRefs(props);
+      useMeta({
+        // Can be static or computed
+        title: user.value.name,
+        description: `The user profile for ${user.value.name}`,
+      });
+    },
+  });
 </script>
 
 <template>
-  <Layout>
+  <Layout is="main" data-test="view-layout">
     <h1>
       <BaseIcon name="user" />
-      {{ user.name }}
-      Profile
+      {{ user.name }} Profile
     </h1>
     <pre>{{ user }}</pre>
   </Layout>

@@ -1,36 +1,35 @@
-<script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library as fontAwesomeIconLibrary } from '@fortawesome/fontawesome-svg-core'
-import camelCase from 'lodash/camelCase'
+<script lang="ts">
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+  import { library as fontAwesomeIconLibrary } from '@fortawesome/fontawesome-svg-core';
+  import camelCase from 'lodash/camelCase';
+  import { defineComponent } from 'vue';
+  import * as faSync from '@fortawesome/free-solid-svg-icons/faSync';
+  import * as faUser from '@fortawesome/free-solid-svg-icons/faUser';
 
-// https://fontawesome.com/icons
-fontAwesomeIconLibrary.add(
-  require('@fortawesome/free-solid-svg-icons/faSync').definition,
-  require('@fortawesome/free-solid-svg-icons/faUser').definition
-)
-
-export default {
-  components: {
-    FontAwesomeIcon,
-  },
-  inheritAttrs: false,
-  props: {
-    source: {
-      type: String,
-      default: 'font-awesome',
+  // https://fontawesome.com/icons
+  fontAwesomeIconLibrary.add(faSync.definition, faUser.definition);
+  export default defineComponent({
+    components: {
+      FontAwesomeIcon,
     },
-    name: {
-      type: String,
-      required: true,
+    inheritAttrs: false,
+    props: {
+      source: {
+        type: String,
+        default: 'font-awesome',
+      },
+      name: {
+        type: String,
+        required: true,
+      },
     },
-  },
-  computed: {
-    // Gets a CSS module class, e.g. iconCustomLogo
-    customIconClass() {
-      return this.$style[camelCase('icon-custom-' + this.name)]
+    computed: {
+      // Gets a CSS module class, e.g. iconCustomLogo
+      customIconClass(): string {
+        return this.$style[camelCase('icon-custom-' + this.name)];
+      },
     },
-  },
-}
+  });
 </script>
 
 <template>
