@@ -52,10 +52,9 @@ const config = deepmerge(presets, {
   globals: {
     'vue-jest': {
       /**
-       * Set to `false` if don't use css module.
        * See {@link https://vue-loader.vuejs.org/guide/css-modules.html#usage|css-modules}
        */
-      experimentalCSSCompile: true,
+      experimentalCSSCompile: false,
     },
     mount: false,
     shallowMount: false,
