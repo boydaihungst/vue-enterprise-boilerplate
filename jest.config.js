@@ -55,7 +55,7 @@ const config = deepmerge(presets, {
        * Set to `false` if don't use css module.
        * See {@link https://vue-loader.vuejs.org/guide/css-modules.html#usage|css-modules}
        */
-      experimentalCSSCompile: false,
+      experimentalCSSCompile: true,
     },
     mount: false,
     shallowMount: false,

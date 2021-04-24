@@ -76,8 +76,6 @@ At its current rate of development, I think TypeScript will eventually _become_ 
 
 ## [Typescript](https://www.typescriptlang.org/docs/)
 
-Requires at least typescript version >= 4.1
-
 ### Vue Component
 
 Create `vue component` with `typescript`, read the following guide.
