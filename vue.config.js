@@ -175,7 +175,7 @@ module.exports = {
      * {@link https://mswjs.io/docs/}
      */
     host: 'localhost',
-    https: true,
+    // https: true,
     ...(process.env.API_BASE_URL
       ? {
           /** {@link https://github.com/chimurai/http-proxy-middleware} */

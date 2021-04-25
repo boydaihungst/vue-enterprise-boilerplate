@@ -60,10 +60,6 @@
     // https://github.com/jasonnutter/vscode-search-node-modules
     "jasonnutter.search-node-modules",
 
-    // auto sort element attributes in save, follow rules in here https://v3.vuejs.org/style-guide/#element-attribute-order-recommended
-    // https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-attrs-sorter
-    "mrmlnc.vscode-attrs-sorter",
-
     // Preview svg file
     // https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer
     "cssho.vscode-svgviewer",

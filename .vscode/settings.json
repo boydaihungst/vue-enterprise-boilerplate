@@ -57,7 +57,7 @@
   // ===
 
   "html.format.enable": false,
-  "vetur.validation.template": true,
+  "vetur.validation.template": false,
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
     "vue-html": "html"
@@ -65,7 +65,6 @@
   "vetur.completion.tagCasing": "initial",
   "vetur.completion.autoImport": true,
   "vetur.validation.templateProps": true,
-  // "html.customData": ["./intellisense/html.html-data.json"],
 
   // ===
   // JS(ON)
@@ -73,7 +72,8 @@
 
   "javascript.format.enable": false,
   "json.format.enable": true,
-  "vetur.validation.script": true,
+  "vetur.validation.script": false,
+  "vetur.validation.interpolation": true,
 
   // ===
   // CSS
@@ -123,49 +123,6 @@
     "sourcemaps": "inline",
     "disableOptimisticBPs": true
   },
-
-  // Auto sort html elemnt attributes on save
-  // Follow rules in: https://v3.vuejs.org/style-guide/#element-attribute-order-recommended
-  "attrsSorter.order": [
-    "is",
-    "v-if",
-    "v-for",
-    "v-else-if",
-    "v-else",
-    "v-show",
-    "v-cloak",
-    "v-pre",
-    "v-once",
-    "id",
-    "ref",
-    "key",
-    "v-model",
-    "v-model.+",
-    "slot",
-    "v-bind",
-    "v-bind.+",
-    ":.+",
-    "class",
-    "@.+",
-    "name",
-    "data-.+",
-    "ng-.+",
-    "src",
-    "for",
-    "type",
-    "href",
-    "values",
-    "title",
-    "alt",
-    "role",
-    "aria-.+",
-    "$unknown$",
-    "v-on.+",
-    "v-html",
-    "v-html.+",
-    "v-text",
-    "v-text.+"
-  ],
 
   // set i18n folder
   "i18n-ally.localesPaths": "../src/lang",
