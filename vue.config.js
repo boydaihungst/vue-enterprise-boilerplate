@@ -1,4 +1,5 @@
 const path = require('path');
+const zlib = require('zlib');
 const CopyPlugin = require('copy-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //   .BundleAnalyzerPlugin;
@@ -52,6 +53,10 @@ module.exports = {
     // Optimize for production build
     if (process.env.NODE_ENV === 'production') {
       /**
+       * Optimize for vue-i18n
+       * {@link https://vue-i18n.intlify.dev/guide/advanced/optimization.html#optimization}
+       */
+      /**
        * Remove all `data-test` attribute
        * {@link https://next.vue-test-utils.vuejs.org/guide/essentials/a-crash-course.html#the-first-test-a-todo-is-rendered}
        */
@@ -93,11 +98,37 @@ module.exports = {
        */
       config.plugins.delete('prefetch');
       // https://www.npmjs.com/package/compression-webpack-plugin
-      config.plugin('CompressionPlugin').use(CompressionPlugin);
-      // config.optimization.runtimeChunk('single').splitChunks({ chunks: 'all' });
+      config.plugin('CompressionPlugin').use(CompressionPlugin, [
+        {
+          filename: '[path][base].gz',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$/,
+          threshold: 10240,
+          minRatio: 0.8,
+        },
+        {
+          filename: '[path][base].br',
+          algorithm: 'brotliCompress',
+          test: /\.(js|css|html|svg)$/,
+          compressionOptions: {
+            params: {
+              [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+            },
+          },
+          threshold: 10240,
+          minRatio: 0.8,
+          deleteOriginalAssets: false,
+        },
+      ]);
+      // Exclude test file from bundle
+      config.module.rule('ts').exclude.add(/\.(unit|spec|test)\.ts$/);
+      config.module
+        .rule('ignore-loader')
+        .test(/.+\.(unit|spec|test).ts$/)
+        .use('ignore-loader');
+
       config.optimization.splitChunks({ chunks: 'all' });
       config.optimization.concatenateModules(true);
-
       /**
        *
        * {@link https://github.com/webpack-contrib/webpack-bundle-analyzer}
@@ -107,16 +138,25 @@ module.exports = {
       //   .use(BundleAnalyzerPlugin, [
       //     { analyzerMode: 'static', analyzerPort: 'auto', openAnalyzer: false },
       //   ]);
-
       /**
-       * Optimize for vue-i18n
+       * Optimize for vue-i18n: can't use vue-i18n directive (v-t)
        * {@link https://vue-i18n.intlify.dev/guide/advanced/optimization.html#optimization}
        */
       config.resolve.alias.merge({
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js',
+        vue: path.resolve(
+          __dirname,
+          'node_modules/vue/dist/vue.runtime.esm-browser.prod.js'
+        ),
+        /**
+         * Optimize for vue: can't use template: <div><div>
+         * {@link https://v3.vuejs.org/guide/installation.html#with-a-bundler}
+         */
+        'vue-i18n': path.resolve(
+          __dirname,
+          'node_modules/vue-i18n/dist/vue-i18n.runtime.esm-browser.prod.js'
+        ),
       });
       config.externals(['Vue']);
-
       // Exclude mock service worker from build
       config.plugin('copy').use(CopyPlugin, [
         {
@@ -128,9 +168,9 @@ module.exports = {
               toType: 'dir',
               globOptions: {
                 ignore: [
-                  'mockServiceWorker.js',
+                  path.resolve(__dirname, 'public/mockServiceWorker.js'),
                   '**/.DS_Store',
-                  '/home/boydaihungst/Gits/vue-enterprise-boilerplate/public/index.html',
+                  path.resolve(__dirname, 'public/index.html'),
                 ],
               },
             },
@@ -160,9 +200,9 @@ module.exports = {
       fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE,
       localeDir: 'lang',
       enableLegacy: false,
-      runtimeOnly: process.env.NODE_ENV === 'production',
+      runtimeOnly: true,
       compositionOnly: true,
-      fullInstall: true,
+      fullInstall: false,
     },
   },
   /**
