@@ -46,31 +46,30 @@ for (const alias in aliases) {
 
 const tsconfigTemplate = require('./tsconfig.template') || {};
 const tsconfigPath = path.resolve(__dirname, 'tsconfig.json');
-
-fs.writeFile(
-  tsconfigPath,
-  prettier.format(
-    JSON.stringify({
-      ...tsconfigTemplate,
-      compilerOptions: {
-        ...(tsconfigTemplate.compilerOptions || {}),
-        paths: module.exports.tsconfig,
-      },
-    }),
-    {
-      ...require('./.prettierrc'),
-      parser: 'json',
-    }
-  ),
-  (error) => {
-    if (error) {
-      console.error(
-        'Error while creating tsconfig.tson from aliases.config.js.'
-      );
-      throw error;
-    }
+try {
+  fs.writeFileSync(
+    tsconfigPath,
+    prettier.format(
+      JSON.stringify({
+        ...tsconfigTemplate,
+        compilerOptions: {
+          ...(tsconfigTemplate.compilerOptions || {}),
+          paths: module.exports.tsconfig,
+        },
+      }),
+      {
+        ...require('./.prettierrc'),
+        parser: 'json',
+      }
+    ),
+    { encoding: 'utf-8' }
+  );
+} catch (error) {
+  if (error) {
+    console.error('Error while creating tsconfig.tson from aliases.config.js.');
+    throw error;
   }
-);
+}
 
 function resolveSrc(_path) {
   return path.resolve(__dirname, _path);

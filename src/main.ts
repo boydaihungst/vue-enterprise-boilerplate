@@ -7,17 +7,17 @@ import { router } from '@router';
 import App from '@src/App.vue';
 const app = createApp(App);
 // Install global plugin, component, directive, config ...
-
-// If running inside Cypress...
-if (process.env.VUE_APP_TEST === 'e2e') {
-  // Ensure tests fail when Vue emits an error.
-  app.config.errorHandler = (err) => {
-    setTimeout(() => {
-      throw err;
-    });
-  };
+if (process.env.NODE_ENV === 'development') {
+  // If running inside Cypress...
+  if (process.env.VUE_APP_TEST === 'e2e') {
+    // Ensure tests fail when Vue emits an error.
+    app.config.errorHandler = (err) => {
+      setTimeout(() => {
+        throw err;
+      });
+    };
+  }
 }
-
 /**
  * With this mock service will intercept any http | graphql query, then response with mock data
  * If u dont use this feature then remove file `mockServiceWorker.js` in public folder
@@ -25,15 +25,18 @@ if (process.env.VUE_APP_TEST === 'e2e') {
  */
 async function waitForMockServiceWorkerStart() {
   // Only run in browser environment like E2E test, webpack dev server
-  if (!process.env.API_BASE_URL && process.env.VUE_APP_TEST !== 'unit') {
-    const mockServer = (await import('@/tests/mock-api/server.worker'))
-      .mockServer;
-    // Use this to debug mock server
-    // mockServer.on('request:match', (req) => {
-    //  console.info('request:match', req);
-    // });
-    await mockServer.start();
-    mockServer.printHandlers();
+  // Indicate for webpack to exclude this code in production build
+  if (process.env.NODE_ENV === 'development') {
+    if (!process.env.API_BASE_URL && process.env.VUE_APP_TEST !== 'unit') {
+      const mockServer = (await import('@/tests/mock-api/server.worker'))
+        .mockServer;
+      // Use this to debug mock server
+      // mockServer.on('request:match', (req) => {
+      //  console.info('request:match', req);
+      // });
+      await mockServer.start();
+      mockServer.printHandlers();
+    }
   }
 }
 waitForMockServiceWorkerStart().then(() => {
@@ -48,11 +51,13 @@ waitForMockServiceWorkerStart().then(() => {
     router.isReady().then(() => {
       const appMounted = app.mount('#app');
       // If running e2e tests...
-      if (process.env.VUE_APP_TEST === 'e2e') {
-        // Attach the app to the window, which can be useful
-        // for manually setting state in Cypress commands
-        // such as `cy.logIn()`.
-        window.__app__ = appMounted;
+      if (process.env.NODE_ENV === 'development') {
+        if (process.env.VUE_APP_TEST === 'e2e') {
+          // Attach the app to the window, which can be useful
+          // for manually setting state in Cypress commands
+          // such as `cy.logIn()`.
+          window.__app__ = appMounted;
+        }
       }
     });
   });

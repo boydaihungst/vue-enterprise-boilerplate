@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build --modern",
+    "build": "vue-cli-service build",
     "build:ci": "yarn build --report",
     "dev": "vue-cli-service serve",
     "dev:e2e": "cross-env VUE_APP_TEST=e2e vue-cli-service test:e2e --mode=development",
@@ -93,6 +93,7 @@
     "eslint-plugin-vue": "^7.8.0",
     "faker": "^5.5.3",
     "hygen": "6.0.x",
+    "ignore-loader": "^0.1.2",
     "imagemin-lint-staged": "0.4.x",
     "jest-extended": "^0.11.5",
     "lint-staged": "^10.0.x",

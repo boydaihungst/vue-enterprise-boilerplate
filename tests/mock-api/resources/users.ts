@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import omit from 'lodash/omit';
 /** {@link https://github.com/marak/Faker.js/} */
 import faker from 'faker';
 import merge from 'lodash/merge';
@@ -65,6 +65,6 @@ export default {
     return null;
   },
   json(user: User) {
-    return user && _.omit(user, ['password']);
+    return user && omit(user, ['password']);
   },
 };
