@@ -8,8 +8,11 @@
       "type": "chrome",
       "request": "launch",
       "name": "chrome",
-      "url": "https://localhost:8080",
+      "url": "http://localhost:8080",
       "webRoot": "${workspaceFolder}/src",
+      "linux": {
+        "runtimeExecutable": "/usr/bin/chromium"
+      },
       "breakOnLoad": true,
       "skipFiles": ["<node_internals>/**"],
       "sourceMapPathOverrides": {
@@ -20,7 +23,7 @@
       "type": "firefox",
       "request": "launch",
       "name": "firefox",
-      "url": "https://localhost:8080",
+      "url": "http://localhost:8080",
       "skipFiles": ["<node_internals>/**"],
       "linux": {
         "firefoxExecutable": "/usr/lib/firefox/firefox",
@@ -30,7 +33,12 @@
       "keepProfileChanges": true,
       "suggestPathMappingWizard": true,
       "webRoot": "${workspaceFolder}/src",
-      "pathMappings": [{ "url": "webpack:///src/", "path": "${webRoot}/" }]
+      "pathMappings": [
+        {
+          "url": "webpack:///src/",
+          "path": "${webRoot}/"
+        }
+      ]
     }
   ]
 }

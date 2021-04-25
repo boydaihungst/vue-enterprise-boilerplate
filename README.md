@@ -1,4 +1,4 @@
-# Vue Enterprise Boilerplate.
+# Vue Enterprise Boilerplate
 
 **Updated with vuejs 3, @vue/cli v5, webpack 5, typescript, full typesafe for vuex module... read more in [docs](#documentation)**
 
