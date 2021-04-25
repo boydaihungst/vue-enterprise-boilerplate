@@ -189,6 +189,13 @@ module.exports = {
           },
         }
       : /** @deprecated Proxy API endpoints a local mock API. Using msw instead */
-        {}),
+        {
+          // Set this to prevent expressjs throw 404 not found before msw ready
+          before: function (app) {
+            app.all('*', function (req, res, next) {
+              next();
+            });
+          },
+        }),
   },
 };

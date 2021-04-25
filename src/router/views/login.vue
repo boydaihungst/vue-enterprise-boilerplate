@@ -62,7 +62,7 @@
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout">
+  <Layout is="default" data-test="view-layout">
     <form :class="$style.form" @submit.prevent="tryToLogIn">
       <BaseInputText
         v-model="username"

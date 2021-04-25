@@ -15,8 +15,7 @@ const routeRecordRaws: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
-        component: () =>
-          lazyLoadView(/* webpackPrefetch: true */ import('@views/home.vue')),
+        component: () => lazyLoadView(import('@views/home.vue')),
       },
       {
         path: 'login',

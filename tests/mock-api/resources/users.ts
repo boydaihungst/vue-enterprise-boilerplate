@@ -22,14 +22,15 @@ function generateUser(userOptions: User = {}) {
 }
 
 const user1: User = generateUser({
-  id: '1',
   username: 'user1',
   password: 'password123',
+  name: 'User One',
 });
 
 const admin: User = generateUser({
   id: 'id-admin-uuid-v4',
   username: 'admin',
+  name: 'admin',
   password: 'password123',
 });
 // Generate 5 random user
@@ -39,6 +40,7 @@ const randomUsers = [5].map(() => generateUser());
 const all: User[] = [...randomUsers, admin, user1];
 
 export default {
+  admin,
   all,
   authenticate({ username, password }: User) {
     return new Promise<User>((resolve, reject) => {
@@ -53,6 +55,11 @@ export default {
     });
   },
   findBy<T extends keyof User>(propertyName: T, value: User[T]) {
+    const matchedUser = this.all.find((user) => user[propertyName] === value);
+    if (matchedUser) return this.json(matchedUser);
+    return null;
+  },
+  findByWithHiddenProps<T extends keyof User>(propertyName: T, value: User[T]) {
     const matchedUser = this.all.find((user) => user[propertyName] === value);
     if (matchedUser) return this.json(matchedUser);
     return null;

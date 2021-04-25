@@ -1,52 +1,40 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
-
+  import isUndefined from 'lodash/isUndefined';
+  import omitBy from 'lodash/omitBy';
   export default defineComponent({
     props: {
       modelValue: {
         type: String,
-        default: '',
+        default: undefined,
       },
       type: {
         type: String,
         default: 'text',
         validator: (val: string) =>
           [
-            'hidden',
-            'text',
+            'email',
+            'number',
+            'password',
             'search',
             'tel',
+            'text',
             'url',
-            'email',
-            'password',
-            'datetime',
-            'date',
-            'month',
-            'week',
-            'time',
-            'datetime-local',
-            'number',
-            'range',
-            'color',
-            'file',
-            'image',
           ].includes(val),
       },
       //#region HTML Attributes
-      accept: {
-        type: String,
-        default: '',
-      },
       alt: {
         type: String,
-        default: '',
+        default: undefined,
       },
       autocomplete: {
         type: String,
-        default: '',
+        default: undefined,
         validator: (val: string) =>
           [
             '',
+            'on',
+            'off',
             'additional-name',
             'address-level1',
             'address-level2',
@@ -113,53 +101,37 @@
         type: Boolean,
         default: false,
       },
-      dirname: {
-        type: String,
-        default: '',
-      },
       disabled: {
         type: Boolean,
         default: false,
       },
-      form: {
-        type: String,
-        default: '',
-      },
-      height: {
-        type: String,
-        default: '',
-      },
       list: {
         type: String,
-        default: '',
+        default: undefined,
       },
       max: {
-        type: String,
-        default: '',
+        type: Number,
+        default: undefined,
       },
       maxlength: {
-        type: String,
-        default: '',
+        type: Number,
+        default: undefined,
       },
       min: {
-        type: String,
-        default: '',
+        type: Number,
+        default: undefined,
       },
       minlength: {
-        type: String,
-        default: '',
-      },
-      multiple: {
-        type: Boolean,
-        default: false,
+        type: Number,
+        default: undefined,
       },
       name: {
         type: String,
-        default: '',
+        default: undefined,
       },
       placeholder: {
         type: String,
-        default: '',
+        default: undefined,
       },
       readonly: {
         type: Boolean,
@@ -170,24 +142,21 @@
         default: false,
       },
       size: {
-        type: String,
-        default: '',
-      },
-      src: {
-        type: String,
-        default: '',
+        type: Number,
+        default: undefined,
       },
       step: {
-        type: String,
-        default: '',
-      },
-      width: {
-        type: String,
-        default: '',
+        type: Number,
+        default: undefined,
       },
       //#endregion
     },
     emits: ['update:modelValue'],
+    computed: {
+      attrsToBinds(): Record<string, unknown> {
+        return { ...this.$attrs, ...omitBy(this.$props, isUndefined) };
+      },
+    },
   });
 </script>
 
@@ -196,7 +165,7 @@
     :type="type"
     :class="$style.input"
     :value="modelValue"
-    v-bind="$attrs"
+    v-bind="attrsToBinds"
     @input="$emit('update:modelValue', $event.target.value)"
   />
 </template>

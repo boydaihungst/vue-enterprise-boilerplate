@@ -1,9 +1,13 @@
 import { cy, describe, it } from 'local-cypress';
+import UsersMocked from '../../mock-api/resources/users';
 
 describe('Authentication', () => {
+  const { admin } = UsersMocked;
   it('login link exists on the home page when logged out', () => {
     cy.visit('/');
-    cy.contains('a', 'Log in').should('have.attr', 'href', '/login');
+    cy.contains('a', 'Log in')
+      .should('have.attr', 'href')
+      .and('match', /^(\/.*)?\/login$/); // /en/login or /login
   });
 
   it('login form shows an error on failure', () => {
@@ -22,16 +26,15 @@ describe('Authentication', () => {
 
   it('successful login works redirects to the home page and logging out works', () => {
     cy.visit('/login');
-
     // Enter the user-supplied username and password
-    cy.get('input[name="username"]').type('admin');
-    cy.get('input[name="password"]').type('password');
+    cy.get('input[name="username"]').type(admin.username || '');
+    cy.get('input[name="password"]').type(admin.password || '');
 
     // Submit the login form
     cy.contains('button', 'Log in').click();
 
     // Confirm redirection to the homepage
-    cy.location('pathname').should('equal', '/');
+    cy.location('pathname').should('match', /^(\/.*)?(\/)?$/);
 
     // Confirm a logout link exists
     cy.contains('a', 'Log out');
@@ -41,17 +44,17 @@ describe('Authentication', () => {
     cy.visit('/profile?someQuery');
 
     // Confirm redirection to the login page
-    cy.location('pathname').should('equal', '/login');
+    cy.location('pathname').should('match', /^(\/.*)?\/login$/);
 
     // Enter the user-supplied username and password
-    cy.get('input[name="username"]').type('admin');
-    cy.get('input[name="password"]').type('password');
+    cy.get('input[name="username"]').type(admin.username || '');
+    cy.get('input[name="password"]').type(admin.password || '');
 
     // Submit the login form
     cy.contains('button', 'Log in').click();
 
     // Confirm redirection to the homepage
-    cy.location('pathname').should('equal', '/profile');
+    cy.location('pathname').should('match', /^(\/.*)?\/profile$/);
     cy.location('search').should('equal', '?someQuery');
 
     // Confirm a logout link exists

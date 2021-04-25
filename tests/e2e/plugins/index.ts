@@ -4,7 +4,11 @@
 const plugin: Cypress.PluginConfig = (on, config) => {
   // Dynamic configuration
   // https://docs.cypress.io/guides/references/configuration.html
-  return Object.assign({}, config, {
+  return Object.assign<
+    any,
+    Cypress.PluginConfigOptions,
+    Partial<Cypress.PluginConfigOptions>
+  >({}, config, {
     // ===
     // General
     // https://docs.cypress.io/guides/references/configuration.html#Global

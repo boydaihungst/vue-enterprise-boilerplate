@@ -21,7 +21,6 @@ export default [
       }
 
       const matchedUser = Users.findBy('username', req.params.username);
-
       if (!matchedUser) {
         return res(
           ctx.status(400),
@@ -31,7 +30,7 @@ export default [
         );
       }
 
-      res(ctx.status(200), ctx.json(matchedUser));
+      return res(ctx.status(200), ctx.json(matchedUser));
     }
   ),
 ];

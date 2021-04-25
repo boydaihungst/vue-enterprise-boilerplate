@@ -24,7 +24,7 @@
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout">
+  <Layout is="default" data-test="view-layout">
     <h1>
       <BaseIcon name="user" />
       {{ user.name }} Profile

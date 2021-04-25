@@ -94,7 +94,7 @@ to: "src/router/views/<%= h.changeCase.kebab(name) %>.vue"
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout"><%= titleName %></Layout>
+  <Layout is="default" data-test="view-layout"><%= titleName %></Layout>
 </template>
 <%
 

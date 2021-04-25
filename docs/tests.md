@@ -200,7 +200,7 @@ Working against the production API can be useful sometimes, but it also has some
 
 The mock API is an [Mock service](https://mswjs.io/) web worker/server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
 
-> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `ctx.status(statusCode)`. If you don't webpack proxy will throw `Network Error`
+> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `return res(ctx.status(statusCode),...)`. If you don't `return` webpack proxy will throw `Network Error`
 
 ### Mock authentication
 

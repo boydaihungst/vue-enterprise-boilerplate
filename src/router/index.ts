@@ -33,8 +33,7 @@ router.beforeEach(async (to, from) => {
 
   const localeInParams = getLocaleFromParams(to.params);
 
-  const isNewLocale =
-    localeInParams !== undefined && localeInParams !== currentLocale;
+  const isNewLocale = localeInParams !== currentLocale;
   if (isNewLocale) {
     const isNewLocaleSupported = SUPPORT_LOCALES.includes(localeInParams);
     if (!isNewLocaleSupported) {
@@ -65,7 +64,7 @@ router.beforeEach(async (to, from) => {
   return redirectToLoginPage(to.fullPath);
 });
 
-router.beforeResolve(async (to, from) => {
+router.beforeResolve((to, from) => {
   // Create a `beforeResolve` hook, which fires whenever
   // `beforeRouteEnter` and `beforeRouteUpdate` would. This
   // allows us to ensure data is fetched even when params change,
@@ -73,22 +72,31 @@ router.beforeResolve(async (to, from) => {
   // indicate that it's a hook we created, rather than part of
   // Vue Router (yet?).
   try {
-    return await new Promise<boolean | Record<string, any>>((resolve) => {
+    return new Promise((resolve) => {
       if (typeof to.meta?.beforeResolve === 'function') {
-        let nextOpts: boolean | Record<string, any> = true;
-        to.meta.beforeResolve(to, from, (...redirectOpts: any[]) => {
-          // If the user chose to redirect...
-          if (redirectOpts.length) {
+        to.meta.beforeResolve(
+          to,
+          from,
+          (
+            redirectOpts?: ReturnType<
+              Parameters<typeof router.beforeResolve>[0]
+            >
+          ) => {
+            if (!redirectOpts) resolve(true);
+            // If the user chose to redirect...
             // If redirecting to the same route we're coming from...
-            if (from.name === redirectOpts[0].name) {
+            if (
+              typeof redirectOpts === 'object' &&
+              'name' in redirectOpts &&
+              from.name === redirectOpts.name
+            ) {
               // Complete the animation of the route progress bar.
               NProgress.done();
             }
             // Complete the redirect.
-            nextOpts = redirectOpts[0];
+            return resolve(redirectOpts);
           }
-          return resolve(nextOpts);
-        });
+        );
       } else resolve(true);
     });
   } catch (error) {

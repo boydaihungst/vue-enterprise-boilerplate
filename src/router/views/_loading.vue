@@ -15,7 +15,7 @@
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout">
+  <Layout is="default" data-test="view-layout">
     <Transition appear>
       <BaseIcon :class="$style.loadingIcon" name="sync" spin />
     </Transition>
