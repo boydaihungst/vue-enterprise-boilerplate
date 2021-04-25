@@ -7,7 +7,7 @@ describe('Authentication', () => {
     cy.visit('/');
     cy.contains('a', 'Log in')
       .should('have.attr', 'href')
-      .and('match', /^(\/.*)?\/login$/); // /en/login or /login
+      .and('match', /^(\/en)?\/login$/);
   });
 
   it('login form shows an error on failure', () => {
@@ -34,7 +34,7 @@ describe('Authentication', () => {
     cy.contains('button', 'Log in').click();
 
     // Confirm redirection to the homepage
-    cy.location('pathname').should('match', /^(\/.*)?(\/)?$/);
+    cy.location('pathname').should('match', /^(\/en)?(\/)?$/);
 
     // Confirm a logout link exists
     cy.contains('a', 'Log out');
@@ -44,7 +44,7 @@ describe('Authentication', () => {
     cy.visit('/profile?someQuery');
 
     // Confirm redirection to the login page
-    cy.location('pathname').should('match', /^(\/.*)?\/login$/);
+    cy.location('pathname').should('match', /^(\/en)?\/login$/);
 
     // Enter the user-supplied username and password
     cy.get('input[name="username"]').type(admin.username || '');
@@ -54,7 +54,7 @@ describe('Authentication', () => {
     cy.contains('button', 'Log in').click();
 
     // Confirm redirection to the homepage
-    cy.location('pathname').should('match', /^(\/.*)?\/profile$/);
+    cy.location('pathname').should('match', /^(\/en)?\/profile$/);
     cy.location('search').should('equal', '?someQuery');
 
     // Confirm a logout link exists
@@ -79,7 +79,7 @@ describe('Authentication', () => {
     cy.contains('a', 'Log out').click();
 
     // Confirm we're on the correct page
-    cy.location('pathname').should('equal', '/');
+    cy.location('pathname').should('match', /^(\/en)?(\/)?$/);
 
     // Confirm that the user is logged out
     cy.contains('a', 'Log in');

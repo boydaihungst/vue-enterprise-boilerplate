@@ -36,10 +36,11 @@ router.beforeEach(async (to, from) => {
   const isNewLocale = localeInParams !== currentLocale;
   if (isNewLocale) {
     const isNewLocaleSupported = SUPPORT_LOCALES.includes(localeInParams);
-    if (!isNewLocaleSupported) {
+    if (!isNewLocaleSupported && to.name !== '404') {
       return redirectToFallbackLocale(currentLocale, to.fullPath);
     }
-    await localeMessageChange(i18n, localeInParams);
+    if (localeInParams !== undefined)
+      await localeMessageChange(i18n, localeInParams);
   }
 
   // Check if auth is required on this route

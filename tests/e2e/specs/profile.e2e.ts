@@ -5,7 +5,7 @@ describe('Profile Page', () => {
   const { admin } = UsersMocked;
   it('redirects to login when logged out', () => {
     cy.visit('/profile');
-    cy.location('pathname').should('match', /^(\/.*)?\/login$/);
+    cy.location('pathname').should('match', /^(\/en)?\/login$/);
   });
 
   it('nav link exists when logged in', () => {
@@ -29,7 +29,7 @@ describe('Profile Page', () => {
     cy.contains('h1', `User One` || '');
   });
 
-  it('shows a user 404 page when looking for a user that does not exist', () => {
+  it.only('shows a user 404 page when looking for a user that does not exist', () => {
     cy.logIn();
     cy.visit('/profile/non-existant-user');
     cy.contains('h1', /User\s+Not\s+Found/);
