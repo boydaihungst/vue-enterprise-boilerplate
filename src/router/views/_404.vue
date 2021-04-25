@@ -24,7 +24,7 @@
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout">
+  <Layout is="default" data-test="view-layout">
     <h1 :class="$style.title">
       404
       <template v-if="resource">

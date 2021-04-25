@@ -10,47 +10,25 @@
         default: false,
       },
       to: {
-        type: Object as PropType<RouteLocationRaw>,
+        type: [Object, String] as PropType<RouteLocationRaw>,
         default: null,
-      },
-      name: {
-        type: String,
-        default: '',
       },
       params: {
         type: Object,
         default: () => ({}),
       },
-      //#region HTML attribute suggestion
+      name: {
+        type: String,
+        default: undefined,
+      },
       href: {
         type: String,
-        default: '',
+        default: undefined,
       },
       target: {
         type: String,
-        default: '',
+        default: '_blank',
       },
-      download: {
-        type: String,
-        default: '',
-      },
-      ping: {
-        type: String,
-        default: '',
-      },
-      rel: {
-        type: String,
-        default: '',
-      },
-      hreflang: {
-        type: String,
-        default: '',
-      },
-      type: {
-        type: String,
-        default: '',
-      },
-      //#endregion
     },
     computed: {},
     created() {
@@ -111,10 +89,10 @@
 </script>
 
 <template>
-  <a v-if="!!href" :href="href" target="_blank" v-bind="$attrs">
+  <a v-if="!!href" :href="href" :target="target" v-bind="$attrs">
     <slot />
   </a>
-  <RouterLink v-else :to="routerLinkTo()" v-bind="$attrs">
-    <slot />
+  <RouterLink v-else v-slot="scopedSlot" :to="routerLinkTo()" custom>
+    <slot v-bind="scopedSlot"></slot>
   </RouterLink>
 </template>

@@ -15,8 +15,7 @@ const routeRecordRaws: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
-        component: () =>
-          lazyLoadView(/* webpackPrefetch: true */ import('@views/home.vue')),
+        component: () => lazyLoadView(import('@views/home.vue')),
       },
       {
         path: 'login',
@@ -105,16 +104,21 @@ const routeRecordRaws: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: '/404',
+    name: '404',
+    component: () =>
+      lazyLoadView(/* webpackPrefetch: true */ import('@views/_404.vue')),
+    // Allows props to be passed to the 404 page through route
+    // params, such as `resource` to define what wasn't found.
+    props: true,
+  },
   // Redirect any unmatched routes to the 404 page. This may
   // require some server configuration to work in production:
   // https://router.vuejs.org/en/essentials/history-mode.html#example-server-configurations
   {
     path: '/:pathMatch(.*)*',
-    name: '404',
-    component: () =>
-      lazyLoadView(/* webpackPrefetch: true */ import('@views/_404.vue')),
-    props: true,
-    // redirect: '404',
+    redirect: '404',
   },
 ];
 

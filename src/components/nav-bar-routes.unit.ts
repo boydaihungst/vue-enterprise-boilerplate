@@ -5,7 +5,7 @@ const mountRoutes = (options) => {
   return mount(
     {
       render() {
-        return h('ul', null, h(NavBarRoutes, { ...options.props }));
+        return h('ul', null, h(NavBarRoutes, options.props));
       },
     },
     {
@@ -13,8 +13,16 @@ const mountRoutes = (options) => {
         stubs: {
           BaseLink: {
             render() {
-              return h('a', null, this.$slots.default());
-              // return <a>{this.$slots.default()}</a>;
+              return h(
+                'a',
+                null,
+                // Fake scopedSlot of BaseLink
+                this.$slots.default({
+                  href: 'aaa',
+                  navigate: '/aaa',
+                  isExactActive: false,
+                })
+              );
             },
           },
           ...options.stubs,

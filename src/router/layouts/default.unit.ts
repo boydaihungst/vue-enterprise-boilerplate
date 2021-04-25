@@ -1,9 +1,9 @@
-import MainLayout from './main.vue';
+import DefaultLayout from './default.vue';
 
-describe('@layouts/main.vue', () => {
+describe('@layouts/default.vue', () => {
   it('renders its content', () => {
     const slotContent = 'Hello!';
-    const wrapper = shallowMount(MainLayout, {
+    const wrapper = shallowMount(DefaultLayout, {
       slots: {
         default: {
           render() {

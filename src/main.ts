@@ -10,10 +10,12 @@ const app = createApp(App);
 
 // If running inside Cypress...
 if (process.env.VUE_APP_TEST === 'e2e') {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-
   // Ensure tests fail when Vue emits an error.
-  app.config.errorHandler = (window.Cypress as any).cy.onUncaughtException;
+  app.config.errorHandler = (err) => {
+    setTimeout(() => {
+      throw err;
+    });
+  };
 }
 
 /**

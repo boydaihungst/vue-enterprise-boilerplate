@@ -33,7 +33,7 @@
 </script>
 
 <template>
-  <Layout is="main" v-if="offlineConfirmed" data-test="view-layout">
+  <Layout is="default" v-if="offlineConfirmed" data-test="view-layout">
     <h1 :class="$style.title">
       The page timed out while loading. Are you sure you're still connected to
       the Internet?

@@ -43,8 +43,8 @@
       });
       // Current metadat
       const metadata = useActiveMeta();
-      // Contain current layout with default is main.vue
-      const currentLayout = ref('main');
+      // Contain current layout with default is default.vue
+      const currentLayout = ref('default');
       // Change view layout
       const changeLayout = (layoutFileName: string) => {
         if (currentLayout.value !== layoutFileName) {

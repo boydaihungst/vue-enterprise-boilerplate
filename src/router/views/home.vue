@@ -20,7 +20,7 @@
 </script>
 
 <template>
-  <Layout is="main" data-test="view-layout">
+  <Layout is="default" data-test="view-layout">
     <h1>Home Page</h1>
     <img src="@assets/images/logo.png" alt="Logo" />
   </Layout>

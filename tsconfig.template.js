@@ -9,10 +9,10 @@ module.exports = {
   exclude: [
     'node_modules',
     'dist',
-    ...(!isTestEnv
+    ...(!isTestEnv || process.env.VUE_APP_TEST === 'e2e'
       ? [
           // Only let typescript compiles these files/folder in test env, or precommit
-          'tests/**/*',
+          process.env.VUE_APP_TEST === 'e2e' ? '' : 'tests/**/*',
           'src/**/*.unit.ts',
           'src/**/*.spec.ts',
           'src/**/*.test.ts',

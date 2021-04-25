@@ -30,7 +30,7 @@ export const vuexPersist = createPersistedState({
   //   removeItem: (key) => window.localStorage.removeItem(key),
   // },
   storage: window.localStorage,
-  fetchBeforeUse: process.env.NODE_ENV === 'test',
+  fetchBeforeUse: true,
   key: 'vuex-persist',
   /** Only cache modules auth, users */
   paths: [AUTH_MODULE_NAME, USERS_MODULE_NAME],

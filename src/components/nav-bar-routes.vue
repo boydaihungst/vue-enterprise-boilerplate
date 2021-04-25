@@ -22,11 +22,12 @@
   <BaseLink
     v-for="route in routes"
     :key="route.name"
-    tag="li"
-    :to="route.name"
-    :exact-active-class="$style.active"
+    v-slot="{ href, navigate, isExactActive }"
+    :to="route"
   >
-    <a>{{ getRouteTitle(route) }}</a>
+    <li :class="[isExactActive && $style.active]">
+      <a :href="href" @click="navigate">{{ getRouteTitle(route) }}</a>
+    </li>
   </BaseLink>
 </template>
 
