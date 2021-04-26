@@ -7,7 +7,7 @@ import { router } from '@router';
 import App from '@src/App.vue';
 const app = createApp(App);
 // Install global plugin, component, directive, config ...
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   // If running inside Cypress...
   if (process.env.VUE_APP_TEST === 'e2e') {
     // Ensure tests fail when Vue emits an error.
@@ -24,9 +24,9 @@ if (process.env.NODE_ENV === 'development') {
  * {@link https://mswjs.io/docs}
  */
 async function waitForMockServiceWorkerStart() {
-  // Only run in browser environment like E2E test, webpack dev server
+  // Only run in browser environment like E2E test, webpack dev server with dev mode
   // Indicate for webpack to exclude this code in production build
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     if (!process.env.API_BASE_URL && process.env.VUE_APP_TEST !== 'unit') {
       const mockServer = (await import('@/tests/mock-api/server.worker'))
         .mockServer;
@@ -50,8 +50,7 @@ waitForMockServiceWorkerStart().then(() => {
     registerGlobalDirective(app);
     router.isReady().then(() => {
       const appMounted = app.mount('#app');
-      // If running e2e tests...
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV !== 'production') {
         if (process.env.VUE_APP_TEST === 'e2e') {
           // Attach the app to the window, which can be useful
           // for manually setting state in Cypress commands
