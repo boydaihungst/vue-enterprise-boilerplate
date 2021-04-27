@@ -5,8 +5,6 @@ import { InjectionKey } from 'vue';
 import { RootState, RootActions, RootGetters, RootMutations } from '@state';
 import modules from '@state/modules/module-loader';
 import { InjectKey } from '@utils/const';
-import { AUTH_MODULE_NAME } from './modules/auth';
-import { USERS_MODULE_NAME } from './modules/users';
 
 /**
  * Read this link first
@@ -33,7 +31,7 @@ export const vuexPersist = createPersistedState({
   fetchBeforeUse: true,
   key: 'vuex-persist',
   /** Only cache modules auth, users */
-  paths: [AUTH_MODULE_NAME, USERS_MODULE_NAME],
+  paths: ['auth', 'users'],
   filter: (mutation) => {
     // Only apply for these mutation
     return ['SET_CURRENT_USER', 'auth/SET_CURRENT_USER'].includes(
