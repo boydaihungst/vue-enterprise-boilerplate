@@ -98,25 +98,28 @@ module.exports = {
        */
       config.plugins.delete('prefetch');
       // https://www.npmjs.com/package/compression-webpack-plugin
-      config.plugin('CompressionPlugin').use(CompressionPlugin, [
+      config.plugin('compress-gzip').use(CompressionPlugin, [
         {
           filename: '[path][base].gz',
           algorithm: 'gzip',
-          test: /\.js$|\.css$|\.html$/,
-          threshold: 10240,
-          minRatio: 0.8,
+          test: /\.js$|\.css$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+          minRatio: 2, //compress all file
+          threshold: 0, //compress all file
+          deleteOriginalAssets: false,
         },
+      ]);
+      config.plugin('compress-brotli').use(CompressionPlugin, [
         {
           filename: '[path][base].br',
           algorithm: 'brotliCompress',
-          test: /\.(js|css|html|svg)$/,
+          test: /\.js$|\.css$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
           compressionOptions: {
             params: {
               [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
             },
           },
-          threshold: 10240,
-          minRatio: 0.8,
+          minRatio: 2, //compress all file
+          threshold: 0, //compress all file
           deleteOriginalAssets: false,
         },
       ]);
