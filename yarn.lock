@@ -2084,14 +2084,17 @@
     "@typescript-eslint/types" "4.22.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vue-intellisense/scripts@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@vue-intellisense/scripts/-/scripts-0.2.1.tgz#d548d0c1bd19181b4bd478e442ad7fa773da9757"
-  integrity sha512-haUUtcrt8lJYk7YCYGFVV7S29oiR6TIxBJI+PELFoR6D41ZQfyIvCnhAyyJr9rM7sRot3/jy8tLSmHanmtLSwg==
+"@vue-intellisense/scripts@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@vue-intellisense/scripts/-/scripts-0.3.0.tgz#114a8d1cc7c900f2f62c8a7b408addc38a746789"
+  integrity sha512-Xo5JL8x5F0tgp46GJ60UIKaiM7ri3cmVl3ZOZBlgIf8wg2UXD6l2fS39tA7XakY1gBkS66J3kgw9t0Qqk6kqVA==
   dependencies:
     case-anything "^1.1.2"
+    chalk "^4.1.1"
     is-what "^3.14.1"
+    log-symbols "^4.1.0"
     merge-anything "^4.0.1"
+    path-to-prop "^1.0.0"
     vue-docgen-api "^4.35.0"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
@@ -3995,7 +3998,7 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0, chalk@^4.1.0:
+chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
   integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
@@ -9449,12 +9452,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
-  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
-
-lodash@4.x, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.7.0:
+lodash@4.17.21, lodash@4.x, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.7.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -10965,6 +10963,11 @@ path-parse@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+
+path-to-prop@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/path-to-prop/-/path-to-prop-1.0.0.tgz#dce4172eab914438644d8f50053213299e4b41ca"
+  integrity sha512-iZMpEadLcydaq6OxyftMKbXzjOIi3xff0V1xNZd6coh1OA1mG6yp0aFjMuA2YqDeaH5u/7DGMoscy5vlswyAoA==
 
 path-to-regexp@0.1.7:
   version "0.1.7"
@@ -14884,12 +14887,12 @@ vue-inbrowser-compiler-utils@^4.37.0:
   dependencies:
     camelcase "^5.3.1"
 
-vue-intellisense@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/vue-intellisense/-/vue-intellisense-0.2.1.tgz#026c28a31dcc98f33ce3b5a6bb8c377eb4c4d338"
-  integrity sha512-J9aOk7gAxv5KlAIRehsaVIexEp8IZYqyG/MT72qFhvNe2/Ce/o5EgGhhObOj+W6FfYEnLNV0xNskHrdBRYQMlA==
+vue-intellisense@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vue-intellisense/-/vue-intellisense-0.3.0.tgz#3793fc5f93eee34fe3b5808c0347a0babd33c946"
+  integrity sha512-wbifZGNd1L7XMZKBaH2VtIku5ro3XsctlmHLqhOaDa3I8uWMRpu3rhUS0rKh6tHdYExCz86cs3UpgwXmJHhieA==
   dependencies:
-    "@vue-intellisense/scripts" "^0.2.1"
+    "@vue-intellisense/scripts" "^0.3.0"
     case-anything "^1.1.2"
     chalk "^4.1.0"
     is-what "^3.14.1"
