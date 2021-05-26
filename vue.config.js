@@ -203,7 +203,7 @@ module.exports = {
       fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE,
       localeDir: 'lang',
       enableLegacy: false,
-      runtimeOnly: true,
+      runtimeOnly: process.env.NODE_ENV === 'production',
       compositionOnly: true,
       fullInstall: false,
     },
