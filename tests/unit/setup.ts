@@ -148,7 +148,7 @@ console.warn = function (message: string | Error, ...args: any[]) {
 
   // NOTE: You can whitelist some `console.warn` messages here
   //       by returning if the `message` value is acceptable.
-  // throw message instanceof Error ? message : new Error(message);
+  throw message instanceof Error ? message : new Error(message);
 };
 
 mount = baseMount;
