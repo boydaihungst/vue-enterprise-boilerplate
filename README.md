@@ -1,8 +1,9 @@
 # Vue Enterprise Boilerplate
 
-**NOTE: For SSR version go [here](https://github.com/boydaihungst/vue-enterprise-boilerplate/tree/ssr)**
+**NOTE: For old webpack cli use this branch [here](https://github.com/boydaihungst/vue-enterprise-boilerplate/tree/main-webpack).
+Some of documents is still old, I am too busy to update, but instead of every comment in codebase is self explain, read carefully.**
 
-**Updated with vuejs 3, @vue/cli v5, webpack 5, typescript, full typesafe for vuex module... read more in [docs](#documentation)**
+**Updated with vuejs 3, vitejs, vitest, pinia store, typescript, setup script, composables... read more in [docs](#documentation)**
 
 **You diverged from the boilerplate on Mar 20 2021. See [what's been added](https://github.com/chrisvfritz/vue-enterprise-boilerplate/compare/e6d74341c1e3e1091f0841012d303e092c6f2676...master) since then.**
 
