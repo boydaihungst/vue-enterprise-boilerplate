@@ -1,25 +1,26 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-  import Layout from '@layouts/layout.vue';
-  import { useMeta } from 'vue-meta';
+<script lang="ts" setup>
+  import { useLayout } from '@composables/layout';
+  import { faSync } from '@fortawesome/free-solid-svg-icons';
+  import { useHead } from '@unhead/vue';
+  import { useI18n } from 'vue-i18n';
 
-  export default defineComponent({
-    components: { Layout },
-    setup() {
-      useMeta({
-        title: 'Loading page...',
-        description: 'Loading page...',
-      });
-    },
+  const { setLayout } = useLayout();
+  const { t } = useI18n();
+
+  setLayout('Default');
+
+  useHead({
+    title: t('views.loading.meta.title'),
+    meta: [
+      { name: 'description', content: t('views.loading.meta.description') },
+    ],
   });
 </script>
 
 <template>
-  <Layout is="default" data-test="view-layout">
-    <Transition appear>
-      <BaseIcon :class="$style.loadingIcon" name="sync" spin />
-    </Transition>
-  </Layout>
+  <Transition appear>
+    <BaseIcon :class="$style.loadingIcon" :icon="faSync" spin />
+  </Transition>
 </template>
 
 <style lang="scss" module>

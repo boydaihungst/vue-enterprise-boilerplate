@@ -2,44 +2,51 @@
 
 - [Architecture](#architecture)
   - [`.circleci`](#circleci)
-  - [`.devcontainer (optional)`](#devcontainer-optional)
-    - [`devcontainer.json`](#devcontainerjson)
   - [`.vscode`](#vscode)
   - [`.vuepress`](#vuepress)
+  - [`@types`](#types)
   - [`deploy (optional)`](#deploy-optional)
   - [`docs`](#docs)
-  - [`generators`](#generators)
+  - [`~generators~`](#generators)
   - [`public`](#public)
+    - [`favicon`](favicon)
+    - [`robots.txt`](#robotstxt)
     - [`index.html`](#indexhtml)
-    - [`mockServiceWorker.js`](#mockServiceWorkerjs)
+    - [`mockServiceWorker.js`](#mockserviceworkerjs)
   - [`src`](#src)
-    - [`@types`](#@types)
     - [`assets`](#assets)
     - [`components`](#components)
     - [`composables (optional)`](#composables-optional)
+    - [`constraint`](#constraint)
     - [`design`](#design)
     - [`directives`](#directives)
     - [`lang`](#lang)
     - [`models`](#models)
     - [`plugin`](#plugin)
     - [`router`](#router)
-    - [`state`](#state)
+    - [`stores`](#stores)
     - [`utils`](#utils)
     - [`app.config.json`](#appconfigjson)
     - [`App.vue`](#appvue)
     - [`main.ts`](#maints)
   - [`tests`](#tests)
-  - [`vetur`](#vetur)
+  - [`env`](#env)
+  - [`.eslintignore.cjs`](#eslintignorecjs)
+  - [`.gitignore`](#gitignore)
+  - [`.markdownlint.yml`](markdownlintyml)
+  - [`.commitlint.config.cjs`](commitlintconfigcjs)
+  - [`cypress.config.ts`](#cypressconfigts)
+  - [`env.d.ts`](envdts)
+  - [`tsconfig`](#tsconfigappjson)
+  - [`vite.config.ts`](#viteconfigts)
 
 ## `.circleci`
 
 Configuration for continuous integration with [Circle CI](https://circleci.com/). See [the production doc](production.md#from-circle-ci) for more.
 
-## `.devcontainer` (optional)
+## `.nlsp-settings`
 
-### `devcontainer.json`
-
-Configuration for development inside a Docker container with vscode. See [development doc](development.md#docker-optional) for more.
+Settings specific to this project, for Nvim nlsp-setting. See [the editors doc](editors.md#lunarvim) for more.
 
 ## `.vscode`
 
@@ -49,6 +56,10 @@ Settings and extensions specific to this project, for Visual Studio Code. See [t
 
 [VuePress](https://vuepress.vuejs.org/) configuration for docs static site generation.
 
+## `@types`
+
+Include all declare merging file. See [tech doc](tech.md#typescript) for more details. Please read every files in this folder to understand how to write typesafe code
+
 ## `deploy` (optional)
 
 Includes all file you need for deployment. Nginx config, scripts....
@@ -57,13 +68,21 @@ Includes all file you need for deployment. Nginx config, scripts....
 
 You found me! :wink:
 
-## `generators`
+## `~generators~`
 
-Generator templates to speed up development. See [the development doc](development.md#generators) for more.
+~Generator templates to speed up development. See [the development doc](development.md#generators) for more.~
 
 ## `public`
 
 Where you'll keep any static assets, to be added to the `dist` directory without processing from our build system.
+
+### `favicon.ico`
+
+A favicon is a small image displayed next to the page title in the browser tab. Just replace with your website logo before build.
+
+### `robots.txt`
+
+A robots.txt file tells search engine crawlers which URLs the crawler can access on your site. This is used mainly to avoid overloading your site with requests; it is not a mechanism for keeping a web page out of Google.
 
 ### `index.html`
 
@@ -77,10 +96,6 @@ This file is used by Mock Service Worker allowing us to mock API locally for tes
 
 Where we keep all our source files.
 
-### `@types`
-
-Include all declare merging file. See [tech doc](tech.md#typescript) for more details.
-
 ### `assets`
 
 This project manages assets via Vue CLI. Learn more about [its asset handling here](https://cli.vuejs.org/guide/html-and-static-assets.html).
@@ -92,6 +107,10 @@ Where we keep our composable APIs, renderless components
 ### `components`
 
 Where most of the components in our app will live, including our [global base components](development.md#base-components).
+
+### `constraint`
+
+where we keep const, enum file.
 
 ### `design`
 
@@ -111,15 +130,15 @@ Directory that contains model: interface, type, class
 
 ### `plugin`
 
-Directory that contains custom plugins need for app to run like i18n, vue-meta. For extenal plugin just add to `plugin/index.ts`
+Directory that contains custom plugins need for app to run like i18n, unhead, pinia store. You can put your own plugin in here as well. After that just add to `plugin/index.ts`.
 
 ### `router`
 
 Where the router, routes, and any routing-related components live. See [the routing doc](routing.md) for more.
 
-### `state`
+### `stores`
 
-Where all our global state management lives. See [the state management doc](state.md) for more.
+Where all our global state/store management lives. See [the state management doc](state.md) for more.
 
 ### `utils`
 
@@ -141,6 +160,50 @@ The entry point to our app, were we create our Vue instance and mount it to the 
 
 Where all our tests go. See [the tests doc](tests.md) for more.
 
-## `vetur`
+## `Dot files`
 
-Where we create custom configs for better vetur intellisense. Default vetur don't suggest attribute for mixin, so we have to define by ourselves. Run `yarn vetur` to automatically generate theses config.
+All the dot files in root project
+
+### `.env`
+
+Include environment variables. Do not upload to repo. You should put it to .gitignore file
+
+### `.eslintignore.cjs`
+
+CommonJs configuration for eslint. Check [package.json](../package.json) for eslint plugins is installed.
+
+### `.gitignore`
+
+Includes file and directory that should not be upload to git repo. Ex: temporary file, cache, node_modules...
+
+### `.markdownlint.yml`
+
+Includes configuration for markdownlint.
+
+### `.commitlint.config.cjs`
+
+Includes configuration for commitlint. Which will force everyone in the project's team to follow the rules for commit's name and changelog. [Learn here](https://commitlint.js.org/#/)
+
+## `cypress.config.ts`
+
+Configuration for Cypress to run E2E testing. Cypress can runs component testing as well. Learn more about configuration in [here](https://docs.cypress.io/guides/references/configuration)
+
+## `env.d.ts`
+
+Declare types for `import.meta.env.*`. Every environment variables start with `VITE_` will be include in bundle after building (Which are used in app itself).
+
+## `tsconfig.app.json`
+
+Configuration for tsserver and volar. This configuration is for app, includes path alias.
+
+## `tsconfig.config.json`
+
+Configuration to compile all config file from ts to js.
+
+## `tsconfig.vitest.json`
+
+Configuration for testing. If you want to use any type from `node_modules`, just put it in here.
+
+## `vite.config.ts`
+
+Configuration for building app. Put vite plugins in this file.

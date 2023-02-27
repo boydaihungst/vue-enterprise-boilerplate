@@ -10,10 +10,21 @@ $size-input-padding-vertical: 0.75em;
 $size-input-padding-horizontal: 1em;
 $size-input-padding: $size-input-padding-vertical $size-input-padding-horizontal;
 $size-input-border: 1px;
-$size-input-border-radius: (1em + $size-input-padding-vertical * 2) / 10;
+$size-input-border-radius: math.div(1em + $size-input-padding-vertical * 2, 10);
 
 // BUTTONS
-$size-button-padding-vertical: $size-grid-padding / 2;
-$size-button-padding-horizontal: $size-grid-padding / 1.5;
+$size-button-padding-vertical: math.div($size-grid-padding, 2);
+$size-button-padding-horizontal: math.div($size-grid-padding, 1.5);
 $size-button-padding: $size-button-padding-vertical
   $size-button-padding-horizontal;
+
+// SELECTS
+$size-select-padding-vertical: 0.75em;
+$size-select-padding-horizontal: 1em;
+$size-select-padding: $size-select-padding-vertical
+  $size-select-padding-horizontal;
+$size-select-border: 1px;
+$size-select-border-radius: math.div(
+  1em + $size-select-padding-vertical * 2,
+  10
+);

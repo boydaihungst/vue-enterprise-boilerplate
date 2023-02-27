@@ -46,44 +46,48 @@
   $p3: 1;
 
   // Parse Cubic Bezier string
-  @if (str-slice($easing, 1, 12) == 'kubic-bezier') {
+  @if string.slice($easing, 1, 12) == 'kubic-bezier' {
     // Get the values between the brackets
     // TODO: Deal with different whitespace
-    $i: str-index($easing, ')'); // Get index of closing bracket
-    $values: str-slice($easing, 14, $i - 1); // Extract values between brackts
+    $i: stirng.index($easing, ')'); // Get index of closing bracket
+    $values: string.slice(
+      $easing,
+      14,
+      $i - 1
+    ); // Extract values between brackts
     $list: typography-explode($values, ', '); // Split the values into a list
 
     @debug ($list);
 
     // Cast values to numebrs
-    $p0: typography-number(nth($list, 1));
-    $p1: typography-number(nth($list, 2));
-    $p2: typography-number(nth($list, 3));
-    $p3: typography-number(nth($list, 4));
+    $p0: typography-number(list.nth($list, 1));
+    $p1: typography-number(list.nth($list, 2));
+    $p2: typography-number(list.nth($list, 3));
+    $p3: typography-number(list.nth($list, 4));
   }
 
-  @if ($easing == 'ease') {
+  @if $easing == 'ease' {
     $p0: 0.25;
     $p1: 1;
     $p2: 0.25;
     $p3: 1;
   }
 
-  @if ($easing == 'ease-in-out') {
+  @if $easing == 'ease-in-out' {
     $p0: 0.42;
     $p1: 0;
     $p2: 0.58;
     $p3: 1;
   }
 
-  @if ($easing == 'ease-in') {
+  @if $easing == 'ease-in' {
     $p0: 0.42;
     $p1: 0;
     $p2: 1;
     $p3: 1;
   }
 
-  @if ($easing == 'ease-out') {
+  @if $easing == 'ease-out' {
     $p0: 0;
     $p1: 0;
     $p2: 0.58;
@@ -92,7 +96,7 @@
 
   #{$property}: $min-value;
 
-  @if ($easing == 'linear' or $bending-points < 1) {
+  @if $easing == 'linear' or $bending-points < 1 {
     @media screen and (min-width: $min-screen) {
       #{$property}: typography-calc-interpolation(
         $min-screen,
@@ -103,7 +107,7 @@
     }
   } @else {
     // Loop through bending points
-    $t: 1 / ($bending-points + 1);
+    $t: math.div(1, ($bending-points + 1));
     $i: 1;
     $prev-screen: $min-screen;
     $prev-value: $min-value;
@@ -147,14 +151,13 @@
   $max-screen,
   $max-value
 ) {
-  $a: ($max-value - $min-value) / ($max-screen - $min-screen);
+  $a: math.div(($max-value - $min-value), ($max-screen - $min-screen));
   $b: $min-value - $a * $min-screen;
-
   $sign: '+';
 
-  @if ($b < 0) {
+  @if $b < 0 {
     $sign: '-';
-    $b: abs($b);
+    $b: math.abs($b);
   }
 
   @return calc(#{$a * 100}vw #{$sign} #{$b});
@@ -165,25 +168,25 @@
   $cx: 3 * $p1x;
   $bx: 3 * ($p2x - $p1x) - $cx;
   $ax: 1 - $cx - $bx;
-
   $t0: 0;
   $t1: 1;
   $t2: $x;
   $x2: 0;
   $res: 1000;
 
-  @while ($t0 < $t1 or $break) {
+  @while $t0 < $t1 or $break {
     $x2: (($ax * $t2 + $bx) * $t2 + $cx) * $t2;
 
-    @if (abs($x2 - $x) < $res) {
+    @if abs($x2 - $x) < $res {
       @return $t2;
     }
 
-    @if ($x > $x2) {
+    @if $x > $x2 {
       $t0: $t2;
     } @else {
       $t1: $t2;
     }
+
     $t2: ($t1 - $t0) * 0.5 + $t0;
   }
 
@@ -218,7 +221,7 @@
 
   $result: 0;
   $digits: 0;
-  $minus: str-slice($value, 1, 1) == '-';
+  $minus: string.slice($value, 1, 1) == '-';
   $numbers: (
     '0': 0,
     '1': 1,
@@ -232,20 +235,23 @@
     '9': 9,
   );
 
-  @for $i from if($minus, 2, 1) through str-length($value) {
-    $character: str-slice($value, $i, $i);
+  @for $i from if($minus, 2, 1) through string.length($value) {
+    $character: string.slice($value, $i, $i);
 
     @if not(index(map-keys($numbers), $character) or $character == '.') {
-      @return to-length(if($minus, -$result, $result), str-slice($value, $i));
+      @return to-length(
+        if($minus, -$result, $result),
+        string.slice($value, $i)
+      );
     }
 
     @if $character == '.' {
       $digits: 1;
     } @else if $digits == 0 {
-      $result: $result * 10 + map-get($numbers, $character);
+      $result: $result * 10 + map.get($numbers, $character);
     } @else {
       $digits: $digits * 10;
-      $result: $result + map-get($numbers, $character) / $digits;
+      $result: $result + math.div(map.get($numbers, $character), $digits);
     }
   }
 
@@ -258,29 +264,30 @@
   $result: ();
 
   @if $delimiter == '' {
-    @for $i from 1 through str-length($string) {
-      $result: append($result, str-slice($string, $i, $i));
+    @for $i from 1 through string.length($string) {
+      $result: list.append($result, string.slice($string, $i, $i));
     }
 
     @return $result;
   }
+
   $exploding: true;
 
   @while $exploding {
-    $d-index: str-index($string, $delimiter);
+    $d-index: stirng.index($string, $delimiter);
 
     @if $d-index {
       @if $d-index > 1 {
-        $result: append($result, str-slice($string, 1, $d-index - 1));
-        $string: str-slice($string, $d-index + str-length($delimiter));
+        $result: list.append($result, string.slice($string, 1, $d-index - 1));
+        $string: string.slice($string, $d-index + string.length($delimiter));
       } @else if $d-index == 1 {
-        $string: str-slice($string, 1, $d-index + str-length($delimiter));
+        $string: string.slice($string, 1, $d-index + string.length($delimiter));
       } @else {
-        $result: append($result, $string);
+        $result: list.append($result, $string);
         $exploding: false;
       }
     } @else {
-      $result: append($result, $string);
+      $result: list.append($result, $string);
       $exploding: false;
     }
   }
@@ -304,7 +311,6 @@ $typography-type-scale: (
   }
 
   @warn 'Unknown `#{$level}` in $typography-type-scale.';
-
   @return null;
 }
 
@@ -322,13 +328,11 @@ $typography-type-scale-contrast: (
   }
 
   @warn 'Unknown `#{$level}` in $typography-type-scale-contrast.';
-
   @return null;
 }
 
 $typography-base-font-size: 1rem;
 $typography-base-line-height: $typography-base-font-size * 1.25;
-
 $typography-line-heights: (
   -1: $typography-base-line-height,
   0: $typography-base-line-height,
@@ -343,12 +347,10 @@ $typography-line-heights: (
   }
 
   @warn 'Unknown `#{$level}` in $line-height.';
-
   @return null;
 }
 
 $typography-base-line-height-contrast: $typography-base-line-height;
-
 $typography-line-heights-contrast: (
   -1: $typography-base-line-height-contrast,
   0: $typography-base-line-height-contrast * 2,
@@ -363,7 +365,6 @@ $typography-line-heights-contrast: (
   }
 
   @warn 'Unknown `#{$level}` in $typography-line-heights-contrast.';
-
   @return null;
 }
 
@@ -387,30 +388,25 @@ $typography-line-heights-contrast: (
 
 %typography-xxlarge {
   @include typography-got-rhythm(3);
-
   @extend %font-heading;
 }
 
 %typography-xlarge {
   @include typography-got-rhythm(2);
-
   @extend %font-heading;
 }
 
 %typography-large {
   @include typography-got-rhythm(1);
-
   @extend %font-heading;
 }
 
 %typography-medium {
   @include typography-got-rhythm(0);
-
   @extend %font-content;
 }
 
 %typography-small {
   @include typography-got-rhythm(-1);
-
   @extend %font-content;
 }

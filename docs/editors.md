@@ -1,7 +1,9 @@
 # Editor integration
 
 - [Visual Studio Code](#visual-studio-code)
-  - [Configuration](#configuration)
+  - [Configuration for vscode](#configuration-for-vscode)
+- [Lunarvim](#lunarvim)
+  - [Configuration for lvim](#configuration-for-lvim)
 - [FAQ](#faq)
 
 ## Visual Studio Code
@@ -13,12 +15,29 @@ This project is best developed in VS Code. With the [recommended extensions](htt
 - Lint-on-save for all files
 - In-editor results on save for unit tests
 
-### Configuration
+### Configuration for vscode
 
 To configure
 
 - `.vscode/extensions.json`
 - `.vscode/settings.json`
+
+## Lunarvim
+
+Lunarvim aka lvim is not a bad choice. With the [recommended config](https://github.com/boydaihungst/.config/edit/master/README.md#install-neovim-090-and-lvim) of mine:
+
+- Syntax highlighting for all files
+- Intellisense for all files
+- Lint for all files
+- In-editor results on save for unit tests
+
+### Configuration for lvim
+
+To configure
+
+- `.nlsp-settings/volar.json`
+- `.nlsp-settings/tsserver.json`
+- `$HOME/.config/lvim/`
 
 ## FAQ
 

@@ -1,15 +1,16 @@
-import { createApp } from 'vue';
-import { registerGlobalDirective } from '@src/directives/_globals';
 import { registerGlobalComponent } from '@components/_globals';
 import { registerLayoutComponent } from '@layouts/_globals';
 import { registerGlobalPlugin } from '@plugin';
-import { router } from '@router';
 import App from '@src/App.vue';
+import { registerGlobalDirective } from '@src/directives/_globals';
+import { useAuthStore } from '@stores';
+import { createApp } from 'vue';
 const app = createApp(App);
+
 // Install global plugin, component, directive, config ...
-if (process.env.NODE_ENV !== 'production') {
+if (!import.meta.env.PROD) {
   // If running inside Cypress...
-  if (process.env.VUE_APP_TEST === 'e2e') {
+  if (import.meta.env.VITE_TEST_E2E) {
     // Ensure tests fail when Vue emits an error.
     app.config.errorHandler = (err) => {
       setTimeout(() => {
@@ -18,46 +19,52 @@ if (process.env.NODE_ENV !== 'production') {
     };
   }
 }
+
 /**
  * With this mock service will intercept any http | graphql query, then response with mock data
  * If u dont use this feature then remove file `mockServiceWorker.js` in public folder
  * {@link https://mswjs.io/docs}
  */
 async function waitForMockServiceWorkerStart() {
-  // Only run in browser environment like E2E test, webpack dev server with dev mode
-  // Indicate for webpack to exclude this code in production build
-  if (process.env.NODE_ENV !== 'production') {
-    if (!process.env.API_BASE_URL && process.env.VUE_APP_TEST !== 'unit') {
-      const mockServer = (await import('@/tests/mock-api/server.worker'))
+  // Only run in browser environment like E2E test, dev server with dev mode
+  // In vitest it will start using /tests/unit/setup-mock-server.ts and add this file to vite.config.ts > test > setupFiles
+  // Indicate for esbuild/rollup to exclude this code in production build
+  if (!import.meta.env.PROD) {
+    if (!import.meta.env.VITE_API_BASE_URL) {
+      const mockServer = (await import('@tests/mock-api/server.worker'))
         .mockServer;
-      // Use this to debug mock server
-      // mockServer.on('request:match', (req) => {
-      //  console.info('request:match', req);
-      // });
-      await mockServer.start();
+
+      // Use this to debug mock server api has been call or passthrough
+      // {@link https://mswjs.io/docs/extensions/life-cycle-events#events}
+      mockServer.events.on('request:match', (req) => {
+        console.info('request:match', req);
+      });
+
+      mockServer.events.removeAllListeners();
+      await mockServer.start({
+        onUnhandledRequest: 'bypass',
+      });
       mockServer.printHandlers();
     }
   }
 }
-waitForMockServiceWorkerStart().then(() => {
-  // Globally register all plugins
-  registerGlobalPlugin(app).then(() => {
-    // Globally register all `_base`-prefixed components
-    registerGlobalComponent(app);
-    // Globally register all layout components
-    registerLayoutComponent(app);
-    // Globally register all directive
-    registerGlobalDirective(app);
-    router.isReady().then(() => {
-      const appMounted = app.mount('#app');
-      if (process.env.NODE_ENV !== 'production') {
-        if (process.env.VUE_APP_TEST === 'e2e') {
-          // Attach the app to the window, which can be useful
-          // for manually setting state in Cypress commands
-          // such as `cy.logIn()`.
-          window.__app__ = appMounted;
-        }
-      }
-    });
-  });
-});
+
+async function initial() {
+  await waitForMockServiceWorkerStart();
+  await registerGlobalPlugin(app);
+  registerGlobalDirective(app);
+  registerLayoutComponent(app);
+  registerGlobalComponent(app);
+  if (!import.meta.env.PROD) {
+    if (import.meta.env.VITE_TEST_E2E) {
+      const authStore = useAuthStore();
+
+      // Attach the store to the window, which can be useful
+      // for manually setting state in Cypress commands
+      // such as `cy.logIn()`.
+      window.authStore = authStore;
+    }
+  }
+  app.mount('#app');
+}
+initial();

@@ -1,38 +1,33 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
-  import Layout from '@layouts/layout.vue';
-  import { useMeta } from 'vue-meta';
+<script lang="ts" setup>
+  import { useLayout } from '@composables/layout';
+  import { useHead } from '@unhead/vue';
+  import { useI18n } from 'vue-i18n';
 
-  export default defineComponent({
-    components: {
-      Layout,
+  const { t } = useI18n();
+  const { setLayout } = useLayout();
+
+  setLayout('Default');
+  defineProps({
+    resource: {
+      type: String,
+      default: '',
     },
-    props: {
-      resource: {
-        type: String,
-        default: '',
-      },
-    },
-    setup() {
-      useMeta({
-        // Can be static or computed
-        title: '404',
-        description: '404',
-      });
-    },
+  });
+
+  useHead({
+    title: t('error.404.code'),
+    meta: [{ name: 'description', content: t('error.404.code') }],
   });
 </script>
 
 <template>
-  <Layout is="default" data-test="view-layout">
-    <h1 :class="$style.title">
-      404
-      <template v-if="resource">
-        {{ resource }}
-      </template>
-      Not Found
-    </h1>
-  </Layout>
+  <h1 :class="$style.title">
+    {{ t('error.404.code') }}
+    <template v-if="resource">
+      {{ resource }}
+    </template>
+    {{ t('error.404.message') }}
+  </h1>
 </template>
 
 <style lang="scss" module>

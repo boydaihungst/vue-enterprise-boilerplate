@@ -1,3 +1,8 @@
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
 @import 'colors';
 @import 'durations';
 @import 'fonts';
@@ -5,18 +10,16 @@
 @import 'sizes';
 @import 'typography';
 
-:export {
-  // Any values that need to be accessible from JavaScript
-  // outside of a Vue component can be defined here, prefixed
-  // with `global-` to avoid conflicts with classes. For
-  // example:
-  //
-  // global-grid-padding: $size-grid-padding;
-  //
-  // Then in a JavaScript file, you can import this object
-  // as you would normally with:
-  //
-  // import design from '@design'
-  //
-  // console.log(design['global-grid-padding'])
-}
+// Think is a little different when migration from webpack to vitejs. So no need to use :export
+// https://github.com/vitejs/vite/discussions/9601
+
+// Any values that need to be accessible from ts/js
+// outside of a Vue component can be defined here, prefixed
+// with `global` to avoid conflicts with classes. For
+// example:
+// global-grid-padding: $size-grid-padding;
+
+// Then in a JavaScript file, you can import this object
+// as you would normally with:
+// import design from '@design'
+// console.log(design['global-grid-padding'])

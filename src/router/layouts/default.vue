@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import NavBar from '@components/nav-bar.vue';
-
-  export default defineComponent({
-    components: {
-      NavBar,
-    },
+  export default {
+    name: 'Default',
     inheritAttrs: false,
-  });
+  };
+</script>
+
+<script lang="ts" setup>
+  import NavBar from '@components/nav-bar.vue';
 </script>
 
 <template>
@@ -16,7 +15,7 @@
       <NavBar />
     </slot>
   </header>
-  <main data-test="main-container" v-bind="$attrs" :class="$style.container">
+  <main v-bind="$attrs" :class="$style.container">
     <slot />
   </main>
   <footer>

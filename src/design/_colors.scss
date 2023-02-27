@@ -8,9 +8,17 @@ $color-link-text: #39a275;
 $color-link-text-active: $color-text;
 
 // INPUTS
-$color-input-border: lighten($color-heading-text, 50%);
+$color-input-border: color.adjust($color-heading-text, $lightness: 50%);
 
 // BUTTONS
 $color-button-bg: $color-link-text;
-$color-button-disabled-bg: darken(desaturate($color-button-bg, 20%), 10%);
+$color-button-disabled-bg: color.adjust(
+  $color-button-bg,
+  $saturation: -20%,
+  $lightness: -10%
+);
 $color-button-text: white;
+
+// SELECTS
+$color-select-border: $color-input-border;
+$color-select-option-bg-even: color.adjust($color-body-bg, $blackness: 30%);

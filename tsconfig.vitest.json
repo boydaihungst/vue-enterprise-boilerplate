@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.app.json",
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": [
+      "node",
+      "jsdom",
+      "vite/client",
+      "vite",
+      "vitest",
+      "vitest/globals",
+      "vitest/environments",
+      "vitest/importMeta",
+      "@intlify/unplugin-vue-i18n/messages"
+    ]
+  }
+}

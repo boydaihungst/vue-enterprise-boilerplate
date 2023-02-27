@@ -1,8 +1,9 @@
 /**
  * Readme:
- * {@link https://v3.vuejs.org/guide/plugins.html#writing-a-plugin}
+ * {@link https://vuejs.org/guide/reusability/plugins.html}
  */
 const install = async () => {
   //
 };
+
 export { install };

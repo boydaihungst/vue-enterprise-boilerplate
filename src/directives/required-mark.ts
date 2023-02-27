@@ -1,8 +1,9 @@
-import { Directive } from 'vue';
+import type { Directive } from 'vue';
 
 const directive: Directive = {
   created(el, { value }) {
     const spanEl = document.createElement('span');
+
     spanEl.innerHTML = ' *';
     spanEl.classList.add('positive');
     if (value && typeof value === 'object') {
@@ -13,4 +14,5 @@ const directive: Directive = {
     el.appendChild(spanEl);
   },
 };
+
 export default directive;

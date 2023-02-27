@@ -1,0 +1,10 @@
+{
+  "volar.autoCompleteRefs": true,
+  "volar.vueserver.noProjectReferences": false,
+  "volar.addSpaceBetweenDoubleCurlyBrackets": true,
+  "volar.vueserver.reverseConfigFilePriority": false,
+  "volar.codeLens.pugTools": true,
+  "volar.updateImportsOnFileMove.enabled": true,
+  "volar.completion.normalizeComponentAutoImportName": true,
+  "volar.vueserver.maxOldSpaceSize": 4096
+}

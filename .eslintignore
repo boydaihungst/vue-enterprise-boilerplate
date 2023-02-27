@@ -3,19 +3,16 @@
 Thumbs.db
 
 # Dependencies
-/node_modules/
+*/node_modules/*
 
 # Dev/Build Artifacts
 /dist/
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 /tests/unit/coverage/
-webpack.config.prod.js
 .vuepress/.temp/
 .vuepress/.cache/
-# Local Env Files
-.env.local
-.env.*.local
+/public/mockServiceWorker.js
 
 # Log Files
 *.log

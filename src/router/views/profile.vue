@@ -1,34 +1,40 @@
-<script lang="ts">
-  import { defineComponent, toRefs, PropType } from 'vue';
-  import Layout from '@layouts/layout.vue';
-  import { useMeta } from 'vue-meta';
-  import { User } from '@models/user';
+<script lang="ts" setup>
+  import { useLayout } from '@composables/layout';
+  import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
+  import type { User } from '@models/user';
+  import { IconSource } from '@src/constraint/const';
+  import { useHead } from '@unhead/vue';
+  import { toRefs, type PropType } from 'vue';
+  import { useI18n } from 'vue-i18n';
 
-  export default defineComponent({
-    components: { Layout },
-    props: {
-      user: {
-        type: Object as PropType<User>,
-        required: true,
+  const { setLayout } = useLayout();
+  const { t } = useI18n();
+  const props = defineProps({
+    user: {
+      type: Object as PropType<User>,
+      required: true,
+    },
+  });
+  const { user } = toRefs(props);
+
+  setLayout('Default');
+  useHead({
+    title: user.value.name,
+    meta: [
+      {
+        name: 'description',
+        content: t('views.profile.meta.description', {
+          username: user.value.name,
+        }),
       },
-    },
-    setup(props) {
-      const { user } = toRefs(props);
-      useMeta({
-        // Can be static or computed
-        title: user.value.name,
-        description: `The user profile for ${user.value.name}`,
-      });
-    },
+    ],
   });
 </script>
 
 <template>
-  <Layout is="default" data-test="view-layout">
-    <h1>
-      <BaseIcon name="user" />
-      {{ user.name }} Profile
-    </h1>
-    <pre>{{ user }}</pre>
-  </Layout>
+  <h1>
+    <BaseIcon :icon="faUser" :source="IconSource.AWESOME_FONT" />
+    {{ t('views.profile.header', { username: user.name }) }}
+  </h1>
+  <pre>{{ user }}</pre>
 </template>

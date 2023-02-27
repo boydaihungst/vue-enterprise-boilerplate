@@ -5,11 +5,9 @@
   - [Installation](#installation)
   - [Dev server](#dev-server)
     - [Developing with the production API](#developing-with-the-production-api)
-  - [Generators](#generators)
   - [Aliases](#aliases)
   - [Globals](#globals)
     - [Base components](#base-components)
-  - [Docker (optional)](#docker-optional)
 
 ## First-time setup
 
@@ -46,12 +44,12 @@ yarn dev --open
 
 # Launch the dev server with the Cypress client for
 # test-driven development in a friendly interface
-yarn dev:e2e
+yarn test:e2e:dev
 ```
 
 ### Developing with the production API
 
-By default, dev and tests filter requests through [the mock API](/docs/tests.md#the-mock-api) in `tests/mock-api`. To test directly against a local/live API instead, run dev and test commands with the `API_BASE_URL` environment variable set. For example:
+By default, dev and tests filter requests through [the mock API](/docs/tests.md#the-mock-api) in `tests/mock-api`. To test directly against a local/live API instead, run dev and test command with the `API_BASE_URL` environment variable set. For example:
 
 ```bash
 # To develop against a local backend server
@@ -60,34 +58,6 @@ API_BASE_URL=http://localhost:3000 yarn dev
 # To test and develop against a production server
 API_BASE_URL=https://example.io yarn dev:e2e
 ```
-
-## Generators
-
-This project includes generators to speed up common development tasks. Commands include:
-
-```bash
-# Generate a new component with adjacent unit test
-yarn new component
-
-# Generate a new view component with adjacent unit test
-yarn new view
-
-# Generate a new layout component with adjacent unit test
-yarn new layout
-
-# Generate a new Vuex module with adjacent unit test
-yarn new module moduleName
-# For nested module
-yarn new module parentModule/nestedModule/nestedOfNestedModule
-
-# Generate a new utility function with adjacent unit test
-yarn new util
-
-# Generate a new end-to-end test
-yarn new e2e
-```
-
-Update existing or create new generators in the `generators` folder, with help from the [Hygen docs](http://www.hygen.io/).
 
 ## Aliases
 
@@ -148,7 +118,3 @@ docker-compose down --volumes --rmi all --remove-orphans
 This command can also be useful in case something goes wrong with a container and you'd like to start over. All containers, networks, volumes, and images defined in `docker-compose.yml` will be rebuilt the next time you run `docker-compose up`.
 
 See the docs for [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) for more information on how to use and configure Docker tooling.
-
-## Docker (optional) - Developing inside a Container
-
-Read more here: [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers#_getting-started)

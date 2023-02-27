@@ -1,0 +1,139 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.json",
+    "src/**/*.vue",
+    "@types/**/*",
+    "tests/mock-api/**/*",
+    "tests/unit/**/*"
+  ],
+  "exclude": ["src/**/__tests__/*", "src/**/*.spec.ts", "tests/**/*"],
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "typescript-vue-plugin"
+      }
+    ],
+    "paths": {
+      "@router": [
+        "./src/router/index.ts",
+        "./src/router/index.js",
+        "./src/router/index.json",
+        "./src/router/index.vue",
+        "./src/router/index.scss",
+        "./src/router/index.css"
+      ],
+      "@router/*": ["./src/router/*"],
+      "@views": [
+        "./src/router/views/index.ts",
+        "./src/router/views/index.js",
+        "./src/router/views/index.json",
+        "./src/router/views/index.vue",
+        "./src/router/views/index.scss",
+        "./src/router/views/index.css"
+      ],
+      "@views/*": ["./src/router/views/*"],
+      "@layouts": [
+        "./src/router/layouts/index.ts",
+        "./src/router/layouts/index.js",
+        "./src/router/layouts/index.json",
+        "./src/router/layouts/index.vue",
+        "./src/router/layouts/index.scss",
+        "./src/router/layouts/index.css"
+      ],
+      "@layouts/*": ["./src/router/layouts/*"],
+      "@components": [
+        "./src/components/index.ts",
+        "./src/components/index.js",
+        "./src/components/index.json",
+        "./src/components/index.vue",
+        "./src/components/index.scss",
+        "./src/components/index.css"
+      ],
+      "@components/*": ["./src/components/*"],
+      "@composables": [
+        "./src/composables/index.ts",
+        "./src/composables/index.js",
+        "./src/composables/index.json",
+        "./src/composables/index.vue",
+        "./src/composables/index.scss",
+        "./src/composables/index.css"
+      ],
+      "@composables/*": ["./src/composables/*"],
+      "@assets": [
+        "./src/assets/index.ts",
+        "./src/assets/index.js",
+        "./src/assets/index.json",
+        "./src/assets/index.vue",
+        "./src/assets/index.scss",
+        "./src/assets/index.css"
+      ],
+      "@assets/*": ["./src/assets/*"],
+      "@utils": [
+        "./src/utils/index.ts",
+        "./src/utils/index.js",
+        "./src/utils/index.json",
+        "./src/utils/index.vue",
+        "./src/utils/index.scss",
+        "./src/utils/index.css"
+      ],
+      "@utils/*": ["./src/utils/*"],
+      "@stores": [
+        "./src/stores/index.ts",
+        "./src/stores/index.js",
+        "./src/stores/index.json",
+        "./src/stores/index.vue",
+        "./src/stores/index.scss",
+        "./src/stores/index.css"
+      ],
+      "@stores/*": ["./src/stores/*"],
+      "@design": ["./src/design/index.scss"],
+      "@design/*": ["./src/design/index.scss/*"],
+      "@plugin": [
+        "./src/plugin/index.ts",
+        "./src/plugin/index.js",
+        "./src/plugin/index.json",
+        "./src/plugin/index.vue",
+        "./src/plugin/index.scss",
+        "./src/plugin/index.css"
+      ],
+      "@plugin/*": ["./src/plugin/*"],
+      "@models": [
+        "./src/models/index.ts",
+        "./src/models/index.js",
+        "./src/models/index.json",
+        "./src/models/index.vue",
+        "./src/models/index.scss",
+        "./src/models/index.css"
+      ],
+      "@models/*": ["./src/models/*"],
+      "@tests/*": ["./tests/*"],
+      "@src": [
+        "./src/index.ts",
+        "./src/index.js",
+        "./src/index.json",
+        "./src/index.vue",
+        "./src/index.scss",
+        "./src/index.css"
+      ],
+      "@src/*": ["./src/*"]
+    }
+  }
+}

@@ -1,8 +1,9 @@
+/* eslint-disable promise/always-return */
+/* eslint-disable promise/no-nesting */
+/* eslint-disable promise/catch-or-return */
 // Create custom Cypress commands and overwrite existing ones.
 // https://on.cypress.io/custom-commands
-import { cy, Cypress } from 'local-cypress';
-import UsersMocked from '../../mock-api/resources/users';
-import { getStore } from './utils';
+import UsersMocked from '@tests/mock-api/resources/users';
 
 Cypress.Commands.add(
   'logIn',
@@ -13,11 +14,16 @@ Cypress.Commands.add(
     // Manually log the user in
     cy.location('pathname').then((pathname) => {
       if (pathname === 'blank') {
-        cy.visit('/');
+        cy.visit('/').then(() => {
+          cy.window()
+            .its('authStore')
+            .then(async (authStore) => {
+              console.log(authStore);
+              await authStore.logIn({ username, password });
+            });
+        });
       }
+      return;
     });
-    getStore().then((store) =>
-      store.dispatch('auth/logIn', { username, password })
-    );
-  }
+  },
 );

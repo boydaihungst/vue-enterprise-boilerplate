@@ -1,85 +1,104 @@
 # State management
 
 - [State management](#state-management)
-  - [Modules](#modules)
-  - [Helpers](#helpers)
-  - [Module Nesting](#module-nesting)
+  - [Store](#stores)
+  - [Init action](#init action)
+  - [Testing](#testing)
+  - [Store in Store](#store in store)
+  - [Typescript](#typescript)
 
-## Modules
+## Stores
 
-The `src/state/modules` directory is where all shared application state lives. Any JS file added here (apart from unit tests) will be automatically registered in the store as a [namespaced module](https://next.vuex.vuejs.org/en/modules.html#namespacing).
+The `src/stores/root.module.ts` file is where all shared application state lives. Just add new store with name convention like `store_name.module.ts`. And then export though `index.ts` file.Read more in the [Pinia store](https://pinia.vuejs.org/) docs.
 
-Read more in the [Vuex modules](https://next.vuex.vuejs.org/en/modules.html) docs.
+Tips: Be careful about Ref and Reactive state, getter and [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
-## Helpers
+## `Init` action
 
-The state helpers in [`helpers.ts`](../src/state/helpers.ts) are the components' interface to the Vuex store. Depending on a component's concerns, we can import a subset of these helpers to quickly bring in the data and actions we need.
-
-You might be thinking, "Why not just automatically inject all of these into every component?" Well, then it would be difficult to figure out where a particular part of state is coming from. As our state becomes increasingly complex, the risk would also increase of accidentally using the same names for internal component state. This way, each component remains traceable, as the necessary `import` will provide a thread back to our helpers file if we ever don't understand where something is coming from.
+Every `store` should define and return `init` action, which will run at startup of the app. This action should contains logic like read data from localstorage, add watch, watcheffect which you only want to run once time.
 
 Here's an example:
 
-```js
-import { authComputed } from '@state/helpers';
+```ts
+// auth.module.ts
+function init() {
+  // Restoring user information and access token from localstorage
+  const restoredCurrentUserAsString = localStorage.getItem(
+    PersistStateKey.user,
+  );
 
-export default {
-  computed: {
-    ...authComputed,
-  },
-};
+  try {
+    if (restoredCurrentUserAsString) {
+      currentUser.value = JSON.parse(restoredCurrentUserAsString);
+      setDefaultAuthHeaders(currentUser.value?.token);
+    }
+  } catch (error: unknown) {
+    localStorage.removeItem(PersistStateKey.user);
+  }
+
+  // Auto update authorization header after current user changed
+  // then save current user's information, including access token, to localStorage
+  const authStore = useAuthStore();
+
+  watch(
+    toRef(authStore, 'currentUser'),
+    (newUserInfo) => {
+      try {
+        localStorage.setItem(
+          PersistStateKey.user,
+          JSON.stringify(unref(newUserInfo)),
+        );
+        setDefaultAuthHeaders(newUserInfo?.token);
+      } catch (error: unknown) {
+        localStorage.removeItem(PersistStateKey.user);
+        setDefaultAuthHeaders('');
+      }
+    },
+    { deep: true, flush: 'pre' },
+  );
+}
 ```
 
-## Module Nesting
+## Testing
 
-Vuex modules can be nested, which sometimes makes sense for organizational purposes. For example, if you created a module:
+Each store should have 1 test file with name `store_name.spec.ts`. When you want to unit test a store. Just remmeber to mock store before each test using code below. Utility `createModuleStore` is declared in [/@types/global.d.ts](../@types/global.d.ts) file and is implemented in [/tests/unit/setup.ts](../tests/unit/setup.ts#L190-L204) file.
 
-Parent module: dashboard `src/state/modules/dashboard`
+```ts
+  beforeEach(async () => {
+    // creates a fresh pinia and make it active so it's automatically picked
+    // up by any useStore() call without having to pass it to it:
+    // `useStore(pinia)`
 
-```js
-// @file src/state/modules/dashboard/state.ts
-export const state = {
-  role: 'project-manager',
-};
+    // This `createModuleStore` utility function will auto add
+    const store = await createModuleStore({
+    // If set to true, every action will be mock with vi.spyOn().
+    // Set to false if run the real code inside action functions.
+      stubActions: false,
+    });
+
+    setActivePinia(store);
+    window.localStorage.clear();
+  });
+  it('test store ...', () => {
+    const rootStore = useRootStore();
+    // Keep states and getters reactive;
+    const { stateA, getterB } = storeToRefs(store)
+
+    // action
+    rootStore.actionC(...);
+    // Some time you should wait for UI is updated
+    await flushPromises();
+    expect(...)
+  })
 ```
 
-Nested module: video `src/state/modules/dashboard/video`
+Testing include state, getter, action.
 
-```js
-// @file src/state/modules/dashboard/video/state.ts
-export const state = {
-  all: [],
-};
+## Use Store in Store
 
-// @file src/state/modules/dashboard/video/getter.ts
-export const getters = {
-  favorited(state) {
-    return state.all.filter((video) => video.favorited);
-  },
-};
-```
+If you want to access another store inside a store just useOtherStore() like normal. Remember that only access state, getter, action of that module in action function. Example check [user.module.ts](../src/stores/user.module.ts)
+[Read more](https://pinia.vuejs.org/core-concepts/outside-component-usage.html)
 
-Then you'd be able to access those modules with:
+## Typescript
 
-```js
-store.state.dashboard.role;
-store.state.dashboard.videos.all;
-store.getters['dashboard/videos/favorited'];
-```
-
-[**Deprected**] As you can see, placing the `videos` module in a folder called `dashboard` automatically nests it underneath the `dashboard` namespace. This works even if a `dashboard.js` file doesn't exist. You can also have as many levels of nesting as you want.
-
-**For better auto typescript generation, make sure parent module is exist.**
-
-![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) **NOTE**: Don't create module by copy paste. Use commands below to generate module with fully typescript for `Store, Getter, Action, Mutation, Mappper helpers`.
-
-Case module without nested:
-
-> `yarn new module NoNestedModule`
-
-**output**: `src/state/modules/no-nested-module` folder
-
-Case nested module:
-
-> `yarn new module parentModule/nestedModule`
-
-**output**: `src/state/modules/parent-module/nested-module` folder
+Pinia store support typescript by default. There are some rare cases you would want to declare type. Like add custom plugin to store, add extra properties to store instance, example: `persist-state.plugin.ts`, which auto save all state of a store to localStorage. Then you should update this file [/@types/pinia.d.ts](../@types/pinia.d.ts) follow the guide from [here](https://pinia.vuejs.org/core-concepts/plugins.html#typescript)

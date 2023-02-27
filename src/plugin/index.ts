@@ -1,35 +1,30 @@
-import { App, Plugin } from 'vue';
-import { createMetaManager } from 'vue-meta';
-import { store, vuexKey } from '@state/store';
-import dispatchActionForAllModules from '@utils/dispatch-action-for-all-modules';
-import { router } from '@router';
-import { i18n } from './i18n';
+import { createI18n } from '@plugin/i18n';
+import { createRouter } from '@router';
+import { createHead } from '@unhead/vue';
+import type { App } from 'vue';
+import type { I18n } from 'vue-i18n';
+import { createStore } from './store.plugin';
 
-const vueMetaManager = createMetaManager();
-
-const plugins: (Plugin | [Plugin, ...any[]])[] = [
-  /** Plugin without options */
-  vueMetaManager,
-  /** Plugin with options */
-  [store, vuexKey],
-  i18n,
-  router,
-];
+let i18nGlobal: I18n;
 
 export async function registerGlobalPlugin(app: App) {
-  for (const plugin of plugins) {
-    let _plugin: Plugin | null | undefined = null;
-    let _pluginOpts: Record<string, any> = {};
-    if (!Array.isArray(plugin)) {
-      _plugin = plugin;
-    } else {
-      const [p, options] = plugin;
-      _plugin = p;
-      _pluginOpts = options || {};
-    }
+  const piniaStore = createStore();
 
-    app.use(_plugin, _pluginOpts);
-  }
+  app.use(piniaStore);
+  await piniaStore.isReady();
+  // i18n plugin require rootStore, run after store initial
+  i18nGlobal = await createI18n();
+  app.use(i18nGlobal);
+  // router require i18n instance, so run after i18n created
+  const router = await createRouter();
 
-  await dispatchActionForAllModules('init');
+  app.use(router);
+  await router.isReady();
+  // the rest. Be careful about the order
+  // if plugin B import any from plugin A, then B need to be run after A used
+  const head = createHead();
+
+  app.use(head);
 }
+
+export { i18nGlobal };
