@@ -1,9 +1,9 @@
 import { defaultTheme } from '@vuepress/theme-default';
-import appConfig from '../src/app.config.json';
+import { app } from '../src/lang/en.json';
 
 export default {
-  title: appConfig.title + ' Docs',
-  description: appConfig.description,
+  title: app.title + ' Docs',
+  description: app.description,
   home: '/',
   theme: defaultTheme({
     sidebar: [

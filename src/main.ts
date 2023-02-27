@@ -8,16 +8,14 @@ import { createApp } from 'vue';
 const app = createApp(App);
 
 // Install global plugin, component, directive, config ...
-if (!import.meta.env.PROD) {
+if (import.meta.env.VITE_TEST_E2E) {
   // If running inside Cypress...
-  if (import.meta.env.VITE_TEST_E2E) {
-    // Ensure tests fail when Vue emits an error.
-    app.config.errorHandler = (err) => {
-      setTimeout(() => {
-        throw err;
-      });
-    };
-  }
+  // Ensure tests fail when Vue emits an error.
+  app.config.errorHandler = (err) => {
+    setTimeout(() => {
+      throw err;
+    });
+  };
 }
 
 /**
@@ -26,10 +24,10 @@ if (!import.meta.env.PROD) {
  * {@link https://mswjs.io/docs}
  */
 async function waitForMockServiceWorkerStart() {
-  // Only run in browser environment like E2E test, dev server with dev mode
-  // In vitest it will start using /tests/unit/setup-mock-server.ts and add this file to vite.config.ts > test > setupFiles
+  // Only run in browser environment like E2E test, dev server with dev mode.   // In vitest it will start using /tests/unit/setup-mock-server.ts and add this file to vite.config.ts > test > setupFiles
   // Indicate for esbuild/rollup to exclude this code in production build
-  if (!import.meta.env.PROD) {
+  if (import.meta.env.VITE_TEST_E2E || import.meta.env.DEV) {
+    // But if you are testing/developing against a real server by add environment VITE_API_BASE_URL=http://localhost:3000 then mock server won't start anymore
     if (!import.meta.env.VITE_API_BASE_URL) {
       const mockServer = (await import('@tests/mock-api/server.worker'))
         .mockServer;
@@ -55,15 +53,14 @@ async function initial() {
   registerGlobalDirective(app);
   registerLayoutComponent(app);
   registerGlobalComponent(app);
-  if (!import.meta.env.PROD) {
-    if (import.meta.env.VITE_TEST_E2E) {
-      const authStore = useAuthStore();
 
-      // Attach the store to the window, which can be useful
-      // for manually setting state in Cypress commands
-      // such as `cy.logIn()`.
-      window.authStore = authStore;
-    }
+  if (import.meta.env.VITE_TEST_E2E) {
+    const authStore = useAuthStore();
+
+    // Attach the store to the window, which can be useful
+    // for manually setting state in Cypress commands
+    // such as `cy.logIn()`.
+    window.authStore = authStore;
   }
   app.mount('#app');
 }

@@ -5,11 +5,12 @@ import LegacyPlugin from '@vitejs/plugin-legacy';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { loadEnv, type BuildOptions } from 'vite';
-import { compression } from 'vite-plugin-compression2';
+import compression from 'vite-plugin-compression2';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { coverageConfigDefaults, defineConfig } from 'vitest/config';
-import * as zlib from 'zlib';
+import zlib from 'zlib';
 
 // https://vitejs.dev/config/
 
@@ -18,12 +19,15 @@ import * as zlib from 'zlib';
  */
 const buildProd: BuildOptions = {
   rollupOptions: {
-    // exclude mock server worker
     external: [
-      fileURLToPath(new URL('public/mockServiceWorker.js', import.meta.url)),
+      fileURLToPath(new URL('public/mockServiceWorkder.js', import.meta.url)),
       fileURLToPath(new URL('tests/mock-api/*', import.meta.url)),
     ],
     plugins: [
+      // build for legacy browser
+      LegacyPlugin({
+        targets: ['defaults', 'not IE 11'],
+      }),
       UnheadVite(),
       compression({
         algorithm: 'gzip',
@@ -44,6 +48,8 @@ const buildProd: BuildOptions = {
           },
         },
       }),
+      /** {@link https://github.com/btd/rollup-plugin-visualizer} */
+      visualizer(),
     ],
   },
 };
@@ -111,14 +117,35 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    preview: {
+      /**
+       * We use msw's web service worker to mock server response locally
+       * {@link https://mswjs.io/docs/}
+       */
+      host: 'localhost',
+      port: 4173,
+      /** {@link https://github.com/chimurai/http-proxy-middleware} */
+      proxy: {
+        '/api': {
+          // real api url to test or run app, only forward request to mock server if this env variable is not existed
+          target: process.env.VITE_API_BASE_URL,
+          secure: false,
+          ws: true,
+          changeOrigin: true,
+        },
+      },
+    },
     // {@link https://vitejs.dev/config/shared-options.html#define}
     define: {
       'import.meta.env.PROD': isProd,
+      'import.meta.env.VITE_TEST_E2E': process.env.VITE_TEST_E2E === 'e2e',
       // {@link https://vitest.dev/config/#configuration}
       'import.meta.vitest': isTest,
+      __VUE_OPTIONS_API__: false,
       ...(isTest
         ? {
-            // global function for testing unit only
+            // global function for testing unit only. Declare here first them add to @types/global.d.ts.
+            // After that, implement in tests/unit/setup.ts
             mount: null,
             shallowMount: null,
             shallowMountView: null,
@@ -189,10 +216,6 @@ export default defineConfig(({ mode }) => {
         runtimeOnly: isProd,
         compositionOnly: true,
         fullInstall: false,
-      }),
-      // build for legacy browser
-      LegacyPlugin({
-        targets: ['defaults', 'not IE 11'],
       }),
     ] as any,
     resolve: {

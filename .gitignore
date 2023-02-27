@@ -21,6 +21,7 @@ coverage
 /tests/unit/coverage/
 /.vuepress/.cache/
 /.vuepress/.temp/
+start.html
 # Local Env Files
 
 # Editor directories and files
