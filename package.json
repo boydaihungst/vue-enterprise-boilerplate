@@ -40,7 +40,7 @@
     "@fortawesome/free-solid-svg-icons": "5.15.3",
     "@fortawesome/vue-fontawesome": "3.0.0-3",
     "@mdi/js": "^5.9.55",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "core-js": "^3.6.5",
     "crypto-browserify": "^3.12.0",
     "date-fns": "2.10.0",
