@@ -4,7 +4,6 @@ import UnheadVite from '@unhead/addons/vite';
 import LegacyPlugin from '@vitejs/plugin-legacy';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import path from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import { loadEnv, type BuildOptions } from 'vite';
 import { compression } from 'vite-plugin-compression2';
@@ -25,7 +24,6 @@ const buildProd: BuildOptions = {
       fileURLToPath(new URL('tests/mock-api/*', import.meta.url)),
     ],
     plugins: [
-      // TsconfigPathsPlugin({}),
       UnheadVite(),
       compression({
         algorithm: 'gzip',
@@ -87,8 +85,7 @@ export default defineConfig(({ mode }) => {
   for (const alias in pathMap) {
     const aliasTo = pathMap[alias];
 
-    resolveAlias[alias] = path.resolve(__dirname, aliasTo);
-    // fileURLToPath(new URL(aliasTo, import.meta.url));
+    resolveAlias[alias] = fileURLToPath(new URL(aliasTo, import.meta.url));
   }
   return {
     // single page app mode

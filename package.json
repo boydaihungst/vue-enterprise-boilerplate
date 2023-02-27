@@ -5,7 +5,7 @@
   "types": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "run-s type-check build-only clean:public",
     "preview": "vite preview",
     "test": "run-s test:unit test:e2e",
     "test:unit": "vitest --run",
@@ -29,7 +29,8 @@
     "docs:dev": "vuepress dev",
     "docs:build": "vuepress build",
     "update:dep": "updates -u",
-    "prepare": "is-ci || husky install"
+    "prepare": "is-ci || husky install",
+    "clean:public": "del dist/mockServiceWorker.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -75,6 +76,7 @@
     "autoprefixer": "^10.4.13",
     "cross-env": "^7.0.3",
     "cypress": "^12.5.1",
+    "del-cli": "^5.0.0",
     "eslint": "^8.34.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
