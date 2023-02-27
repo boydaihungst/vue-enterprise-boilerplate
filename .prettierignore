@@ -13,7 +13,7 @@ Thumbs.db
 /.vuepress/.temp/
 /.vuepress/.cache/
 /public/mockServiceWorker.js
-start.html
+stats.html
 
 # Local Env Files
 .env.local
