@@ -7,5 +7,5 @@
 </script>
 
 <template>
-  <router-view data-test="router-view" />
+  <router-view />
 </template>

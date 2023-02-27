@@ -1,8 +1,8 @@
-import { cy, describe, it } from 'local-cypress';
-import UsersMocked from '../../mock-api/resources/users';
+import UsersMocked from '@tests/mock-api/resources/users';
 
 describe('Profile Page', () => {
   const { admin } = UsersMocked;
+
   it('redirects to login when logged out', () => {
     cy.visit('/profile');
     cy.location('pathname').should('match', /^(\/en)?\/login$/);
@@ -13,7 +13,7 @@ describe('Profile Page', () => {
     cy.contains('a', `Logged in as ${admin.name}`).should(
       'have.attr',
       'href',
-      '/profile'
+      '/profile',
     );
   });
 

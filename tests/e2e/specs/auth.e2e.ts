@@ -1,8 +1,8 @@
-import { cy, describe, it } from 'local-cypress';
-import UsersMocked from '../../mock-api/resources/users';
+import UsersMocked from '@tests/mock-api/resources/users';
 
 describe('Authentication', () => {
   const { admin } = UsersMocked;
+
   it('login link exists on the home page when logged out', () => {
     cy.visit('/');
     cy.contains('a', 'Log in')

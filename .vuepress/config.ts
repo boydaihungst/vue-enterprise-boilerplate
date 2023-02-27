@@ -1,21 +1,52 @@
+import { defaultTheme } from '@vuepress/theme-default';
 import appConfig from '../src/app.config.json';
 
-module.exports = {
+export default {
   title: appConfig.title + ' Docs',
   description: appConfig.description,
-  themeConfig: {
+  home: '/',
+  theme: defaultTheme({
     sidebar: [
-      ['/', 'Introduction'],
-      '/docs/development.md',
-      '/docs/architecture.md',
-      '/docs/tech.md',
-      '/docs/routing.md',
-      '/docs/state.md',
-      '/docs/tests.md',
-      '/docs/linting.md',
-      '/docs/editors.md',
-      '/docs/production.md',
-      '/docs/troubleshooting.md',
+      {
+        text: 'development',
+        link: '/docs/development.md',
+      },
+      {
+        text: 'architecture',
+        link: '/docs/architecture.md',
+      },
+      {
+        text: 'tech',
+        link: '/docs/tech.md',
+      },
+      {
+        text: 'routing',
+        link: '/docs/routing.md',
+      },
+      {
+        text: 'state',
+        link: '/docs/state.md',
+      },
+      {
+        text: 'tests',
+        link: '/docs/tests.md',
+      },
+      {
+        text: 'linting',
+        link: '/docs/linting.md',
+      },
+      {
+        text: 'editors',
+        link: '/docs/editors.md',
+      },
+      {
+        text: 'production',
+        link: '/docs/production.md',
+      },
+      {
+        text: 'troubleshooting',
+        link: '/docs/troubleshooting.md',
+      },
     ],
-  },
+  }),
 };

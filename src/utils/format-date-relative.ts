@@ -5,7 +5,7 @@ import isToday from 'date-fns/isToday';
 
 export default function formatDateRelative(
   fromDate: Date,
-  toDate = new Date()
+  toDate = new Date(),
 ) {
   return formatDistance(fromDate, toDate) + (isToday(toDate) ? ' ago' : '');
 }

@@ -14,7 +14,7 @@ This project uses ESLint, Stylelint, Markdownlint, and Prettier to catch errors 
 
 - **JavaScript/Typescript** is linted by ESLint and formatted by Prettier
 - **HTML** (in templates and JSX) is linted by ESLint
-- **CSS** is linted by Stylelint and formatted by Prettier
+- **CSS/SCSS** is linted by Stylelint and formatted by Prettier
 - **Markdown** is linted by Markdownlint and formatted by Prettier
 - **JSON** is formatted by Prettier
 - **Images** are minified by `imagemin-lint-staged` (only on pre-commit)
@@ -34,7 +34,7 @@ See `package.json` to update.
 
 ### Pre-commit
 
-Staged files are automatically linted and tested before each commit. See `lint-staged.config.js` to update. [Yorkie](https://github.com/yyx990803/yorkie) is used by `@vue/cli-plugin-eslint` to install the pre-commit hook.
+Staged files are automatically linted and tested before each commit. See `lint-staged.config.js` to update. Using [husky](https://typicode.github.io/husky/#/?id=features) to install the pre-commit hook.
 
 ### Editor
 
@@ -45,14 +45,14 @@ In supported editors, all files will be linted and formatted on-save. See [edito
 This boilerplate ships with opinionated defaults, but you can edit each tools configuration in the following config files:
 
 - [ESLint](https://eslint.org/docs/user-guide/configuring)
-  - `.eslintrc.js`
+  - `.eslintrc.cjs` (CommonJS file name)
   - `.eslintignore`
 - [Stylelint](https://stylelint.io/user-guide/configuration/)
-  - `stylelint.config.js`
+  - `stylelint.config.cjs`
 - [Markdownlint](https://github.com/markdownlint/markdownlint/blob/master/docs/configuration.md)
-  - `.markdownlintrc`
+  - `.markdownlint.yml`
 - [Prettier](https://prettier.io/docs/en/configuration.html)
-  - `.prettierrc.js`
+  - `~.prettierrc.js~` (inside package.json)
   - `.prettierignore`
 
 ## FAQ

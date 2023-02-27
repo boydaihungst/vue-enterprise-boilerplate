@@ -1,1 +1,48 @@
-{}
+{
+  "app": {
+    "title": "Vue Enterprise Boilerplate",
+    "description": "Opinionated boilerplate project for an enterprise Vue frontend"
+  },
+  "error": {
+    "404": {
+      "code": "404",
+      "message": "Không tìm thấy"
+    }
+  },
+  "views": {
+    "home": {
+      "header": "Trang chủ",
+      "logoAtl": "Logo"
+    },
+    "loading": {
+      "meta": {
+        "title": "Đang tải...",
+        "description": "Đang tải..."
+      }
+    },
+    "timeout": {
+      "meta": {
+        "title": "Lỗi tải trang",
+        "description": "Trang tải quá lâu"
+      },
+      "noInternetPrompt": "Trang tải quá lâu. Bạn có chắc mình vẫn đang kết nối đến mạng?"
+    },
+    "login": {
+      "meta": {
+        "title": "Đăng nhập",
+        "description": "Đăng nhập to @:app.title"
+      },
+      "usernameHint": "Nhập \"admin\" để đăng nhập dùng mock API",
+      "passwordHint": "Nhập \"password123\" để đăng nhập dùng mock API",
+      "confirmPasswordHint": "Nhập lại password",
+      "loginButton": "Đăng nhập",
+      "unauthorizedError": "Lỗi đăng nhập. Sai thông tin tài khoản"
+    },
+    "profile": {
+      "meta": {
+        "description": "Thông tin người dùng {username}"
+      },
+      "header": "Hồ sơ {username}"
+    }
+  }
+}

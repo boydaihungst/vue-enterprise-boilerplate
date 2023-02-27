@@ -1,20 +1,36 @@
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  export default defineComponent({
-    name: 'BaseButton',
-    props: {},
-    computed: {},
-  });
+  // normal <script>, executed in module scope (only once)
+  // runSideEffectOnce();
+
+  // declare additional options
+  export default {
+    inheritAttrs: false,
+  };
+</script>
+
+<script setup lang="ts">
+  // import { useAttrs } from 'vue';
+
+  // inside setup() scope...
+  // default, returns classes for <style module>
+  // const styles = useCssModule();
+
+  // named, returns classes for <style module="classes">
+  // useCssModule('classes')
+
+  // const slots = useSlots();
+  // const attrs = useAttrs();
 </script>
 
 <template>
-  <button data-test="base-button" :class="$style.button" v-bind="$attrs">
+  <button :class="$style.button" v-bind="$attrs">
     <slot />
   </button>
 </template>
 
 <style lang="scss" module>
   @import '@design';
+
   .button {
     @extend %typography-small;
 
@@ -23,6 +39,7 @@
     cursor: pointer;
     background: $color-button-bg;
     border: none;
+
     &:disabled {
       cursor: not-allowed;
       background: $color-button-disabled-bg;

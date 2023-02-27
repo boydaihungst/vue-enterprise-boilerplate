@@ -1,4 +1,4 @@
-import { Directive } from 'vue';
+import type { Directive } from 'vue';
 
 const Ripple: Directive & { color?: string; zIndex?: string | number } = {
   beforeMount: function (el, binding) {
@@ -21,7 +21,7 @@ const Ripple: Directive & { color?: string; zIndex?: string | number } = {
       const target = el;
       // Get border to avoid offsetting on ripple container position
       const targetBorder = parseInt(
-        getComputedStyle(target).borderWidth.replace('px', '')
+        getComputedStyle(target).borderWidth.replace('px', ''),
       );
 
       // Get necessary variables
@@ -41,6 +41,7 @@ const Ripple: Directive & { color?: string; zIndex?: string | number } = {
       // Create the ripple and its container
       const ripple = document.createElement('div'),
         rippleContainer = document.createElement('div');
+
       rippleContainer.className = 'ripple-container';
       ripple.className = 'ripple';
 
@@ -71,6 +72,7 @@ const Ripple: Directive & { color?: string; zIndex?: string | number } = {
         target.style.position.length > 0
           ? target.style.position
           : getComputedStyle(target).position;
+
       // Change target position to relative to guarantee ripples correct positioning
       if (storedTargetPosition !== 'relative') {
         target.style.position = 'relative';
@@ -121,6 +123,7 @@ const Ripple: Directive & { color?: string; zIndex?: string | number } = {
         // Timeout it's needed to avoid jerky effect of ripple jumping out parent target
         setTimeout(function () {
           let clearPosition = true;
+
           for (let i = 0; i < target.childNodes.length; i++) {
             if (target.children[i].className === 'ripple-container') {
               clearPosition = false;
@@ -153,10 +156,11 @@ function setPropsByModifiers(
   props: {
     event: string;
     transition: number;
-  }
+  },
 ) {
   let event = props.event;
   let transition = props.transition;
+
   modifiers.forEach(function (item) {
     if (isNaN(Number(item))) event = item;
     else transition = +item;

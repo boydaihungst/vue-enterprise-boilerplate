@@ -1,0 +1,21 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": [
+    "./**/*",
+    "../../src/models/**/*",
+    "../../src/app.config.json",
+    "../../@types/*",
+    "../../tests/mock-api/**/*"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "@faker-js/faker", "lodash"],
+    "paths": {
+      "@/*": ["../../*"],
+      "@src/*": ["../../src/*"],
+      "@tests/*": ["../../tests/*"]
+    }
+  }
+}

@@ -1,8 +1,6 @@
-import omit from 'lodash/omit';
-/** {@link https://github.com/marak/Faker.js/} */
-import faker from 'faker';
-import merge from 'lodash/merge';
-import { User } from '@models/user';
+import { faker } from '@faker-js/faker';
+import type { User } from '@models/user';
+import { merge, omit } from 'lodash';
 
 /**
  * Function to generate user
@@ -14,10 +12,11 @@ function generateUser(userOptions: User = {}) {
   const userName = userOptions.username || faker.internet.userName();
   const defaultUser: User = {
     id,
-    name: faker.name.findName(firstName, lastName),
+    name: faker.name.fullName({ firstName, lastName }),
     username: userName,
     token: `valid-token-for-${userName}`,
   };
+
   return merge(defaultUser, userOptions);
 }
 
@@ -44,26 +43,40 @@ export default {
   all,
   authenticate({ username, password }: User) {
     return new Promise<User>((resolve, reject) => {
-      const matchedUser = this.all.find(
-        (user) => user.username === username && user.password === password
+      const matchedUser = all.find(
+        (user: User) =>
+          user.username === username && user.password === password,
       );
+
       if (matchedUser) {
-        resolve(this.json(matchedUser));
+        resolve(matchedUser);
       } else {
         reject(new Error('Invalid user credentials.'));
       }
     });
   },
+
+  /**
+   * @param propertyName - property of User
+   * @param value - value to match
+   * @returns User or null
+   */
   findBy<T extends keyof User>(propertyName: T, value: User[T]) {
-    const matchedUser = this.all.find((user) => user[propertyName] === value);
-    if (matchedUser) return this.json(matchedUser);
+    const matchedUser = all.find((user) => user[propertyName] === value);
+
+    if (matchedUser) return matchedUser;
     return null;
   },
   findByWithHiddenProps<T extends keyof User>(propertyName: T, value: User[T]) {
-    const matchedUser = this.all.find((user) => user[propertyName] === value);
-    if (matchedUser) return this.json(matchedUser);
+    const matchedUser = all.find((user) => user[propertyName] === value);
+
+    if (matchedUser) return matchedUser;
     return null;
   },
+  /**
+   * @param user - user to convert
+   * @returns user without password
+   */
   json(user: User) {
     return user && omit(user, ['password']);
   },

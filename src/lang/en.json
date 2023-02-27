@@ -1,1 +1,48 @@
-{}
+{
+  "app": {
+    "title": "Vue Enterprise Boilerplate",
+    "description": "Opinionated boilerplate project for an enterprise Vue frontend"
+  },
+  "error": {
+    "404": {
+      "code": "404",
+      "message": "Not Found"
+    }
+  },
+  "views": {
+    "home": {
+      "header": "Home Page",
+      "logoAtl": "Logo"
+    },
+    "loading": {
+      "meta": {
+        "title": "Loading page...",
+        "description": "Loading page..."
+      }
+    },
+    "timeout": {
+      "meta": {
+        "title": "Loading timeout",
+        "description": "The page timed out while loading."
+      },
+      "noInternetPrompt": "The page timed out while loading. Are you sure you're still connected to the Internet?"
+    },
+    "login": {
+      "meta": {
+        "title": "Log in",
+        "description": "Log in to @:app.title"
+      },
+      "usernameHint": "Use \"admin\" to log in with the mock API",
+      "passwordHint": "Use \"password123\" to log in with the mock API",
+      "confirmPasswordHint": "Same as password",
+      "loginButton": "Log in",
+      "unauthorizedError": "There was an error logging in to your account."
+    },
+    "profile": {
+      "meta": {
+        "description": "The user profile for {username}"
+      },
+      "header": "{username} Profile"
+    }
+  }
+}

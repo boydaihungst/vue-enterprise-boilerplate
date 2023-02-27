@@ -200,7 +200,7 @@ Working against the production API can be useful sometimes, but it also has some
 
 The mock API is an [Mock service](https://mswjs.io/) web worker/server in `tests/mock-api` you can extend to - you guessed it - mock what the real API would do, solving all the problems listed above. This solution is also backend-agnostic, making it ideal for a wide variety of projects.
 
-> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `return res(ctx.status(statusCode),...)`. If you don't `return` webpack proxy will throw `Network Error`
+> ![#d90000](https://via.placeholder.com/15/d90000/000000?text=+) NOTE: When mock API response data or Error you have to add `return res(ctx.status(statusCode),...)`. If you don't `return` vite proxy will throw `Network Error`
 
 ### Mock authentication
 
@@ -208,7 +208,7 @@ See the [`users` resource](../tests/mock-api/resources/users.ts) in the mock API
 
 ### Testing/developing against a real server
 
-In some situations, you might prefer to test against a local server while developing, or maybe just during continuous integration. To do so, you can run any development or test command with the `API_BASE_URL` environment variable. For example:
+In some situations, you might prefer to test against a local server while developing, or maybe just during continuous integration. To do so, you can run any development or test command with the `VITE_API_BASE_URL` environment variable. For example:
 
 ```bash
 API_BASE_URL=http://localhost:3000 yarn test

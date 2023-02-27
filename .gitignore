@@ -1,33 +1,34 @@
-# OS Files
-.DS_Store
-Thumbs.db
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Dependencies
-node_modules/
+node_modules
+.DS_Store
+dist
+dist-ssr
+coverage
+*.local
 
 # Dev/Build Artifacts
 /dist/
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 /tests/unit/coverage/
-tsconfig.json
-webpack.config.prod.js
-.vuepress/.temp/
-.vuepress/.cache/
+/.vuepress/.cache/
+/.vuepress/.temp/
 # Local Env Files
-.env.local
-.env.*.local
 
-# Log Files
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Unconfigured Editors
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw*
+*.sw?

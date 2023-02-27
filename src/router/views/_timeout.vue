@@ -1,44 +1,38 @@
-<script lang="ts">
-  import { defineComponent } from 'vue';
+<script lang="ts" setup>
+  import { useLayout } from '@composables/layout';
+  import { useHead } from '@unhead/vue';
   import axios from 'axios';
-  import Layout from '@layouts/layout.vue';
-  import { useMeta } from 'vue-meta';
+  import { ref } from 'vue';
+  import { useI18n } from 'vue-i18n';
   import LoadingView from './_loading.vue';
 
-  export default defineComponent({
-    components: { Layout, LoadingView },
-    setup() {
-      useMeta({
-        // Can be static or computed
-        title: 'Loading timeout',
-        description: 'The page timed out while loading.',
-      });
-    },
-    data() {
-      return {
-        offlineConfirmed: false,
-      };
-    },
-    beforeCreate() {
-      axios
-        .head('/api/ping')
-        .then(() => {
-          window.location.reload();
-        })
-        .catch(() => {
-          this.offlineConfirmed = true;
-        });
-    },
+  const { setLayout } = useLayout();
+  const { t } = useI18n();
+
+  setLayout('Default');
+  useHead({
+    title: t('views.timeout.meta.title'),
+    meta: [
+      {
+        name: 'description',
+        content: t('views.timeout.meta.description'),
+      },
+    ],
   });
+  const offlineConfirmed = ref(false);
+
+  axios
+    .head('/api/ping')
+    .then(() => window.location.reload())
+    .catch(() => {
+      offlineConfirmed.value = true;
+    });
 </script>
 
 <template>
-  <Layout is="default" v-if="offlineConfirmed" data-test="view-layout">
-    <h1 :class="$style.title">
-      The page timed out while loading. Are you sure you're still connected to
-      the Internet?
-    </h1>
-  </Layout>
+  <h1 v-if="offlineConfirmed" :class="$style.title">
+    {{ t('views.timeout.noInternetPrompt') }}
+  </h1>
   <LoadingView v-else />
 </template>
 
